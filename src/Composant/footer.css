@@ -1,0 +1,501 @@
+/* Variables CSS pour les couleurs et effets */
+:root {
+    --primary-color: #1a1a2e;
+    --secondary-color: #16213e;
+    --accent-gold: #d4af37;
+    --accent-gold-light: #f4e4a9;
+    --accent-gold-dark: #b8941f;
+    --text-light: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --text-gold: #f4e4a9;
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --border-radius: 12px;
+  }
+  
+  /* Styles du footer */
+  .rn-footer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid var(--accent-gold);
+  }
+  
+  .rn-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, 
+      transparent, 
+      var(--accent-gold), 
+      var(--accent-gold-light), 
+      var(--accent-gold), 
+      transparent
+    );
+    opacity: 0.6;
+  }
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 20px 30px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* En-tête avec logo */
+  .footer-header {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  
+  .logo-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 25px 40px;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    backdrop-filter: blur(10px);
+  }
+  
+  .logo-container::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+      transparent, 
+      var(--accent-gold), 
+      transparent
+    );
+    border-radius: calc(var(--border-radius) + 2px);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition-smooth);
+  }
+  
+  .logo-container:hover::before {
+    opacity: 0.3;
+  }
+  
+  /* Placeholder du logo - À remplacer par votre image */
+  .logo-placeholder {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .temp-logo {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-gold);
+  }
+  
+  .temp-logo::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(
+      from 0deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: rotate 10s linear infinite;
+  }
+  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  .logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .logo-gold-bar {
+    width: 30px;
+    height: 3px;
+    background: var(--primary-color);
+    margin-top: 5px;
+    border-radius: 2px;
+  }
+  
+  /* Votre logo image */
+  .logo-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(212, 175, 55, 0.4));
+    transition: var(--transition-smooth);
+  }
+  
+  .logo-image:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 12px rgba(212, 175, 55, 0.6));
+  }
+  
+  .logo-text-content {
+    text-align: left;
+  }
+  
+  .logo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 5px 0;
+    background: linear-gradient(135deg, var(--text-light), var(--text-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .logo-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--accent-gold-light);
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  /* Grille du footer */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .footer-section {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    position: relative;
+    display: inline-block;
+    color: var(--text-gold);
+  }
+  
+  .footer-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-gold), transparent);
+    transition: var(--transition-smooth);
+  }
+  
+  .footer-section:hover .footer-subtitle::after {
+    width: 100%;
+  }
+  
+  .footer-description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+  }
+  
+  /* Liens sociaux */
+  .social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+  }
+  
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-light);
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+  
+  .social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+    opacity: 0;
+    transition: var(--transition-smooth);
+    z-index: -1;
+  }
+  
+  .social-link:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: var(--shadow-gold);
+    color: var(--primary-color);
+  }
+  
+  .social-link:hover::before {
+    opacity: 1;
+  }
+  
+  /* Liens de navigation */
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-links li {
+    margin-bottom: 15px;
+  }
+  
+  .footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    position: relative;
+    padding-left: 0;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+  }
+  
+  .footer-link::before {
+    content: '▸';
+    position: absolute;
+    left: -20px;
+    color: var(--accent-gold);
+    opacity: 0;
+    transition: var(--transition-smooth);
+    transform: translateX(-5px);
+  }
+  
+  .footer-link:hover {
+    color: var(--text-light);
+    padding-left: 20px;
+    transform: translateX(5px);
+  }
+  
+  .footer-link:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Informations de contact */
+  .contact-info {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .contact-icon {
+    color: var(--accent-gold);
+    margin-right: 15px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  
+  .contact-text {
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  
+  .contact-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    position: relative;
+  }
+  
+  .contact-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-gold);
+    transition: var(--transition-smooth);
+  }
+  
+  .contact-link:hover {
+    color: var(--text-light);
+  }
+  
+  .contact-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Badge de prestige */
+  .prestige-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(212, 175, 55, 0.1);
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    margin-top: auto;
+  }
+  
+  .badge-icon {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  .prestige-badge span {
+    font-size: 0.85rem;
+    color: var(--text-gold);
+    font-weight: 500;
+  }
+  
+  /* Bas du footer */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 30px;
+  }
+  
+  .footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .copyright {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  
+  .legal-links {
+    display: flex;
+    gap: 25px;
+  }
+  
+  .legal-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition-smooth);
+    position: relative;
+  }
+  
+  .legal-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-gold);
+    transition: var(--transition-smooth);
+  }
+  
+  .legal-link:hover {
+    color: var(--text-light);
+  }
+  
+  .legal-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer-container {
+      padding: 50px 15px 25px;
+    }
+    
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    
+    .logo-container {
+      flex-direction: column;
+      text-align: center;
+      padding: 20px 30px;
+    }
+    
+    .logo-text-content {
+      text-align: center;
+    }
+    
+    .logo-title {
+      font-size: 1.8rem;
+    }
+    
+    .footer-bottom-content {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .legal-links {
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-title {
+      font-size: 1.5rem;
+    }
+    
+    .logo-subtitle {
+      font-size: 0.8rem;
+    }
+    
+    .footer-subtitle {
+      font-size: 1.1rem;
+    }
+  }
