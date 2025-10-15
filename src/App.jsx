@@ -1,20 +1,27 @@
-import { useState } from 'react'
-import Header from './Composant/Header'
-import Hero from './Composant/Hero'
-import Footer from './Composant/Footer'
-import Expli from './Composant/expli'
-
+import { useState } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom'; // <-- IMPORTS MANQUANTS
+import Header from './Composant/Header';
+import Accueil from './page/accueil';
+import Footer from './Composant/Footer';
+import Propos from './page/about';
 
 function App() {
-
   return (
     <>
-     <Header/>
-     <Hero/>
-     <Expli/>
-     <Footer/>
+      <Header />
+
+      <Routes>
+        {/* Redirection de la racine vers /Accueil */}
+        <Route path="/" element={<Navigate to="/Accueil" replace />} />
+
+        {/* Route pour la page Accueil */}
+        <Route path="/Accueil" element={<Accueil />} />
+        <Route path="/A-propos-de-nous" element={<Propos />} />
+      </Routes>
+
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
