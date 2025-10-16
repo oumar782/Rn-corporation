@@ -6,6 +6,8 @@ import Footer from './Composant/Footer';
 import Propos from './page/about';
 import Filiales from './page/filiales';
 import Galerie from './page/galerie';
+import New from './page/actualite';
+import Contact from './page/contact';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path="/A-propos-de-nous" element={<Propos />} />
         <Route path="/Nos-filiales" element={<Filiales />} />
         <Route path="/Notre-galerie" element={<Galerie />} />
+        <Route path="/Nos-actualités" element={<New />} />
+        <Route path="/Nos-contacts" element={<Contact />} />
       </Routes>
 
       <Footer />

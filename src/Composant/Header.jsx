@@ -31,8 +31,8 @@ const Header = () => {
     { name: "À Propos", href: "/A-propos-de-nous" },
     { name: "Filiales", href: "/Nos-filiales" },
     { name: "Galerie", href: "/Notre-galerie" },
-    { name: "Actualités", href: "/news" },
-    { name: "Contact", href: "/contact" },
+    { name: "Actualités", href: "/Nos-actualités" },
+    { name: "Contact", href: "/Nos-contacts" },
   ];
 
   const handleNavClick = (href) => {
