@@ -4,6 +4,8 @@ import Header from './Composant/Header';
 import Accueil from './page/accueil';
 import Footer from './Composant/Footer';
 import Propos from './page/about';
+import Filiales from './page/filiales';
+import Galerie from './page/galerie';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         {/* Route pour la page Accueil */}
         <Route path="/Accueil" element={<Accueil />} />
         <Route path="/A-propos-de-nous" element={<Propos />} />
+        <Route path="/Nos-filiales" element={<Filiales />} />
+        <Route path="/Notre-galerie" element={<Galerie />} />
       </Routes>
 
       <Footer />
