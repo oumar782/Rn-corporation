@@ -1,80 +1,86 @@
-/* Variables CSS */
+/* Variables CSS - Version Odevolv Filiales */
 :root {
-  --odevolv-primary: #000000;
-  --odevolv-secondary: #D4AF37;
-  --odevolv-gold-light: #F4D03F;
-  --odevolv-gold-dark: #B8941F;
-  --odevolv-dark: #0A0A0A;
-  --odevolv-darker: #050505;
-  --odevolv-light: #F8F9FA;
-  --odevolv-lighter: #FFFFFF;
-  --odevolv-gray: #E9ECEF;
-  --odevolv-gray-dark: #6C757D;
-  --odevolv-white: #FFFFFF;
-  --odevolv-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  --odevolv-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --odevolv-shadow-md: 0 4px 20px rgba(0, 0, 0, 0.15);
-  --odevolv-shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.2);
-  --odevolv-shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
-  --odevolv-shadow-gold-lg: 0 8px 40px rgba(212, 175, 55, 0.4);
-  --odevolv-gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 100%);
-  --odevolv-gradient-dark: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
-  --odevolv-gradient-light: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
-  --odevolv-gradient-card: linear-gradient(145deg, #FFFFFF 0%, #FCFCFC 100%);
+  --odevolv-filiales-primary: #000000;
+  --odevolv-filiales-secondary: #D4AF37;
+  --odevolv-filiales-gold-light: #F4D03F;
+  --odevolv-filiales-gold-dark: #B8941F;
+  --odevolv-filiales-gold-glow: rgba(212, 175, 55, 0.4);
+  --odevolv-filiales-dark: #0A0A0A;
+  --odevolv-filiales-darker: #050505;
+  --odevolv-filiales-light: #F8F9FA;
+  --odevolv-filiales-lighter: #FFFFFF;
+  --odevolv-filiales-gray: #E9ECEF;
+  --odevolv-filiales-gray-dark: #6C757D;
+  --odevolv-filiales-white: #FFFFFF;
+  --odevolv-filiales-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --odevolv-filiales-shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --odevolv-filiales-shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --odevolv-filiales-shadow-lg: 0 15px 50px rgba(0, 0, 0, 0.18);
+  --odevolv-filiales-shadow-xl: 0 25px 70px rgba(0, 0, 0, 0.25);
+  --odevolv-filiales-shadow-gold: 0 6px 25px rgba(212, 175, 55, 0.25);
+  --odevolv-filiales-shadow-gold-lg: 0 12px 45px rgba(212, 175, 55, 0.35);
+  --odevolv-filiales-gradient-gold: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
+  --odevolv-filiales-gradient-dark: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%);
+  --odevolv-filiales-gradient-light: linear-gradient(135deg, #F8F9FA 0%, #FFFFFF 100%);
+  --odevolv-filiales-gradient-card: linear-gradient(145deg, #FFFFFF 0%, #FCFCFC 50%, #FFFFFF 100%);
+  --odevolv-filiales-gradient-gold-soft: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(244, 208, 63, 0.05) 100%);
 }
 
 /* Reset et Base */
-.odevolv-subsidiaries {
+.odevolv-filiales {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background: var(--odevolv-lighter);
-  color: var(--odevolv-dark);
+  background: var(--odevolv-filiales-lighter);
+  color: var(--odevolv-filiales-dark);
   line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
 /* Hero Section - Noir/Or */
-.odevolv-hero {
+.odevolv-filiales-hero {
   min-height: 100vh;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--odevolv-gradient-dark);
+  background: var(--odevolv-filiales-gradient-dark);
 }
 
-.odevolv-hero-background {
+.odevolv-filiales-hero-background {
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-    url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
-  opacity: 0.3;
+    radial-gradient(circle at 20% 50%, var(--odevolv-filiales-gold-glow) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(0, 0, 0, 0.8) 0%, transparent 70%);
+  opacity: 0.6;
 }
 
-.odevolv-hero-overlay {
+.odevolv-filiales-hero-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, 
-    rgba(0, 0, 0, 0.9) 0%, 
-    rgba(0, 0, 0, 0.7) 50%, 
-    rgba(0, 0, 0, 0.9) 100%);
+    rgba(0, 0, 0, 0.95) 0%, 
+    rgba(0, 0, 0, 0.85) 50%, 
+    rgba(0, 0, 0, 0.95) 100%);
 }
 
-.odevolv-hero-gold-particles {
+.odevolv-filiales-hero-gold-particles {
   position: absolute;
   inset: 0;
   background-image: 
-    radial-gradient(circle at 25% 25%, rgba(212, 175, 55, 0.2) 1px, transparent 1px),
-    radial-gradient(circle at 75% 75%, rgba(212, 175, 55, 0.15) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: od-particles 20s linear infinite;
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.3) 2px, transparent 2px),
+    radial-gradient(circle at 90% 40%, rgba(212, 175, 55, 0.2) 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(212, 175, 55, 0.25) 1px, transparent 1px),
+    radial-gradient(circle at 60% 10%, rgba(212, 175, 55, 0.15) 1px, transparent 1px);
+  background-size: 60px 60px, 40px 40px, 80px 80px, 30px 30px;
+  animation: odevolv-filiales-particles 20s linear infinite;
 }
 
-.odevolv-hero-glow {
+.odevolv-filiales-hero-glow {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -82,461 +88,596 @@
   width: 100vw;
   height: 100vh;
   background: radial-gradient(circle, 
-    rgba(212, 175, 55, 0.1) 0%, 
+    rgba(212, 175, 55, 0.15) 0%, 
+    rgba(212, 175, 55, 0.05) 30%,
     transparent 70%);
-  animation: od-pulse 8s ease-in-out infinite;
+  animation: odevolv-filiales-pulse 8s ease-in-out infinite;
+  filter: blur(40px);
 }
 
-.odevolv-hero-content {
+.odevolv-filiales-hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   max-width: 1200px;
   width: 100%;
-  padding: 0 2rem;
+  padding: 4rem 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.odevolv-hero-badge {
+.odevolv-filiales-hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 0.875rem 1.75rem;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 50px;
-  backdrop-filter: blur(10px);
-  margin-bottom: 3rem;
-  animation: od-fade-in 1s ease-out;
+  backdrop-filter: blur(12px);
+  margin-bottom: 3.5rem;
+  animation: odevolv-filiales-fade-in 1s ease-out 0.2s both;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-.odevolv-hero-badge svg {
-  color: var(--odevolv-secondary);
+.odevolv-filiales-hero-badge svg {
+  color: var(--odevolv-filiales-secondary);
+  animation: odevolv-filiales-sparkle 2s ease-in-out infinite;
 }
 
-.odevolv-hero-badge span {
-  color: var(--odevolv-secondary);
+.odevolv-filiales-hero-badge span {
+  color: var(--odevolv-filiales-secondary);
   font-weight: 600;
-  font-size: 0.875rem;
-  letter-spacing: 0.5px;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-.odevolv-hero-title {
+.odevolv-filiales-hero-title {
   font-size: 4.5rem;
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #FFFFFF 0%, #D4AF37 100%);
+  font-weight: 900;
+  line-height: 1.05;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, 
+    #FFFFFF 0%, 
+    var(--odevolv-filiales-gold-light) 25%,
+    var(--odevolv-filiales-secondary) 50%,
+    var(--odevolv-filiales-gold-light) 75%,
+    #FFFFFF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: od-fade-up 1s ease-out 0.2s both;
+  background-size: 200% auto;
+  animation: odevolv-filiales-shine 3s ease-in-out infinite alternate, 
+             odevolv-filiales-fade-up 1s ease-out 0.3s both;
+  text-shadow: 0 2px 30px rgba(212, 175, 55, 0.3);
 }
 
-.odevolv-hero-highlight {
+.odevolv-filiales-hero-highlight {
   position: relative;
   display: inline-block;
+  padding: 0 0.5rem;
 }
 
-.odevolv-hero-highlight::after {
+.odevolv-filiales-hero-highlight::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--odevolv-gradient-gold);
-  border-radius: 2px;
+  bottom: 0.25rem;
+  left: 0.5rem;
+  width: calc(100% - 1rem);
+  height: 6px;
+  background: var(--odevolv-filiales-gradient-gold);
+  border-radius: 3px;
   transform: scaleX(0);
   transform-origin: right;
-  animation: od-underline 1s ease-out 1s forwards;
+  animation: odevolv-filiales-underline 1.2s ease-out 0.8s forwards;
+  z-index: -1;
+  box-shadow: 0 2px 15px var(--odevolv-filiales-gold-glow);
 }
 
-.odevolv-hero-subtitle {
-  font-size: 1.25rem;
-  line-height: 1.6;
+.odevolv-filiales-hero-subtitle {
+  font-size: 1.375rem;
+  line-height: 1.7;
   max-width: 800px;
-  margin: 0 auto 4rem;
-  color: rgba(255, 255, 255, 0.85);
-  animation: od-fade-up 1s ease-out 0.4s both;
+  margin: 0 auto 5rem;
+  color: rgba(255, 255, 255, 0.9);
+  animation: odevolv-filiales-fade-up 1s ease-out 0.5s both;
+  font-weight: 300;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-.odevolv-hero-stats {
+.odevolv-filiales-hero-stats {
   display: flex;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
-  margin-bottom: 4rem;
-  animation: od-fade-up 1s ease-out 0.6s both;
+  margin-bottom: 5rem;
+  animation: odevolv-filiales-fade-up 1s ease-out 0.7s both;
+  perspective: 1000px;
 }
 
-.odevolv-hero-stat {
+.odevolv-filiales-hero-stat {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  transition: var(--odevolv-transition);
-  min-width: 200px;
+  gap: 1.25rem;
+  padding: 2rem 1.75rem;
+  background: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(255, 255, 255, 0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  transition: var(--odevolv-filiales-transition);
+  min-width: 220px;
+  transform-style: preserve-3d;
 }
 
-.odevolv-hero-stat:hover {
-  background: rgba(212, 175, 55, 0.1);
-  border-color: rgba(212, 175, 55, 0.3);
-  transform: translateY(-4px);
+.odevolv-filiales-hero-stat:hover {
+  background: linear-gradient(145deg, 
+    rgba(212, 175, 55, 0.15) 0%, 
+    rgba(212, 175, 55, 0.08) 100%);
+  border-color: rgba(212, 175, 55, 0.5);
+  transform: translateY(-8px) rotateX(5deg);
+  box-shadow: var(--odevolv-filiales-shadow-gold);
 }
 
-.odevolv-hero-stat-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--odevolv-gradient-gold);
-  border-radius: 12px;
-  color: var(--odevolv-dark);
-  flex-shrink: 0;
-}
-
-.odevolv-hero-stat-content {
-  text-align: left;
-  flex: 1;
-}
-
-.odevolv-hero-stat-number {
-  font-size: 1.75rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #FFFFFF 0%, #D4AF37 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  margin-bottom: 0.25rem;
-}
-
-.odevolv-hero-stat-label {
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.odevolv-hero-scroll {
-  position: absolute;
-  bottom: 3rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.odevolv-scroll-indicator {
+.odevolv-filiales-hero-stat-icon {
   width: 56px;
   height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  border-radius: 50%;
-  color: var(--odevolv-secondary);
-  animation: od-bounce 2s infinite;
-  cursor: pointer;
-  transition: var(--odevolv-transition);
+  background: var(--odevolv-filiales-gradient-gold);
+  border-radius: 16px;
+  color: var(--odevolv-filiales-dark);
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+  position: relative;
+  overflow: hidden;
 }
 
-.odevolv-scroll-indicator:hover {
-  background: rgba(212, 175, 55, 0.2);
-  transform: translateY(-4px) translateX(-50%);
+.odevolv-filiales-hero-stat-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent);
+  transition: left 0.6s;
 }
 
-/* Value Section - Fond clair */
-.odevolv-value-section {
-  padding: 6rem 0;
-  background: var(--odevolv-lighter);
+.odevolv-filiales-hero-stat:hover .odevolv-filiales-hero-stat-icon::after {
+  left: 100%;
 }
 
-.odevolv-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
+.odevolv-filiales-hero-stat-content {
+  text-align: left;
+  flex: 1;
 }
 
-.odevolv-value-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
+.odevolv-filiales-hero-stat-number {
+  font-size: 2.25rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #FFFFFF 0%, var(--odevolv-filiales-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 20px rgba(212, 175, 55, 0.4);
 }
 
-.odevolv-value-card {
-  padding: 3rem 2rem;
-  background: var(--odevolv-gradient-card);
-  border-radius: 24px;
-  text-align: center;
-  border: 1px solid rgba(212, 175, 55, 0.1);
-  box-shadow: var(--odevolv-shadow-sm);
-  transition: var(--odevolv-transition);
+.odevolv-filiales-hero-stat-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  letter-spacing: 0.5px;
 }
 
-.odevolv-value-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--odevolv-shadow-lg);
-  border-color: rgba(212, 175, 55, 0.3);
+.odevolv-filiales-hero-scroll {
+  position: absolute;
+  bottom: 3.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
 
-.odevolv-value-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 1.5rem;
-  background: var(--odevolv-gradient-gold);
-  border-radius: 18px;
+.odevolv-filiales-scroll-indicator {
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--odevolv-white);
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(212, 175, 55, 0.5);
+  border-radius: 50%;
+  color: var(--odevolv-filiales-secondary);
+  animation: odevolv-filiales-bounce 2s infinite, odevolv-filiales-rotate 4s linear infinite;
+  cursor: pointer;
+  transition: var(--odevolv-filiales-transition);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
 }
 
-.odevolv-value-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--odevolv-dark);
-  margin-bottom: 0.75rem;
+.odevolv-filiales-scroll-indicator:hover {
+  background: rgba(212, 175, 55, 0.25);
+  border-color: var(--odevolv-filiales-secondary);
+  transform: translateY(-6px) translateX(-50%) scale(1.1);
+  box-shadow: 0 6px 35px rgba(212, 175, 55, 0.5);
 }
 
-.odevolv-value-description {
-  color: var(--odevolv-gray-dark);
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-/* Portfolio Section - Fond clair */
-.odevolv-portfolio-section {
+/* Value Section - Fond clair */
+.odevolv-filiales-value-section {
   padding: 8rem 0;
-  background: var(--odevolv-light);
+  background: var(--odevolv-filiales-lighter);
+  position: relative;
+  overflow: hidden;
 }
 
-.odevolv-section-header {
-  text-align: center;
-  margin-bottom: 5rem;
+.odevolv-filiales-value-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--odevolv-filiales-secondary), 
+    transparent);
 }
 
-.odevolv-section-badge {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  border-radius: 50px;
-  color: var(--odevolv-gold-dark);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-bottom: 1.5rem;
-  text-transform: uppercase;
-}
-
-.odevolv-section-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: var(--odevolv-dark);
-}
-
-.odevolv-section-description {
-  font-size: 1.125rem;
-  color: var(--odevolv-gray-dark);
-  max-width: 600px;
+.odevolv-filiales-container {
+  max-width: 1200px;
   margin: 0 auto;
-  line-height: 1.6;
+  padding: 0 2rem;
+  position: relative;
 }
 
-.odevolv-portfolio-grid {
+.odevolv-filiales-value-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2.5rem;
 }
 
-.odevolv-portfolio-card {
-  background: var(--odevolv-white);
+.odevolv-filiales-value-card {
+  padding: 3.5rem 2.5rem;
+  background: var(--odevolv-filiales-gradient-card);
   border-radius: 28px;
-  overflow: hidden;
-  position: relative;
+  text-align: center;
   border: 1px solid rgba(212, 175, 55, 0.15);
-  transition: var(--odevolv-transition);
-  box-shadow: var(--odevolv-shadow-md);
+  box-shadow: var(--odevolv-filiales-shadow-md);
+  transition: var(--odevolv-filiales-transition);
+  position: relative;
+  overflow: hidden;
 }
 
-.odevolv-portfolio-card:hover {
+.odevolv-filiales-value-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(212, 175, 55, 0.08), 
+    transparent);
+  transition: left 0.8s;
+}
+
+.odevolv-filiales-value-card:hover {
   transform: translateY(-12px);
-  box-shadow: var(--odevolv-shadow-xl);
+  box-shadow: var(--odevolv-filiales-shadow-xl);
   border-color: rgba(212, 175, 55, 0.3);
 }
 
-.odevolv-card-gold-border {
+.odevolv-filiales-value-card:hover::before {
+  left: 100%;
+}
+
+.odevolv-filiales-value-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 2rem;
+  background: var(--odevolv-filiales-gradient-gold);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--odevolv-filiales-white);
+  box-shadow: var(--odevolv-filiales-shadow-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.odevolv-filiales-value-icon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, 
+    transparent 30%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 70%);
+  animation: odevolv-filiales-shine-icon 3s infinite linear;
+}
+
+.odevolv-filiales-value-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--odevolv-filiales-dark);
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+}
+
+.odevolv-filiales-value-description {
+  color: var(--odevolv-filiales-gray-dark);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.odevolv-filiales-value-underline {
+  width: 60px;
+  height: 3px;
+  background: var(--odevolv-filiales-gradient-gold);
+  margin: 0 auto;
+  border-radius: 2px;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 0.6s ease;
+}
+
+.odevolv-filiales-value-card:hover .odevolv-filiales-value-underline {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Portfolio Section - Fond clair */
+.odevolv-filiales-portfolio-section {
+  padding: 10rem 0;
+  background: var(--odevolv-filiales-light);
+  position: relative;
+}
+
+.odevolv-filiales-portfolio-section::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: var(--odevolv-gradient-gold);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--odevolv-filiales-secondary), 
+    transparent);
 }
 
-.odevolv-portfolio-card:hover .odevolv-card-gold-border {
+.odevolv-filiales-section-header {
+  text-align: center;
+  margin-bottom: 6rem;
+  position: relative;
+}
+
+.odevolv-filiales-section-badge {
+  display: inline-block;
+  padding: 0.875rem 2rem;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 50px;
+  color: var(--odevolv-filiales-gold-dark);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.odevolv-filiales-section-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(212, 175, 55, 0.3), 
+    transparent);
+  animation: odevolv-filiales-slide 3s infinite;
+}
+
+.odevolv-filiales-section-title {
+  font-size: 3.75rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: var(--odevolv-filiales-dark);
+  background: linear-gradient(135deg, 
+    var(--odevolv-filiales-dark) 0%, 
+    var(--odevolv-filiales-gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.odevolv-filiales-section-description {
+  font-size: 1.25rem;
+  color: var(--odevolv-filiales-gray-dark);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.odevolv-filiales-portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 3rem;
+}
+
+.odevolv-filiales-portfolio-card {
+  background: var(--odevolv-filiales-white);
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  transition: var(--odevolv-filiales-transition);
+  box-shadow: var(--odevolv-filiales-shadow-lg);
+  transform-style: preserve-3d;
+}
+
+.odevolv-filiales-portfolio-card:hover {
+  transform: translateY(-15px) rotateX(2deg);
+  box-shadow: var(--odevolv-filiales-shadow-xl);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+.odevolv-filiales-card-gold-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: var(--odevolv-filiales-gradient-gold);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+}
+
+.odevolv-filiales-portfolio-card:hover .odevolv-filiales-card-gold-border {
   opacity: 1;
 }
 
-.odevolv-card-pattern {
+.odevolv-filiales-card-pattern {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 120px;
-  background: 
-    linear-gradient(135deg, 
-      rgba(212, 175, 55, 0.03) 0%, 
-      transparent 100%);
+  height: 150px;
+  background: var(--odevolv-filiales-gradient-gold-soft);
+  opacity: 0.6;
 }
 
-.odevolv-card-header {
+.odevolv-filiales-card-header {
   position: relative;
-  padding: 2.5rem 2.5rem 1.5rem;
+  padding: 3rem 3rem 2rem;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.9);
+  gap: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
 }
 
-.odevolv-card-icon-wrapper {
+.odevolv-filiales-card-icon-wrapper {
   position: relative;
   flex-shrink: 0;
 }
 
-.odevolv-card-icon {
-  width: 70px;
-  height: 70px;
+.odevolv-filiales-card-icon {
+  width: 85px;
+  height: 85px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--odevolv-gradient-gold);
-  border-radius: 18px;
-  color: var(--odevolv-white);
+  background: var(--odevolv-filiales-gradient-gold);
+  border-radius: 22px;
+  color: var(--odevolv-filiales-white);
   position: relative;
   z-index: 2;
-  transition: var(--odevolv-transition);
-  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+  transition: var(--odevolv-filiales-transition);
+  box-shadow: var(--odevolv-filiales-shadow-gold);
+  font-size: 2rem;
 }
 
-.odevolv-portfolio-card:hover .odevolv-card-icon {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+.odevolv-filiales-portfolio-card:hover .odevolv-filiales-card-icon {
+  transform: scale(1.15) rotate(8deg);
+  box-shadow: var(--odevolv-filiales-shadow-gold-lg);
 }
 
-.odevolv-card-glow {
+.odevolv-filiales-card-glow {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 90px;
-  height: 90px;
+  width: 110px;
+  height: 110px;
   background: radial-gradient(circle, 
-    rgba(212, 175, 55, 0.2) 0%, 
+    var(--odevolv-filiales-gold-glow) 0%, 
     transparent 70%);
   border-radius: 50%;
-  animation: od-pulse-glow 2s ease-in-out infinite;
+  animation: odevolv-filiales-pulse-glow 2.5s ease-in-out infinite;
+  filter: blur(15px);
 }
 
-.odevolv-card-titles {
+.odevolv-filiales-card-titles {
   flex: 1;
 }
 
-.odevolv-card-title {
-  font-size: 1.75rem;
-  font-weight: 800;
-  color: var(--odevolv-dark);
-  margin-bottom: 0.5rem;
+.odevolv-filiales-card-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--odevolv-filiales-dark);
+  margin-bottom: 0.75rem;
+  background: linear-gradient(135deg, 
+    var(--odevolv-filiales-dark) 0%, 
+    var(--odevolv-filiales-gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.odevolv-card-performance {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  background: rgba(212, 175, 55, 0.1);
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--odevolv-gold-dark);
-}
-
-.odevolv-card-performance svg {
-  color: var(--odevolv-gold);
-}
-
-.odevolv-card-body {
-  padding: 0 2.5rem 2.5rem;
-  position: relative;
-}
-
-.odevolv-card-stats {
-  margin-bottom: 1.5rem;
-}
-
-.odevolv-card-stat-badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: var(--odevolv-gradient-gold);
-  color: var(--odevolv-white);
-  border-radius: 20px;
-  font-size: 0.875rem;
-  font-weight: 700;
-}
-
-.odevolv-card-description {
-  color: var(--odevolv-gray-dark);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
-  max-height: 200px;
-  overflow-y: auto;
-  padding-right: 1rem;
-  text-align: justify;
-}
-
-.odevolv-card-description::-webkit-scrollbar {
-  width: 6px;
-}
-
-.odevolv-card-description::-webkit-scrollbar-track {
-  background: rgba(212, 175, 55, 0.05);
-  border-radius: 10px;
-}
-
-.odevolv-card-description::-webkit-scrollbar-thumb {
-  background: var(--odevolv-gradient-gold);
-  border-radius: 10px;
-}
-
-.odevolv-card-footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  padding-top: 1.5rem;
-}
-
-.odevolv-card-link {
+.odevolv-filiales-card-performance {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 2rem;
-  background: var(--odevolv-gradient-gold);
-  color: var(--odevolv-white);
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  background: rgba(212, 175, 55, 0.15);
+  border-radius: 25px;
   font-size: 0.95rem;
-  transition: var(--odevolv-transition);
+  font-weight: 700;
+  color: var(--odevolv-filiales-gold-dark);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.odevolv-filiales-card-performance svg {
+  color: var(--odevolv-filiales-gold-dark);
+  animation: odevolv-filiales-pulse 2s infinite;
+}
+
+.odevolv-filiales-card-body {
+  padding: 0 3rem 3rem;
+  position: relative;
+}
+
+.odevolv-filiales-card-stats {
+  margin-bottom: 2rem;
+}
+
+.odevolv-filiales-card-stat-badge {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--odevolv-filiales-gradient-gold);
+  color: var(--odevolv-filiales-white);
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  box-shadow: var(--odevolv-filiales-shadow-gold);
   position: relative;
   overflow: hidden;
 }
 
-.odevolv-card-link::before {
+.odevolv-filiales-card-stat-badge::before {
   content: '';
   position: absolute;
   top: 0;
@@ -545,116 +686,225 @@
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.3), 
+    rgba(255, 255, 255, 0.4), 
     transparent);
-  transition: left 0.6s;
+  animation: odevolv-filiales-slide 2s infinite;
 }
 
-.odevolv-card-link:hover::before {
+.odevolv-filiales-card-description {
+  color: var(--odevolv-filiales-gray-dark);
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+  font-size: 1.05rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 1rem;
+  text-align: justify;
+  font-weight: 300;
+}
+
+.odevolv-filiales-card-description::-webkit-scrollbar {
+  width: 8px;
+}
+
+.odevolv-filiales-card-description::-webkit-scrollbar-track {
+  background: rgba(212, 175, 55, 0.08);
+  border-radius: 10px;
+}
+
+.odevolv-filiales-card-description::-webkit-scrollbar-thumb {
+  background: var(--odevolv-filiales-gradient-gold);
+  border-radius: 10px;
+}
+
+.odevolv-filiales-card-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 2rem;
+}
+
+.odevolv-filiales-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 2.5rem;
+  background: var(--odevolv-filiales-gradient-gold);
+  color: var(--odevolv-filiales-white);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: var(--odevolv-filiales-transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--odevolv-filiales-shadow-gold);
+}
+
+.odevolv-filiales-card-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent);
+  transition: left 0.8s;
+}
+
+.odevolv-filiales-card-link:hover::before {
   left: 100%;
 }
 
-.odevolv-card-link:hover {
-  transform: translateX(8px);
-  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+.odevolv-filiales-card-link:hover {
+  transform: translateX(10px) scale(1.05);
+  box-shadow: var(--odevolv-filiales-shadow-gold-lg);
 }
 
 /* CTA Section - Fond clair */
-.odevolv-cta-section {
-  padding: 8rem 0;
-  background: var(--odevolv-lighter);
+.odevolv-filiales-cta-section {
+  padding: 10rem 0;
+  background: var(--odevolv-filiales-lighter);
   position: relative;
+  overflow: hidden;
 }
 
-.odevolv-cta-content {
-  max-width: 800px;
+.odevolv-filiales-cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--odevolv-filiales-secondary), 
+    transparent);
+}
+
+.odevolv-filiales-cta-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--odevolv-filiales-secondary), 
+    transparent);
+}
+
+.odevolv-filiales-cta-content {
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
   position: relative;
   z-index: 2;
 }
 
-.odevolv-cta-badge {
+.odevolv-filiales-cta-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
-  background: rgba(212, 175, 55, 0.1);
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.3);
   border-radius: 50px;
+  margin-bottom: 3rem;
+  color: var(--odevolv-filiales-gold-dark);
+  backdrop-filter: blur(10px);
+  animation: odevolv-filiales-pulse 2s infinite;
+}
+
+.odevolv-filiales-cta-title {
+  font-size: 4rem;
+  font-weight: 900;
   margin-bottom: 2rem;
-  color: var(--odevolv-gold-dark);
-}
-
-.odevolv-cta-title {
-  font-size: 3.5rem;
-  font-weight: 800;
-  margin-bottom: 1.5rem;
-  color: var(--odevolv-dark);
+  color: var(--odevolv-filiales-dark);
   line-height: 1.1;
+  background: linear-gradient(135deg, 
+    var(--odevolv-filiales-dark) 0%, 
+    var(--odevolv-filiales-gold-dark) 50%,
+    var(--odevolv-filiales-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: odevolv-filiales-shine 3s ease-in-out infinite alternate;
 }
 
-.odevolv-cta-highlight {
-  color: var(--odevolv-gold);
+.odevolv-filiales-cta-highlight {
   position: relative;
   display: inline-block;
+  padding: 0 0.5rem;
 }
 
-.odevolv-cta-highlight::after {
+.odevolv-filiales-cta-highlight::after {
   content: '';
   position: absolute;
-  bottom: 4px;
-  left: 0;
-  width: 100%;
-  height: 6px;
+  bottom: 0.25rem;
+  left: 0.5rem;
+  width: calc(100% - 1rem);
+  height: 8px;
   background: linear-gradient(90deg, 
-    rgba(212, 175, 55, 0.2) 0%, 
-    rgba(212, 175, 55, 0.4) 50%, 
-    rgba(212, 175, 55, 0.2) 100%);
-  border-radius: 3px;
+    rgba(212, 175, 55, 0.3) 0%, 
+    rgba(212, 175, 55, 0.6) 50%, 
+    rgba(212, 175, 55, 0.3) 100%);
+  border-radius: 4px;
   z-index: -1;
+  animation: odevolv-filiales-pulse 2s infinite;
 }
 
-.odevolv-cta-description {
-  font-size: 1.125rem;
-  color: var(--odevolv-gray-dark);
-  line-height: 1.6;
-  margin-bottom: 3rem;
+.odevolv-filiales-cta-description {
+  font-size: 1.375rem;
+  color: var(--odevolv-filiales-gray-dark);
+  line-height: 1.7;
+  margin-bottom: 4rem;
+  font-weight: 300;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.odevolv-cta-actions {
+.odevolv-filiales-cta-actions {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   justify-content: center;
   flex-wrap: wrap;
+  perspective: 1000px;
 }
 
-.odevolv-cta-button {
+.odevolv-filiales-cta-button {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2.5rem;
-  font-size: 1rem;
-  font-weight: 600;
+  gap: 1rem;
+  padding: 1.5rem 3rem;
+  font-size: 1.125rem;
+  font-weight: 700;
   text-decoration: none;
-  border-radius: 50px;
-  transition: var(--odevolv-transition);
+  border-radius: 60px;
+  transition: var(--odevolv-filiales-transition);
   position: relative;
   overflow: hidden;
+  transform-style: preserve-3d;
 }
 
-.odevolv-cta-primary {
-  background: var(--odevolv-gradient-gold);
-  color: var(--odevolv-white);
+.odevolv-filiales-cta-primary {
+  background: var(--odevolv-filiales-gradient-gold);
+  color: var(--odevolv-filiales-white);
+  box-shadow: var(--odevolv-filiales-shadow-gold);
 }
 
-.odevolv-cta-secondary {
+.odevolv-filiales-cta-secondary {
   background: transparent;
-  color: var(--odevolv-gold-dark);
-  border: 2px solid rgba(212, 175, 55, 0.3);
+  color: var(--odevolv-filiales-gold-dark);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  backdrop-filter: blur(10px);
 }
 
-.odevolv-cta-button::before {
+.odevolv-filiales-cta-button::before {
   content: '';
   position: absolute;
   top: 0;
@@ -663,31 +913,32 @@
   height: 100%;
   background: linear-gradient(90deg, 
     transparent, 
-    rgba(255, 255, 255, 0.3), 
+    rgba(255, 255, 255, 0.4), 
     transparent);
-  transition: left 0.6s;
+  transition: left 0.8s;
 }
 
-.odevolv-cta-button:hover::before {
+.odevolv-filiales-cta-button:hover::before {
   left: 100%;
 }
 
-.odevolv-cta-primary:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--odevolv-shadow-lg);
+.odevolv-filiales-cta-primary:hover {
+  transform: translateY(-8px) rotateX(5deg);
+  box-shadow: var(--odevolv-filiales-shadow-gold-lg);
 }
 
-.odevolv-cta-secondary:hover {
-  background: rgba(212, 175, 55, 0.1);
-  border-color: var(--odevolv-gold);
-  transform: translateY(-4px);
+.odevolv-filiales-cta-secondary:hover {
+  background: rgba(212, 175, 55, 0.15);
+  border-color: var(--odevolv-filiales-secondary);
+  transform: translateY(-8px) rotateX(-5deg);
+  box-shadow: var(--odevolv-filiales-shadow-gold);
 }
 
 /* Animations */
-@keyframes od-fade-in {
+@keyframes odevolv-filiales-fade-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -695,10 +946,10 @@
   }
 }
 
-@keyframes od-fade-up {
+@keyframes odevolv-filiales-fade-up {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(60px);
   }
   to {
     opacity: 1;
@@ -706,7 +957,7 @@
   }
 }
 
-@keyframes od-underline {
+@keyframes odevolv-filiales-underline {
   from {
     transform: scaleX(0);
     transform-origin: right;
@@ -717,30 +968,39 @@
   }
 }
 
-@keyframes od-bounce {
+@keyframes odevolv-filiales-bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0) translateX(-50%);
   }
   40% {
-    transform: translateY(-10px) translateX(-50%);
+    transform: translateY(-15px) translateX(-50%);
   }
   60% {
-    transform: translateY(-5px) translateX(-50%);
+    transform: translateY(-7px) translateX(-50%);
   }
 }
 
-@keyframes od-particles {
+@keyframes odevolv-filiales-particles {
   from {
-    transform: translateY(0);
+    transform: translateY(0) rotate(0deg);
   }
   to {
-    transform: translateY(-50px);
+    transform: translateY(-100px) rotate(360deg);
   }
 }
 
-@keyframes od-pulse {
+@keyframes odevolv-filiales-pulse {
   0%, 100% {
-    opacity: 0.1;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes odevolv-filiales-pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
     transform: translate(-50%, -50%) scale(1);
   }
   50% {
@@ -749,129 +1009,221 @@
   }
 }
 
-@keyframes od-pulse-glow {
+@keyframes odevolv-filiales-shine {
+  from {
+    background-position: 0% center;
+  }
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes odevolv-filiales-shine-icon {
+  from {
+    transform: translateX(-50%) translateY(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) translateY(-50%) rotate(360deg);
+  }
+}
+
+@keyframes odevolv-filiales-sparkle {
   0%, 100% {
-    opacity: 0.3;
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transform: scale(1);
   }
   50% {
-    opacity: 0.1;
-    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes odevolv-filiales-rotate {
+  from {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes odevolv-filiales-slide {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
   }
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
-  .odevolv-hero-title {
+@media (max-width: 1200px) {
+  .odevolv-filiales-hero-title {
+    font-size: 4rem;
+  }
+  
+  .odevolv-filiales-section-title,
+  .odevolv-filiales-cta-title {
+    font-size: 3.25rem;
+  }
+  
+  .odevolv-filiales-portfolio-grid {
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  }
+}
+
+@media (max-width: 992px) {
+  .odevolv-filiales-hero-title {
     font-size: 3.5rem;
   }
   
-  .odevolv-section-title,
-  .odevolv-cta-title {
+  .odevolv-filiales-section-title,
+  .odevolv-filiales-cta-title {
     font-size: 2.75rem;
   }
   
-  .odevolv-portfolio-grid {
-    grid-template-columns: 1fr;
+  .odevolv-filiales-hero-subtitle,
+  .odevolv-filiales-cta-description {
+    font-size: 1.25rem;
+    padding: 0 1.5rem;
   }
   
-  .odevolv-hero-stats {
-    gap: 1.5rem;
+  .odevolv-filiales-portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .odevolv-filiales-value-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .odevolv-hero {
+  .odevolv-filiales-hero {
     min-height: 90vh;
   }
   
-  .odevolv-hero-title {
+  .odevolv-filiales-hero-title {
     font-size: 2.75rem;
   }
   
-  .odevolv-hero-subtitle {
+  .odevolv-filiales-hero-subtitle {
     font-size: 1.125rem;
-    padding: 0 1rem;
+    margin-bottom: 4rem;
   }
   
-  .odevolv-section-title,
-  .odevolv-cta-title {
+  .odevolv-filiales-section-title,
+  .odevolv-filiales-cta-title {
     font-size: 2.25rem;
   }
   
-  .odevolv-hero-stats {
+  .odevolv-filiales-hero-stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
+  .odevolv-filiales-hero-stat {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .odevolv-filiales-cta-actions {
     flex-direction: column;
     align-items: center;
   }
   
-  .odevolv-hero-stat {
+  .odevolv-filiales-cta-button {
     width: 100%;
-    max-width: 300px;
-  }
-  
-  .odevolv-cta-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .odevolv-cta-button {
-    width: 100%;
-    max-width: 300px;
+    max-width: 320px;
     justify-content: center;
   }
   
-  .odevolv-portfolio-grid {
-    gap: 2rem;
+  .odevolv-filiales-value-grid {
+    grid-template-columns: 1fr;
   }
   
-  .odevolv-value-grid {
-    grid-template-columns: 1fr;
+  .odevolv-filiales-container {
+    padding: 0 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
-  .odevolv-hero-title {
+@media (max-width: 576px) {
+  .odevolv-filiales-hero-title {
     font-size: 2.25rem;
   }
   
-  .odevolv-section-title,
-  .odevolv-cta-title {
+  .odevolv-filiales-section-title,
+  .odevolv-filiales-cta-title {
     font-size: 1.875rem;
   }
   
-  .odevolv-portfolio-card {
+  .odevolv-filiales-section-description,
+  .odevolv-filiales-cta-description {
+    font-size: 1.125rem;
+  }
+  
+  .odevolv-filiales-portfolio-card {
     min-width: 100%;
   }
   
-  .odevolv-card-header {
+  .odevolv-filiales-card-header {
     flex-direction: column;
     text-align: center;
-    padding: 2rem 1.5rem 1rem;
+    padding: 2.5rem 2rem 1.5rem;
+    gap: 1.5rem;
   }
   
-  .odevolv-card-icon-wrapper {
-    margin-bottom: 1rem;
+  .odevolv-filiales-card-icon-wrapper {
+    margin-bottom: 0.5rem;
   }
   
-  .odevolv-card-body {
-    padding: 0 1.5rem 1.5rem;
+  .odevolv-filiales-card-body {
+    padding: 0 2rem 2.5rem;
   }
   
-  .odevolv-card-link {
+  .odevolv-filiales-card-link {
     width: 100%;
     justify-content: center;
+  }
+  
+  .odevolv-filiales-hero-badge,
+  .odevolv-filiales-section-badge,
+  .odevolv-filiales-cta-badge {
+    font-size: 0.875rem;
+    padding: 0.75rem 1.5rem;
   }
 }
 
 /* Support des navigateurs modernes */
 @supports (backdrop-filter: blur(10px)) {
-  .odevolv-hero-badge,
-  .odevolv-hero-stat {
-    backdrop-filter: blur(10px);
+  .odevolv-filiales-hero-badge,
+  .odevolv-filiales-hero-stat,
+  .odevolv-filiales-card-performance,
+  .odevolv-filiales-cta-badge,
+  .odevolv-filiales-cta-secondary {
+    backdrop-filter: blur(12px);
   }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Améliorations de performance */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimisation pour les appareils mobiles */
+@media (hover: none) and (pointer: coarse) {
+  .odevolv-filiales-hero-stat:hover,
+  .odevolv-filiales-value-card:hover,
+  .odevolv-filiales-portfolio-card:hover,
+  .odevolv-filiales-card-link:hover,
+  .odevolv-filiales-cta-button:hover {
+    transform: none;
+  }
 }

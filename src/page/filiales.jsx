@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, Palette, Megaphone, Trophy, Car, UtensilsCrossed, ArrowRight, MessageCircle, ChevronDown, Sparkles, Building2, Target, Award, Globe, Users, TrendingUp, Shield, Star, Zap, Coins } from "lucide-react";
 import './filiale.css';
+
 const OdevolvSubsidiaries = () => {
   const subsidiaries = [
     {
@@ -85,47 +86,47 @@ const OdevolvSubsidiaries = () => {
   ];
 
   return (
-    <div className="odevolv-subsidiaries">
+    <div className="odevolv-filiales">
       {/* Hero Section en noir/or */}
-      <section className="odevolv-hero">
-        <div className="odevolv-hero-background">
-          <div className="odevolv-hero-overlay"></div>
-          <div className="odevolv-hero-gold-particles"></div>
-          <div className="odevolv-hero-glow"></div>
+      <section className="odevolv-filiales-hero">
+        <div className="odevolv-filiales-hero-background">
+          <div className="odevolv-filiales-hero-overlay"></div>
+          <div className="odevolv-filiales-hero-gold-particles"></div>
+          <div className="odevolv-filiales-hero-glow"></div>
         </div>
         
-        <div className="odevolv-hero-content">
-          <div className="odevolv-hero-badge">
+        <div className="odevolv-filiales-hero-content">
+          <div className="odevolv-filiales-hero-badge">
             <Sparkles size={16} />
             <span>Portfolio d'Excellence</span>
           </div>
           
-          <h1 className="odevolv-hero-title">
-            L'Empire <span className="odevolv-hero-highlight">Odevolv</span>
+          <h1 className="odevolv-filiales-hero-title">
+            L'Empire <span className="odevolv-filiales-hero-highlight">Odevolv</span>
           </h1>
           
-          <p className="odevolv-hero-subtitle">
+          <p className="odevolv-filiales-hero-subtitle">
             Un écosystème diversifié de six filiales d'excellence, 
             chacune leader dans son secteur. Innovation, qualité et 
             croissance durable définissent notre ADN entrepreneurial.
           </p>
 
-          <div className="odevolv-hero-stats">
+          <div className="odevolv-filiales-hero-stats">
             {achievements.map((achievement, index) => (
-              <div key={index} className="odevolv-hero-stat">
-                <div className="odevolv-hero-stat-icon">
+              <div key={index} className="odevolv-filiales-hero-stat">
+                <div className="odevolv-filiales-hero-stat-icon">
                   {React.createElement(achievement.icon, { size: 20 })}
                 </div>
-                <div className="odevolv-hero-stat-content">
-                  <div className="odevolv-hero-stat-number">{achievement.number}</div>
-                  <div className="odevolv-hero-stat-label">{achievement.label}</div>
+                <div className="odevolv-filiales-hero-stat-content">
+                  <div className="odevolv-filiales-hero-stat-number">{achievement.number}</div>
+                  <div className="odevolv-filiales-hero-stat-label">{achievement.label}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="odevolv-hero-scroll">
-            <a href="#portfolio" className="odevolv-scroll-indicator">
+          <div className="odevolv-filiales-hero-scroll">
+            <a href="#portfolio" className="odevolv-filiales-scroll-indicator">
               <ChevronDown size={24} />
             </a>
           </div>
@@ -133,16 +134,17 @@ const OdevolvSubsidiaries = () => {
       </section>
 
       {/* Section valeur ajoutée - fond clair */}
-      <section className="odevolv-value-section">
-        <div className="odevolv-container">
-          <div className="odevolv-value-grid">
+      <section className="odevolv-filiales-value-section">
+        <div className="odevolv-filiales-container">
+          <div className="odevolv-filiales-value-grid">
             {valuePropositions.map((prop, index) => (
-              <div key={index} className="odevolv-value-card">
-                <div className="odevolv-value-icon">
+              <div key={index} className="odevolv-filiales-value-card">
+                <div className="odevolv-filiales-value-icon">
                   {React.createElement(prop.icon)}
                 </div>
-                <h3 className="odevolv-value-title">{prop.title}</h3>
-                <p className="odevolv-value-description">{prop.description}</p>
+                <h3 className="odevolv-filiales-value-title">{prop.title}</h3>
+                <p className="odevolv-filiales-value-description">{prop.description}</p>
+                <div className="odevolv-filiales-value-underline"></div>
               </div>
             ))}
           </div>
@@ -150,59 +152,59 @@ const OdevolvSubsidiaries = () => {
       </section>
 
       {/* Portfolio Section - fond clair */}
-      <section className="odevolv-portfolio-section" id="portfolio">
-        <div className="odevolv-container">
-          <div className="odevolv-section-header">
-            <div className="odevolv-section-badge">
+      <section className="odevolv-filiales-portfolio-section" id="portfolio">
+        <div className="odevolv-filiales-container">
+          <div className="odevolv-filiales-section-header">
+            <div className="odevolv-filiales-section-badge">
               Notre Écosystème
             </div>
-            <h2 className="odevolv-section-title">
+            <h2 className="odevolv-filiales-section-title">
               Des Piliers d'Excellence
             </h2>
-            <p className="odevolv-section-description">
+            <p className="odevolv-filiales-section-description">
               Six filiales, une vision : révolutionner chaque secteur 
               avec innovation et expertise africaine.
             </p>
           </div>
 
-          <div className="odevolv-portfolio-grid">
+          <div className="odevolv-filiales-portfolio-grid">
             {subsidiaries.map((subsidiary, index) => (
               <div 
                 key={subsidiary.title} 
-                className="odevolv-portfolio-card"
+                className="odevolv-filiales-portfolio-card"
                 data-index={index}
               >
-                <div className="odevolv-card-gold-border"></div>
-                <div className="odevolv-card-pattern"></div>
+                <div className="odevolv-filiales-card-gold-border"></div>
+                <div className="odevolv-filiales-card-pattern"></div>
                 
-                <div className="odevolv-card-header">
-                  <div className="odevolv-card-icon-wrapper">
-                    <div className="odevolv-card-icon">
+                <div className="odevolv-filiales-card-header">
+                  <div className="odevolv-filiales-card-icon-wrapper">
+                    <div className="odevolv-filiales-card-icon">
                       {React.createElement(subsidiary.icon, { size: 32 })}
                     </div>
-                    <div className="odevolv-card-glow"></div>
+                    <div className="odevolv-filiales-card-glow"></div>
                   </div>
                   
-                  <div className="odevolv-card-titles">
-                    <h3 className="odevolv-card-title">{subsidiary.title}</h3>
-                    <div className="odevolv-card-performance">
+                  <div className="odevolv-filiales-card-titles">
+                    <h3 className="odevolv-filiales-card-title">{subsidiary.title}</h3>
+                    <div className="odevolv-filiales-card-performance">
                       <Coins size={14} />
                       <span>{subsidiary.performance}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="odevolv-card-body">
-                  <div className="odevolv-card-stats">
-                    <span className="odevolv-card-stat-badge">
+                <div className="odevolv-filiales-card-body">
+                  <div className="odevolv-filiales-card-stats">
+                    <span className="odevolv-filiales-card-stat-badge">
                       {subsidiary.stats}
                     </span>
                   </div>
                   
-                  <p className="odevolv-card-description">{subsidiary.description}</p>
+                  <p className="odevolv-filiales-card-description">{subsidiary.description}</p>
                   
-                  <div className="odevolv-card-footer">
-                    <a href={subsidiary.link} className="odevolv-card-link">
+                  <div className="odevolv-filiales-card-footer">
+                    <a href={subsidiary.link} className="odevolv-filiales-card-link">
                       <span>Explorer les détails</span>
                       <ArrowRight size={18} />
                     </a>
@@ -215,30 +217,30 @@ const OdevolvSubsidiaries = () => {
       </section>
 
       {/* CTA Section - fond clair */}
-      <section className="odevolv-cta-section">
-        <div className="odevolv-container">
-          <div className="odevolv-cta-content">
-            <div className="odevolv-cta-badge">
+      <section className="odevolv-filiales-cta-section">
+        <div className="odevolv-filiales-container">
+          <div className="odevolv-filiales-cta-content">
+            <div className="odevolv-filiales-cta-badge">
               <Sparkles size={16} />
               <span>Opportunité d'Investissement</span>
             </div>
             
-            <h2 className="odevolv-cta-title">
-              Partenaire de Notre <span className="odevolv-cta-highlight">Croissance</span>
+            <h2 className="odevolv-filiales-cta-title">
+              Partenaire de Notre <span className="odevolv-filiales-cta-highlight">Croissance</span>
             </h2>
             
-            <p className="odevolv-cta-description">
+            <p className="odevolv-filiales-cta-description">
               Rejoignez-nous dans cette aventure entrepreneuriale exceptionnelle. 
               Investissez dans un écosystème diversifié, résilient et à forte 
               croissance. Notre succès est votre succès.
             </p>
             
-            <div className="odevolv-cta-actions">
-              <a href="/investisseurs" className="odevolv-cta-button odevolv-cta-primary">
+            <div className="odevolv-filiales-cta-actions">
+              <a href="/investisseurs" className="odevolv-filiales-cta-button odevolv-filiales-cta-primary">
                 <MessageCircle size={20} />
                 <span>Devenir Investisseur</span>
               </a>
-              <a href="/contact" className="odevolv-cta-button odevolv-cta-secondary">
+              <a href="/contact" className="odevolv-filiales-cta-button odevolv-filiales-cta-secondary">
                 <span>Planifier une Rencontre</span>
                 <ArrowRight size={18} />
               </a>
