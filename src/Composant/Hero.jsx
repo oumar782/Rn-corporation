@@ -1,174 +1,311 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './hero.css';
 
-const HeroSection = () => {
+import { 
+  ChevronRight, 
+  ChevronLeft,
+  Globe,
+  Users,
+  TrendingUp,
+  Target,
+  Star,
+  Shield,
+  Sparkles,
+  Award
+} from 'lucide-react';
+
+const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [displayText, setDisplayText] = useState('');
+  const [typedText, setTypedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
+  const [typingLoop, setTypingLoop] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
+  const [isLoaded, setIsLoaded] = useState(false);
   
-  const titles = [
-    "RN CORPORATION",
-    "EXCELLENCE IVOIRIENNE", 
-    "INNOVATION & QUALITÉ",
-    "LEADER MULTISECTORIEL"
+  const typingTimeoutRef = useRef(null);
+
+  const TYPING_TEXTS = [
+    "Odevolv CORPORATION",
+    "Excellence Malienne", 
+    "Innovation & Qualité",
+    "Leader Multisectorielle"
   ];
 
-  // Images du carrousel
-  const slides = [
+  const CAROUSEL_SLIDES = [
     {
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80",
-      title: "Excellence & Innovation"
+      id: 1,
+      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+      title: "Excellence & Innovation",
+      gradient: "rgba(10, 10, 10, 0.95)"
     },
     {
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      title: "Solutions Intégrées"
+      id: 2,
+      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: "Solutions Intégrées",
+      gradient: "rgba(10, 10, 10, 0.85)"
     },
     {
-      image: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      title: "Expertise Multisectorielle"
+      id: 3,
+      image: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: "Expertise Multisectorielle",
+      gradient: "rgba(10, 10, 10, 0.9)"
     },
     {
-      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      title: "Vision Africaine"
+      id: 4,
+      image: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      title: "Vision Africaine",
+      gradient: "rgba(10, 10, 10, 0.88)"
     }
   ];
 
-  // Référence pour maintenir la largeur fixe
-  const titleRef = useRef(null);
+  const KEY_STATS = [
+    {
+      id: 1,
+      icon: <Shield size={24} />,
+      value: "6 Filiales",
+      label: "Spécialisées",
+      gradient: "linear-gradient(135deg, #D4AF37 0%, #FFD700 100%)"
+    },
+    {
+      id: 2,
+      icon: <Users size={24} />,
+      value: "500+",
+      label: "Clients Satisfaits",
+      gradient: "linear-gradient(135deg, #FFD700 0%, #FFED4E 100%)"
+    },
+    {
+      id: 3,
+      icon: <Star size={24} />,
+      value: "10+ Ans",
+      label: "d'Expérience",
+      gradient: "linear-gradient(135deg, #B8860B 0%, #D4AF37 100%)"
+    },
+    {
+      id: 4,
+      icon: <TrendingUp size={24} />,
+      value: "95%",
+      label: "Taux de Réussite",
+      gradient: "linear-gradient(135deg, #FFF8DC 0%, #FFD700 100%)"
+    }
+  ];
 
-  // Machine à écrire
+  const trustBadges = [
+    'Certifié ISO 9001',
+    'Leader Régional',
+    'Innovation Award 2025'
+  ];
+
+  useEffect(() => {
+    setIsLoaded(true);
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     const handleTyping = () => {
-      const i = loopNum % titles.length;
-      const fullText = titles[i];
-
-      setDisplayText(isDeleting 
-        ? fullText.substring(0, displayText.length - 1)
-        : fullText.substring(0, displayText.length + 1)
+      const currentIndex = typingLoop % TYPING_TEXTS.length;
+      const fullText = TYPING_TEXTS[currentIndex];
+      
+      setTypedText(prev => 
+        isDeleting 
+          ? fullText.substring(0, prev.length - 1)
+          : fullText.substring(0, prev.length + 1)
       );
 
-      setTypingSpeed(isDeleting ? 75 : 150);
+      setTypingSpeed(isDeleting ? 50 : 100);
 
-      if (!isDeleting && displayText === fullText) {
-        setTimeout(() => setIsDeleting(true), 2000);
-      } else if (isDeleting && displayText === '') {
+      if (!isDeleting && typedText === fullText) {
+        typingTimeoutRef.current = setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && typedText === '') {
         setIsDeleting(false);
-        setLoopNum(loopNum + 1);
+        setTypingLoop(prev => prev + 1);
       }
     };
 
-    const timer = setTimeout(handleTyping, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [displayText, isDeleting, loopNum, titles]);
+    typingTimeoutRef.current = setTimeout(handleTyping, typingSpeed);
+    return () => {
+      if (typingTimeoutRef.current) {
+        clearTimeout(typingTimeoutRef.current);
+      }
+    };
+  }, [typedText, isDeleting, typingLoop]);
 
-  // Carrousel automatique
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
+    const carouselInterval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % CAROUSEL_SLIDES.length);
+    }, 6000);
+    
+    return () => clearInterval(carouselInterval);
+  }, []);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const handleNextSlide = useCallback(() => {
+    setCurrentSlide(prev => (prev + 1) % CAROUSEL_SLIDES.length);
+  }, []);
+
+  const handlePrevSlide = useCallback(() => {
+    setCurrentSlide(prev => (prev - 1 + CAROUSEL_SLIDES.length) % CAROUSEL_SLIDES.length);
+  }, []);
+
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const handleSecondaryCTA = useCallback(() => {
+    console.log('Navigation vers partenariat');
+  }, []);
+
+  const renderParticles = () => {
+    return Array.from({ length: 15 }).map((_, index) => (
+      <div
+        key={`particle-${index}`}
+        className="rn-hero-particle"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animationDelay: `${Math.random() * 3}s`,
+          width: `${Math.random() * 2 + 1}px`,
+          height: `${Math.random() * 2 + 1}px`,
+          opacity: Math.random() * 0.2 + 0.1
+        }}
+      />
+    ));
   };
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
+  const renderSlides = () => {
+    return CAROUSEL_SLIDES.map((slide, index) => (
+      <div
+        key={`slide-${slide.id}`}
+        className={`rn-hero-slide ${index === currentSlide ? 'rn-hero-slide--active' : ''}`}
+        style={{ 
+          backgroundImage: `linear-gradient(135deg, ${slide.gradient}, rgba(0, 0, 0, 0.4)), url(${slide.image})`
+        }}
+        aria-label={`Slide ${index + 1}: ${slide.title}`}
+      />
+    ));
+  };
+
+  const renderStats = () => {
+    return KEY_STATS.map((stat) => (
+      <div key={`stat-${stat.id}`} className="rn-hero-stat">
+        <div className="rn-hero-stat-icon" style={{ background: stat.gradient }}>
+          {stat.icon}
+        </div>
+        <div className="rn-hero-stat-content">
+          <h3 className="rn-hero-stat-value">{stat.value}</h3>
+          <p className="rn-hero-stat-label">{stat.label}</p>
+        </div>
+      </div>
+    ));
   };
 
   return (
-    <section className="hero-section">
-      {/* Carrousel d'images */}
-      <div className="carousel-container">
-        {slides.map((slide, index) => (
-          <div
-            key={index}
-            className={`carousel-slide ${index === currentSlide ? 'active' : ''}`}
-            style={{ backgroundImage: `url(${slide.image})` }}
-          >
-            <div className="slide-overlay"></div>
-          </div>
-        ))}
+    <section 
+      className={`rn-hero-container ${isLoaded ? 'rn-hero-container--loaded' : ''}`}
+      role="banner"
+      aria-label="Section principale Odevolv Corporation"
+    >
+      <div className="rn-hero-background" aria-hidden="true">
+        {renderParticles()}
+        <div className="rn-hero-slides">
+          {renderSlides()}
+        </div>
+        <div className="rn-hero-overlay" />
       </div>
 
-      {/* Contenu principal */}
-      <div className="hero-content">
-        <div className="content-wrapper">
-       
+      <div className="rn-hero-content">
+        <div className="rn-hero-content-wrapper">
+          {/* Badges supérieurs */}
+          <div className="rn-hero-top-section">
+            <div className="rn-hero-badge">
+              <div className="rn-hero-badge-inner">
+                <Target size={18} className="rn-hero-badge-icon" aria-hidden="true" />
+                <span className="rn-hero-badge-text">Leader depuis 2010</span>
+              </div>
+            </div>
 
-          {/* Conteneur fixe pour le titre */}
-          <div className="title-container" ref={titleRef}>
-            <h1 className="main-title">
-              <span className="typed-text">{displayText}</span>
-              <span className="cursor">|</span>
+            <div className="premium-hero__trust-badges">
+              {trustBadges.map((badge, index) => (
+                <div 
+                  key={index} 
+                  className="premium-hero__trust-badge"
+                >
+                  <Sparkles size={14} className="premium-hero__badge-icon" />
+                  <span>{badge}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Titre principal */}
+          <div className="rn-hero-title-section">
+            <div className="rn-hero-title-glow" aria-hidden="true" />
+            <h1 className="rn-hero-title">
+              <span className="rn-hero-title-text" aria-live="polite">
+                {typedText}
+              </span>
+              <span className="rn-hero-title-cursor" aria-hidden="true">|</span>
             </h1>
-            {/* Texte invisible pour maintenir la hauteur */}
-            <div className="hidden-title" aria-hidden="true">
-              {titles[0]}
+            <div className="rn-hero-title-underline">
+              <div className="rn-hero-title-underline-inner" />
             </div>
           </div>
 
           {/* Sous-titre */}
-          <p className="subtitle">
-            Un conglomérat d'excellence au service de six secteurs stratégiques en Côte d'Ivoire et en Afrique de l'Ouest
-          </p>
-
-          {/* Points clés */}
-          <div className="key-points">
-            <div className="key-point">
-              <span className="point-icon">✓</span>
-              <span>6 Filiales Spécialisées</span>
+          <div className="rn-hero-subtitle-section">
+            <div className="rn-hero-subtitle-icon">
+              <Globe size={24} aria-hidden="true" />
             </div>
-            <div className="key-point">
-              <span className="point-icon">✓</span>
-              <span>500+ Clients Satisfaits</span>
-            </div>
-            <div className="key-point">
-              <span className="point-icon">✓</span>
-              <span>10+ Ans d'Expérience</span>
-            </div>
+            <p className="rn-hero-subtitle">
+              Un conglomérat d'excellence opérant dans six secteurs stratégiques 
+              en Côte d'Ivoire et en Afrique de l'Ouest
+            </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="cta-buttons">
-            <button className="btn btn-primary">
-              <span className="btn-icon"></span>
-              Découvrir nos filiales
-            </button>
-            <button className="btn btn-secondary">
-              <span className="btn-icon"></span>
-              Devenir partenaire
-            </button>
+          {/* Statistiques */}
+          <div className="rn-hero-stats">
+            {renderStats()}
           </div>
 
-       
+          {/* Boutons d'action */}
+          <div className="rn-hero-actions">
+            <button 
+              className="rn-hero-btn rn-hero-btn--primary"
+              onClick={() => scrollToSection('subsidiaries')}
+              aria-label="Découvrir nos filiales"
+            >
+              <span className="rn-hero-btn-content">
+                <span className="rn-hero-btn-text">Découvrir nos filiales</span>
+                <ChevronRight size={20} className="rn-hero-btn-icon" aria-hidden="true" />
+              </span>
+            </button>
+            
+            <button 
+              className="rn-hero-btn rn-hero-btn--secondary"
+              onClick={handleSecondaryCTA}
+              aria-label="Devenir partenaire"
+            >
+              <span className="rn-hero-btn-content">
+                <span className="rn-hero-btn-text">Devenir partenaire</span>
+                <ChevronRight size={20} className="rn-hero-btn-icon" aria-hidden="true" />
+              </span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Contrôles du carrousel */}
-      <button className="carousel-control prev" onClick={prevSlide}>
-        ‹
-      </button>
-      <button className="carousel-control next" onClick={nextSlide}>
-        ›
-      </button>
-
-
-      {/* Scroll indicator */}
-      <div className="scroll-indicator">
-        <div className="scroll-arrow"></div>
-        <span>Scroll pour découvrir</span>
-      </div>
-
+      
     </section>
   );
 };
 
-export default HeroSection;
+export default Hero;

@@ -1,151 +1,263 @@
 import { useState } from "react";
-import { Calendar, Tag, ArrowRight, Clock, Users, Trophy, Star, Award, TrendingUp } from "lucide-react";
+import { 
+  Calendar, 
+  Tag, 
+  ArrowRight, 
+  Clock, 
+  Users, 
+  Award, 
+  TrendingUp,
+  X,
+  ChevronLeft,
+  ChevronRight,
+  MapPin,
+  ExternalLink,
+  Share2,
+  Download,
+  Heart,
+  Target,
+  Star,
+  FileText,
+  Eye,
+  BookOpen,
+  Newspaper,
+  Trophy,
+  Briefcase
+} from "lucide-react";
+import './actualite.css';
 
-const News = () => {
+const OdevolvNews = () => {
   const [selectedCategory, setSelectedCategory] = useState("Tous");
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const categories = ["Tous", "Football", "Cosmétique", "Événementiel", "Communication", "Restaurant", "Location", "Groupe"];
 
-  const newsItems = [
+  const newsArticles = [
     {
-      title: "RN Corporation ouvre sa nouvelle académie de football ultramoderne de 5 hectares",
-      excerpt: "Investissement majeur de 800 millions FCFA dans une infrastructure d'excellence dédiée à la formation de jeunes talents footballistiques. Plus de 200 jeunes pourront bénéficier de nos programmes de formation intensifs encadrés par 15 coachs diplômés UEFA/CAF. Partenariats signés avec 3 clubs européens pour faciliter la détection et les stages internationaux de nos meilleurs espoirs.",
+      id: 1,
+      title: "Odevolv Group inaugure son académie de football ultramoderne de 5 hectares",
+      excerpt: "Investissement stratégique de 800 millions FCFA pour former la prochaine génération de champions africains.",
+      fullContent: `Odevolv Group franchit une étape historique dans le développement du sport africain avec l'inauguration de son académie de football d'excellence. Cet investissement de 800 millions FCFA matérialise notre vision pour l'émergence des talents locaux.
+
+      Infrastructure d'exception :
+      • 3 terrains synthétiques dernière génération
+      • 1 terrain naturel aux normes FIFA
+      • Centre de performance avec analyse vidéo
+      • Internat premium pour 200 jeunes sportifs
+      • Centre médical et de rééducation
+      • Salle de musculation high-tech
+      
+      Programme pédagogique exclusif :
+      • Encadrement par 15 coachs diplômés UEFA/CAF
+      • Suivi scolaire individualisé
+      • Développement personnel et leadership
+      • Stages internationaux avec clubs partenaires
+      
+      Partenariats stratégiques avec 3 clubs européens d'élite pour offrir des débouchés professionnels à nos meilleurs éléments.`,
       date: "15 Mars 2024",
       category: "Football",
       readTime: "4 min",
-      image: "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      images: [
+        "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1579952363873-27f1bddcd8e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
+      ],
+      location: "Abidjan, Côte d'Ivoire",
+      author: "Jean Koffi",
+      position: "Directeur Sports Odevolv",
+      tags: ["Football", "Formation", "Jeunes Talents", "Infrastructure"],
+      stats: {
+        investissement: "800M FCFA",
+        surface: "5 Hectares",
+        capacite: "200 Jeunes",
+        coachs: "15 Experts"
+      }
     },
     {
-      title: "Lancement triomphal de notre nouvelle ligne cosmétique bio \"Ébène Royale Prestige\"",
-      excerpt: "Découvrez notre collection exclusive révolutionnaire de 25 nouveaux produits cosmétiques 100% naturels et certifiés bio, enrichis aux ingrédients locaux rares : beurre de karité du Burkina Faso, huile de moringa, extrait de baobab. Formulations brevetées développées en collaboration avec des dermatologues français. Disponibles dans 30 points de vente à travers la Côte d'Ivoire et bientôt exportés vers le Sénégal, le Mali et le Bénin. Packaging éco-responsable 100% recyclable.",
+      id: 2,
+      title: "Lancement de \"Ébène Royale Prestige\", notre ligne cosmétique bio d'excellence",
+      excerpt: "25 produits innovants 100% naturels, certifiés bio et enrichis d'ingrédients africains rares.",
+      fullContent: `Odevolv Group révolutionne l'industrie cosmétique avec "Ébène Royale Prestige", une collection qui célèbre la beauté africaine authentique.
+
+      Innovation scientifique :
+      • 25 formules brevetées développées avec des dermatologues
+      • Ingrédients 100% africains d'exception
+      • Procédés d'extraction à froid préservant les actifs
+      • Tests cliniques rigoureux
+      
+      Ingrédients phares :
+      • Beurre de karité pur du Burkina Faso
+      • Huile de moringa biologique certifiée
+      • Extrait de baobab riche en antioxydants
+      • Argile de Ndop aux propriétés purifiantes
+      
+      Engagement durable :
+      • Packaging 100% recyclable et éco-conçu
+      • Production neutre en carbone
+      • Partenariat avec 50 coopératives locales
+      • Programme de reforestation
+      
+      Disponible dans 30 points de vente premium et bientôt exportée vers 4 pays d'Afrique de l'Ouest.`,
       date: "8 Mars 2024",
       category: "Cosmétique",
       readTime: "5 min",
-      image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      images: [
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2087&q=80",
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80",
+        "https://images.unsplash.com/photo-1596703923538-b6d4bb0a44ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      ],
+      location: "Laboratoires Odevolv, Abidjan",
+      author: "Dr Aïcha Diarra",
+      position: "Directrice R&D Cosmétique",
+      tags: ["Cosmétique", "Bio", "Innovation", "Made in Africa"],
+      stats: {
+        produits: "25 Formules",
+        certification: "Ecocert Bio",
+        pointsVente: "30 Boutiques",
+        export: "4 Pays"
+      }
     },
     {
-      title: "Succès retentissant du Gala Annuel RN Corporation 2024 au Sofitel Hôtel Ivoire",
-      excerpt: "Plus de 650 invités prestigieux (ministres, PDG, diplomates, personnalités) ont célébré les réussites exceptionnelles de l'année écoulée lors d'une soirée inoubliable de 6 heures orchestrée par notre division événementiel. Au programme : spectacles artistiques de classe internationale, dîner gastronomique 5 services signé par notre chef étoilé, remises de distinctions à nos partenaires clés, et annonce de nos projets d'expansion 2025-2027 en Afrique de l'Ouest.",
+      id: 3,
+      title: "Gala Annuel 2024 : Une célébration d'excellence au Sofitel Hôtel Ivoire",
+      excerpt: "650 personnalités d'élite ont célébré nos succès lors d'une soirée événementielle mémorable.",
+      fullContent: `Le Gala Annuel Odevolv Group 2024 a marqué les esprits par son raffinement et son ambition. Réunissant l'élite économique d'Afrique de l'Ouest, cet événement a témoigné de notre leadership régional.
+
+      Scénographie immersive :
+      • Design signé par notre agence événementielle
+      • Éclairage intelligent et mapping vidéo
+      • Décors végétalisés et mobilier design
+      • Ambiance sonore sur-mesure
+      
+      Expérience culinaire :
+      • Menu dégustation en 5 services par notre chef étoilé
+      • Accord mets-vins par notre sommelier
+      • Produits locaux d'exception réinterprétés
+      • Service au cordon bleu
+      
+      Moments stratégiques :
+      • Signature de 3 nouveaux partenariats majeurs
+      • Lancement de notre fondation éducative
+      • Présentation de notre roadmap innovation 2025-2027
+      • Remise des trophées "Partenaire d'Excellence"
+      
+      Retombées exceptionnelles avec une couverture média internationale.`,
       date: "1 Mars 2024",
       category: "Événementiel",
       readTime: "3 min",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      title: "Partenariats stratégiques majeurs : RN Corporation signe avec 5 groupes internationaux",
-      excerpt: "RN Corporation renforce considérablement sa présence continentale avec des accords de coopération majeurs dans les secteurs de la communication digitale (partenariat avec Publicis Groupe), de l'automobile (Mercedes-Benz pour notre flotte premium), et de la cosmétique (laboratoires Clarins pour R&D). Ces alliances stratégiques nous positionnent comme acteur incontournable de la transformation économique ouest-africaine et ouvrent de nouvelles opportunités de croissance.",
-      date: "22 Février 2024",
-      category: "Communication",
-      readTime: "4 min",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      title: "Grande ouverture du restaurant gastronomique \"Le Palais Saveurs\" à Abidjan Plateau",
-      excerpt: "Un nouveau temple de la haute gastronomie fusion ouvre ses portes au cœur de la capitale économique. Investissement de 300 millions FCFA pour créer un espace élégant de 250m² pouvant accueillir 80 convives. Notre Chef Kouamé, formé chez Alain Ducasse à Paris et récompensé d'une distinction Michelin, propose une carte audacieuse mêlant traditions culinaires ivoiriennes et techniques gastronomiques contemporaines. Cave à vins exceptionnelle de 200+ références internationales. Réservations ouvertes.",
-      date: "14 Février 2024",
-      category: "Restaurant",
-      readTime: "3 min",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      title: "Expansion massive de notre flotte automobile : 50 véhicules premium rejoignent RN Prestige Location",
-      excerpt: "Investissement stratégique de 2 milliards FCFA pour renouveler et agrandir significativement notre parc automobile. Arrivée de 50 nouveaux véhicules haut de gamme dernière génération : 20 berlines de luxe Mercedes Classe S et BMW Série 7, 15 SUV premium Range Rover Sport et Porsche Cayenne, 10 minibus VIP Mercedes Sprinter aménagés grand luxe, 5 véhicules électriques Tesla Model S. Cette expansion répond à la demande croissante de nos clients corporatifs (multinationales, ambassades, organisations internationales) et renforce notre position de leader du transport VIP en Côte d'Ivoire.",
-      date: "5 Février 2024",
-      category: "Location",
-      readTime: "5 min",
-      image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      title: "RN Communication remporte le Grand Prix de la Meilleure Campagne Digitale 2024",
-      excerpt: "Notre agence de communication a été couronnée lors des prestigieux Abidjan Marketing Awards pour sa campagne digitale innovante \"Connectons l'Afrique\" réalisée pour Orange Côte d'Ivoire. Cette reconnaissance salue notre créativité exceptionnelle, notre maîtrise des codes digitaux africains et les résultats impressionnants obtenus : +250% d'engagement sur les réseaux sociaux, +180% de trafic web, +65% de conversions. Une fierté pour nos 20 talents créatifs qui confirme notre position de leader de la communication digitale en Afrique de l'Ouest.",
-      date: "28 Janvier 2024",
-      category: "Communication",
-      readTime: "3 min",
-      image: "https://images.unsplash.com/photo-1565689228644-83e87f26c3f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      title: "RN Corporation lance son programme de responsabilité sociale \"Impact Positif Côte d'Ivoire\"",
-      excerpt: "Engagement citoyen majeur : lancement de notre programme RSE ambitieux doté de 100 millions FCFA pour 2024. Quatre axes prioritaires : formation professionnelle gratuite pour 500 jeunes défavorisés aux métiers de nos filiales, bourses d'excellence pour 50 étudiants méritants, actions environnementales (plantation de 10000 arbres, sensibilisation au recyclage), et soutien aux PME locales (mentorat, formation, mise en réseau). Partenariats signés avec 15 ONG et associations communautaires pour maximiser notre impact social positif.",
-      date: "20 Janvier 2024",
-      category: "Groupe",
-      readTime: "4 min",
-      image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    {
-      title: "Ébène Royale Cosmétique certifiée Ecocert et remporte le Prix de l'Innovation Beauté Africaine",
-      excerpt: "Double consécration pour notre marque de cosmétiques naturels : obtention de la prestigieuse certification Ecocert Cosmos Organic (reconnaissance internationale du bio) et remise du Prix de l'Innovation Beauté Africaine lors du Salon International de la Cosmétique d'Abidjan. Ces distinctions récompensent nos 5 années de recherche, notre engagement pour des formulations 100% naturelles et notre valorisation des ingrédients africains d'exception. Export vers 8 nouveaux pays prévu en 2024.",
-      date: "12 Janvier 2024",
-      category: "Cosmétique",
-      readTime: "3 min",
-      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
+      images: [
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      ],
+      location: "Sofitel Hôtel Ivoire, Abidjan",
+      author: "Sophie N'Guessan",
+      position: "Directrice Événementiel",
+      tags: ["Événement", "Gala", "Networking", "Prestige"],
+      stats: {
+        invites: "650 Personnalités",
+        duree: "6 Heures",
+        medias: "8 Couvertures",
+        partenaires: "15 Distinctions"
+      }
+    }
   ];
 
   const filteredItems = selectedCategory === "Tous" 
-    ? newsItems 
-    : newsItems.filter(item => item.category === selectedCategory);
+    ? newsArticles 
+    : newsArticles.filter(item => item.category === selectedCategory);
+
+  const handleArticleClick = (article) => {
+    setSelectedArticle(article);
+    setCurrentImageIndex(0);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setSelectedArticle(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  const nextImage = () => {
+    if (selectedArticle) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedArticle.images.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedArticle) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedArticle.images.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const goToImage = (index) => {
+    setCurrentImageIndex(index);
+  };
 
   return (
-    <div className="news-page">
-      {/* Header */}
-    
-
+    <div className="odevolv-news-container">
       {/* Hero Section */}
-      <section className="news-hero">
-        <div className="hero-background">
-          <div className="hero-gradient"></div>
-          <div className="hero-pattern"></div>
+      <section className="odevolv-news-hero-section">
+        <div className="odevolv-news-hero-bg">
+          <div className="odevolv-news-hero-gradient"></div>
+          <div className="odevolv-news-hero-pattern"></div>
         </div>
-        <div className="hero-content">
-          <div className="hero-text">
-            <div className="hero-badge">
-              <TrendingUp size={16} />
-              <span>Informations en temps réel</span>
+        <div className="odevolv-news-hero-wrapper">
+          <div className="odevolv-news-hero-text-content">
+            <div className="odevolv-news-hero-badge">
+              <Newspaper size={16} />
+              <span>Odevolv Group · Actualités Premium</span>
             </div>
-            <h1 className="hero-title">
-              Nos <span className="hero-highlight">Actualités</span>
+            <h1 className="odevolv-news-hero-headline">
+              L'Excellence <span className="odevolv-news-hero-highlight">en Actualités</span>
             </h1>
-            <p className="hero-description">
-              Restez informés des dernières nouvelles, événements marquants 
-              et réalisations exceptionnelles de RN Corporation et de ses filiales. 
-              L'excellence en mouvement.
+            <p className="odevolv-news-hero-description">
+              Suivez les dernières innovations, réalisations et succès 
+              d'Odevolv Group et de ses huit filiales spécialisées. 
+              Chaque actualité témoigne de notre engagement pour l'excellence africaine.
             </p>
-            <div className="hero-stats">
-              <div className="stat">
-                <div className="stat-icon">
+            <div className="odevolv-news-hero-stats">
+              <div className="odevolv-news-stat-item">
+                <div className="odevolv-news-stat-icon">
                   <Calendar size={20} />
                 </div>
-                <div className="stat-content">
-                  <span className="stat-number">{newsItems.length}+</span>
-                  <span className="stat-label">Articles publiés</span>
+                <div className="odevolv-news-stat-details">
+                  <span className="odevolv-news-stat-number">{newsArticles.length}+</span>
+                  <span className="odevolv-news-stat-label">Articles premium</span>
                 </div>
               </div>
-              <div className="stat">
-                <div className="stat-icon">
-                  <Users size={20} />
+              <div className="odevolv-news-stat-item">
+                <div className="odevolv-news-stat-icon">
+                  <Target size={20} />
                 </div>
-                <div className="stat-content">
-                  <span className="stat-number">8</span>
-                  <span className="stat-label">Filiales actives</span>
+                <div className="odevolv-news-stat-details">
+                  <span className="odevolv-news-stat-number">8</span>
+                  <span className="odevolv-news-stat-label">Filiales expertes</span>
                 </div>
               </div>
-              <div className="stat">
-                <div className="stat-icon">
-                  <Award size={20} />
+              <div className="odevolv-news-stat-item">
+                <div className="odevolv-news-stat-icon">
+                  <Trophy size={20} />
                 </div>
-                <div className="stat-content">
-                  <span className="stat-number">15+</span>
-                  <span className="stat-label">Prix remportés</span>
+                <div className="odevolv-news-stat-details">
+                  <span className="odevolv-news-stat-number">15+</span>
+                  <span className="odevolv-news-stat-label">Distinctions</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="hero-visual">
-            <div className="visual-main">
-              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="RN Corporation Actualités" />
-              <div className="visual-overlay">
-                <span className="overlay-badge">À la une</span>
-                <h3>L'excellence en action</h3>
+          <div className="odevolv-news-hero-visual">
+            <div className="odevolv-news-hero-image-container">
+              <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Odevolv Group Actualités" />
+              <div className="odevolv-news-hero-overlay">
+                <span className="odevolv-news-hero-tag">À la une</span>
+                <h3 className="odevolv-news-hero-caption">Innovation & Leadership</h3>
+                <p className="odevolv-news-hero-subcaption">Odevolv Group redéfinit l'excellence</p>
               </div>
             </div>
           </div>
@@ -153,20 +265,25 @@ const News = () => {
       </section>
 
       {/* Categories Filter */}
-      <section className="news-categories">
-        <div className="categories-container">
-          <h2 className="categories-title">Filtrer par catégorie</h2>
-          <div className="categories-grid">
+      <section className="odevolv-news-categories-section">
+        <div className="odevolv-news-categories-wrapper">
+          <div className="odevolv-news-categories-header">
+            <h2 className="odevolv-news-categories-title">Filtrer par Spécialité</h2>
+            <p className="odevolv-news-categories-subtitle">
+              Découvrez nos actualités par domaine d'expertise
+            </p>
+          </div>
+          <div className="odevolv-news-categories-buttons">
             {categories.map((category) => (
               <button
                 key={category}
-                className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+                className={`odevolv-news-category-btn ${selectedCategory === category ? 'odevolv-news-category-active' : ''}`}
                 onClick={() => setSelectedCategory(category)}
               >
-                <span className="category-text">{category}</span>
+                <span className="odevolv-news-category-label">{category}</span>
                 {selectedCategory === category && (
-                  <div className="category-indicator">
-                    <div className="indicator-dot"></div>
+                  <div className="odevolv-news-category-indicator">
+                    <Star size={10} />
                   </div>
                 )}
               </button>
@@ -176,48 +293,70 @@ const News = () => {
       </section>
 
       {/* News Grid */}
-      <section className="news-grid-section">
-        <div className="news-container">
-          <div className="news-header">
-            <h2 className="news-title">
-              Dernières <span className="accent">Actualités</span>
-            </h2>
-            <p className="news-subtitle">
-              {selectedCategory === "Tous" 
-                ? "Découvrez toutes nos actualités" 
-                : `Actualités ${selectedCategory} - ${filteredItems.length} article${filteredItems.length > 1 ? 's' : ''}`}
-            </p>
+      <section className="odevolv-news-articles-section">
+        <div className="odevolv-news-articles-container">
+          <div className="odevolv-news-articles-header">
+            <div className="odevolv-news-articles-title-content">
+              <h2 className="odevolv-news-articles-main-title">
+                <span className="odevolv-news-articles-title-accent">A</span>ctualités
+                <span className="odevolv-news-articles-title-sub">Odevolv</span>
+              </h2>
+              <p className="odevolv-news-articles-subtitle">
+                {selectedCategory === "Tous" 
+                  ? "Découvrez toutes nos réalisations d'excellence" 
+                  : `${selectedCategory} · ${filteredItems.length} article${filteredItems.length > 1 ? 's' : ''} premium`}
+              </p>
+            </div>
           </div>
-          <div className="news-grid">
+          <div className="odevolv-news-articles-grid">
             {filteredItems.map((item, index) => (
               <article 
-                key={`${item.title}-${index}`} 
-                className="news-card"
-                style={{ animationDelay: `${index * 100}ms` }}
+                key={`odevolv-article-${item.id}`} 
+                className="odevolv-news-article-card"
+                style={{ animationDelay: `${index * 80}ms` }}
               >
-                <div className="card-image">
-                  <img src={item.image} alt={item.title} />
-                  <div className="card-badge">
+                <div className="odevolv-news-article-image">
+                  <img src={item.images[0]} alt={item.title} />
+                  <div className="odevolv-news-article-category">
                     <Tag size={12} />
                     <span>{item.category}</span>
                   </div>
+                  <div className="odevolv-news-article-hover">
+                    <button 
+                      className="odevolv-news-article-read-btn"
+                      onClick={() => handleArticleClick(item)}
+                    >
+                      <BookOpen size={18} />
+                      <span>Lire l'article</span>
+                    </button>
+                  </div>
                 </div>
-                <div className="card-content">
-                  <div className="card-meta">
-                    <div className="meta-item">
+                <div className="odevolv-news-article-content">
+                  <div className="odevolv-news-article-meta">
+                    <div className="odevolv-news-article-meta-item">
                       <Calendar size={14} />
                       <span>{item.date}</span>
                     </div>
-                    <div className="meta-item">
+                    <div className="odevolv-news-article-meta-item">
                       <Clock size={14} />
                       <span>{item.readTime}</span>
                     </div>
+                    <div className="odevolv-news-article-meta-item">
+                      <MapPin size={14} />
+                      <span>{item.location}</span>
+                    </div>
                   </div>
-                  <h3 className="card-title">{item.title}</h3>
-                  <p className="card-excerpt">{item.excerpt}</p>
-                  <div className="card-actions">
-                    <button className="read-more">
-                      <span>Lire l'article</span>
+                  <h3 className="odevolv-news-article-heading">{item.title}</h3>
+                  <p className="odevolv-news-article-summary">{item.excerpt}</p>
+                  <div className="odevolv-news-article-footer">
+                    <div className="odevolv-news-article-author">
+                      <span>Par {item.author}</span>
+                    </div>
+                    <button 
+                      className="odevolv-news-article-action"
+                      onClick={() => handleArticleClick(item)}
+                    >
+                      <span>Lire la suite</span>
                       <ArrowRight size={16} />
                     </button>
                   </div>
@@ -225,684 +364,180 @@ const News = () => {
               </article>
             ))}
           </div>
+          
+          {filteredItems.length > 0 && (
+            <div className="odevolv-news-section-footer">
+              <div className="odevolv-news-count-info">
+                <FileText size={20} />
+                <span>{filteredItems.length} articles premium</span>
+              </div>
+              <button className="odevolv-news-view-all">
+                <span>Voir toutes les actualités</span>
+                <ArrowRight size={18} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-
-      <style jsx>{`
-        .news-page {
-          min-height: 100vh;
-          background: white;
-          color: #1e293b;
-          font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-          line-height: 1.6;
-        }
-
-        /* Header Styles */
-        .news-header {
-          position: fixed;
-          top: 0;
-          width: 100%;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(20px);
-          z-index: 1000;
-          border-bottom: 1px solid #e2e8f0;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .header-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1e293b;
-        }
-
-        .logo-icon {
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          padding: 0.5rem;
-          border-radius: 10px;
-          font-size: 1.2rem;
-        }
-
-        .header-nav {
-          display: flex;
-          gap: 2rem;
-        }
-
-        .header-nav a {
-          color: #64748b;
-          text-decoration: none;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          position: relative;
-          padding: 0.5rem 0;
-        }
-
-        .header-nav a:hover,
-        .header-nav a.active {
-          color: #f59e0b;
-        }
-
-        .header-nav a.active::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, #f59e0b, #d97706);
-          border-radius: 2px;
-        }
-
-        /* Hero Section */
-        .news-hero {
-          position: relative;
-          min-height: 80vh;
-          display: flex;
-          align-items: center;
-          margin-top: 80px;
-          overflow: hidden;
-        }
-
-        .hero-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-
-        .hero-gradient {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: 
-            radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
-            linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        }
-
-        .hero-pattern {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: 
-            radial-gradient(circle at 1px 1px, rgba(245, 158, 11, 0.1) 1px, transparent 0);
-          background-size: 20px 20px;
-        }
-
-        .hero-content {
-          position: relative;
-          z-index: 2;
-          max-width: 1400px;
-          width: 100%;
-          margin: 0 auto;
-          padding: 4rem 2rem;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
-          align-items: center;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: linear-gradient(135deg, #fef3c7, #fde68a);
-          color: #92400e;
-          padding: 0.5rem 1rem;
-          border-radius: 50px;
-          font-size: 0.875rem;
-          font-weight: 600;
-          margin-bottom: 2rem;
-          border: 1px solid #fcd34d;
-        }
-
-        .hero-title {
-          font-size: 3.5rem;
-          font-weight: 800;
-          line-height: 1.1;
-          margin-bottom: 1.5rem;
-          color: #1e293b;
-        }
-
-        .hero-highlight {
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          position: relative;
-        }
-
-        .hero-highlight::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 4px;
-          background: linear-gradient(90deg, #f59e0b, #d97706);
-          border-radius: 2px;
-          opacity: 0.3;
-        }
-
-        .hero-description {
-          font-size: 1.25rem;
-          color: #64748b;
-          margin-bottom: 3rem;
-          line-height: 1.7;
-        }
-
-        .hero-stats {
-          display: flex;
-          gap: 2rem;
-        }
-
-        .stat {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .stat-icon {
-          background: linear-gradient(135deg, #fef3c7, #fde68a);
-          padding: 0.75rem;
-          border-radius: 12px;
-          color: #d97706;
-        }
-
-        .stat-content {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .stat-number {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1e293b;
-        }
-
-        .stat-label {
-          font-size: 0.875rem;
-          color: #64748b;
-          font-weight: 500;
-        }
-
-        .hero-visual {
-          position: relative;
-        }
-
-        .visual-main {
-          position: relative;
-          border-radius: 24px;
-          overflow: hidden;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-          border: 1px solid #e2e8f0;
-        }
-
-        .visual-main img {
-          width: 100%;
-          height: 400px;
-          object-fit: cover;
-        }
-
-        .visual-overlay {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-          color: white;
-          padding: 2rem;
-        }
-
-        .overlay-badge {
-          display: inline-block;
-          background: #f59e0b;
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          margin-bottom: 0.5rem;
-        }
-
-        .visual-overlay h3 {
-          font-size: 1.25rem;
-          font-weight: 600;
-        }
-
-        /* Categories Section */
-        .news-categories {
-          padding: 3rem 2rem;
-          background: #ffffff;
-          border-top: 1px solid #f1f5f9;
-          border-bottom: 1px solid #f1f5f9;
-        }
-
-        .categories-container {
-          max-width: 1200px;
-          margin: 0 auto;
-        }
-
-        .categories-title {
-          text-align: center;
-          font-size: 2rem;
-          font-weight: 700;
-          margin-bottom: 2rem;
-          color: #1e293b;
-        }
-
-        .categories-grid {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 1rem;
-        }
-
-        .category-button {
-          position: relative;
-          background: #ffffff;
-          border: 2px solid #e2e8f0;
-          border-radius: 50px;
-          color: #64748b;
-          padding: 0.75rem 1.5rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          overflow: hidden;
-        }
-
-        .category-button:hover {
-          border-color: #f59e0b;
-          color: #f59e0b;
-          transform: translateY(-2px);
-        }
-
-        .category-button.active {
-          background: linear-gradient(135deg, #fef3c7, #fde68a);
-          border-color: #f59e0b;
-          color: #92400e;
-          box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
-        }
-
-        .category-indicator {
-          position: absolute;
-          top: -2px;
-          right: -2px;
-          width: 12px;
-          height: 12px;
-          background: #f59e0b;
-          border-radius: 50%;
-          border: 2px solid white;
-        }
-
-        /* News Grid Section */
-        .news-grid-section {
-          padding: 6rem 2rem;
-          background: #f8fafc;
-        }
-
-        .news-container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .news-header {
-          text-align: center;
-          margin-bottom: 4rem;
-          position: static;
-          background: none;
-          border: none;
-          box-shadow: none;
-        }
-
-        .news-title {
-          font-size: 3rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          color: #1e293b;
-        }
-
-        .accent {
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .news-subtitle {
-          font-size: 1.25rem;
-          color: #64748b;
-        }
-
-        .news-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-          gap: 2rem;
-        }
-
-        .news-card {
-          opacity: 0;
-          animation: fadeInUp 0.6s ease forwards;
-          background: #ffffff;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 
-            0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          transition: all 0.4s ease;
-          border: 1px solid #f1f5f9;
-        }
-
-        @keyframes fadeInUp {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-        }
-
-        .news-card:hover {
-          transform: translateY(-8px);
-          box-shadow: 
-            0 25px 50px -12px rgba(0, 0, 0, 0.25),
-            0 0 0 1px rgba(245, 158, 11, 0.1);
-        }
-
-        .card-image {
-          position: relative;
-          height: 200px;
-          overflow: hidden;
-        }
-
-        .card-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        .news-card:hover .card-image img {
-          transform: scale(1.1);
-        }
-
-        .card-badge {
-          position: absolute;
-          top: 1rem;
-          left: 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: rgba(255, 255, 255, 0.95);
-          color: #92400e;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          backdrop-filter: blur(10px);
-        }
-
-        .card-content {
-          padding: 1.5rem;
-        }
-
-        .card-meta {
-          display: flex;
-          gap: 1rem;
-          margin-bottom: 1rem;
-        }
-
-        .meta-item {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: #64748b;
-          font-size: 0.875rem;
-        }
-
-        .card-title {
-          font-size: 1.25rem;
-          font-weight: 700;
-          line-height: 1.4;
-          margin-bottom: 1rem;
-          color: #1e293b;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        .card-excerpt {
-          color: #64748b;
-          line-height: 1.6;
-          margin-bottom: 1.5rem;
-          display: -webkit-box;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
-        .card-actions {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .read-more {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          color: white;
-          border: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 25px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
-          transform: translateX(5px);
-          box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
-        }
-
-        /* Footer */
-        .news-footer {
-          background: #1e293b;
-          color: white;
-          padding: 4rem 2rem 2rem;
-        }
-
-        .footer-content {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .footer-main {
-          display: grid;
-          grid-template-columns: 1fr 2fr;
-          gap: 4rem;
-          margin-bottom: 3rem;
-        }
-
-        .footer-brand {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .footer-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: white;
-        }
-
-        .footer-tagline {
-          color: #cbd5e1;
-          line-height: 1.6;
-        }
-
-        .footer-links {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
-        }
-
-        .footer-column h4 {
-          color: #f59e0b;
-          margin-bottom: 1rem;
-          font-size: 1.125rem;
-          font-weight: 600;
-        }
-
-        .footer-column a,
-        .footer-column p {
-          display: block;
-          color: #cbd5e1;
-          text-decoration: none;
-          margin-bottom: 0.5rem;
-          transition: color 0.3s ease;
-        }
-
-        .footer-column a:hover {
-          color: #f59e0b;
-        }
-
-        .footer-bottom {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-top: 2rem;
-          border-top: 1px solid #334155;
-          color: #94a3b8;
-          font-size: 0.875rem;
-        }
-
-        .footer-legal {
-          display: flex;
-          gap: 2rem;
-        }
-
-        .footer-legal a {
-          color: #94a3b8;
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .footer-legal a:hover {
-          color: #f59e0b;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-          .hero-content {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            text-align: center;
-          }
-
-          .hero-stats {
-            justify-content: center;
-          }
-
-          .news-grid {
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          }
-        }
-
-        @media (max-width: 768px) {
-          .header-content {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
-          }
-
-          .header-nav {
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-          }
-
-          .hero-title {
-            font-size: 2.5rem;
-          }
-
-          .hero-stats {
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-          }
-
-          .categories-grid {
-            justify-content: flex-start;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-          }
-
-          .news-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .footer-main {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .footer-links {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .footer-bottom {
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .hero-title {
-            font-size: 2rem;
-          }
-
-          .hero-description {
-            font-size: 1.1rem;
-          }
-
-          .news-title {
-            font-size: 2rem;
-          }
-
-          .categories-grid {
-            justify-content: flex-start;
-          }
-        }
-      `}</style>
+      {/* Modal pour les articles */}
+      {selectedArticle && (
+        <div className="odevolv-news-modal-overlay" onClick={closeModal}>
+          <div className="odevolv-news-modal-wrapper" onClick={(e) => e.stopPropagation()}>
+            {/* Header du modal */}
+            <div className="odevolv-news-modal-header">
+              <div className="odevolv-news-modal-header-content">
+                <div className="odevolv-news-modal-badge">
+                  <Award size={14} />
+                  <span>{selectedArticle.category}</span>
+                </div>
+                <h2 className="odevolv-news-modal-title">{selectedArticle.title}</h2>
+                <div className="odevolv-news-modal-meta">
+                  <div className="odevolv-news-modal-meta-item">
+                    <Calendar size={14} />
+                    <span>{selectedArticle.date}</span>
+                  </div>
+                  <div className="odevolv-news-modal-meta-item">
+                    <Clock size={14} />
+                    <span>{selectedArticle.readTime} de lecture</span>
+                  </div>
+                  <div className="odevolv-news-modal-meta-item">
+                    <MapPin size={14} />
+                    <span>{selectedArticle.location}</span>
+                  </div>
+                </div>
+              </div>
+              <button className="odevolv-news-modal-close" onClick={closeModal}>
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Contenu du modal */}
+            <div className="odevolv-news-modal-body">
+              {/* Carrousel d'images */}
+              <div className="odevolv-news-modal-carousel">
+                <div className="odevolv-news-carousel-main">
+                  <button className="odevolv-news-carousel-nav odevolv-news-carousel-prev" onClick={prevImage}>
+                    <ChevronLeft size={24} />
+                  </button>
+                  
+                  <div className="odevolv-news-carousel-image">
+                    <img 
+                      src={selectedArticle.images[currentImageIndex]} 
+                      alt={`${selectedArticle.title} - Image ${currentImageIndex + 1}`}
+                    />
+                    <div className="odevolv-news-carousel-counter">
+                      {currentImageIndex + 1} / {selectedArticle.images.length}
+                    </div>
+                  </div>
+                  
+                  <button className="odevolv-news-carousel-nav odevolv-news-carousel-next" onClick={nextImage}>
+                    <ChevronRight size={24} />
+                  </button>
+                </div>
+                
+                {/* Miniatures */}
+                <div className="odevolv-news-carousel-thumbnails">
+                  {selectedArticle.images.map((image, index) => (
+                    <button
+                      key={`thumb-${index}`}
+                      className={`odevolv-news-carousel-thumb ${index === currentImageIndex ? 'active' : ''}`}
+                      onClick={() => goToImage(index)}
+                    >
+                      <img src={image} alt={`Miniature ${index + 1}`} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Contenu de l'article */}
+              <div className="odevolv-news-modal-article">
+                <div className="odevolv-news-article-header">
+                  <div className="odevolv-news-article-author-info">
+                    <div className="odevolv-news-author-avatar">
+                      {selectedArticle.author.split(' ')[0][0]}
+                    </div>
+                    <div className="odevolv-news-author-details">
+                      <span className="odevolv-news-author-name">{selectedArticle.author}</span>
+                      <span className="odevolv-news-author-position">{selectedArticle.position}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="odevolv-news-article-content-full">
+                  <h3 className="odevolv-news-article-content-title">Article Complet</h3>
+                  <div className="odevolv-news-article-text-content">
+                    {selectedArticle.fullContent.split('\n\n').map((paragraph, index) => (
+                      <p key={`para-${index}`}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Statistiques */}
+                <div className="odevolv-news-article-stats">
+                  <h4 className="odevolv-news-stats-title">Chiffres Clés</h4>
+                  <div className="odevolv-news-stats-grid">
+                    {Object.entries(selectedArticle.stats).map(([key, value]) => (
+                      <div key={`stat-${key}`} className="odevolv-news-stat-card">
+                        <div className="odevolv-news-stat-value">{value}</div>
+                        <div className="odevolv-news-stat-label">
+                          {key.replace(/([A-Z])/g, ' $1').trim()}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Tags */}
+                <div className="odevolv-news-article-tags">
+                  <h4 className="odevolv-news-tags-title">Mots-clés</h4>
+                  <div className="odevolv-news-tags-list">
+                    {selectedArticle.tags.map((tag, index) => (
+                      <span key={`tag-${index}`} className="odevolv-news-tag-item">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="odevolv-news-article-actions">
+                  <button className="odevolv-news-action-btn odevolv-news-action-primary">
+                    <ExternalLink size={18} />
+                    <span>Consulter le dossier complet</span>
+                  </button>
+                  <button className="odevolv-news-action-btn odevolv-news-action-secondary">
+                    <Heart size={18} />
+                    <span>Enregistrer</span>
+                  </button>
+                  <button className="odevolv-news-action-btn odevolv-news-action-secondary">
+                    <Share2 size={18} />
+                    <span>Partager</span>
+                  </button>
+                  <button className="odevolv-news-action-btn odevolv-news-action-secondary">
+                    <Download size={18} />
+                    <span>Télécharger PDF</span>
+                  </button>
+                </div>
+
+                {/* Article suivant */}
+                <div className="odevolv-news-next-article">
+                  <div className="odevolv-news-next-content">
+                    <span className="odevolv-news-next-label">Article suivant</span>
+                    <h5 className="odevolv-news-next-title">
+                      Découvrez nos autres réalisations d'excellence
+                    </h5>
+                    <button className="odevolv-news-next-button">
+                      <span>Explorer les actualités</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default News;
+export default OdevolvNews;

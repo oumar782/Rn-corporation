@@ -1,11 +1,42 @@
 import { useState } from "react";
-import { Star, Trophy, Utensils, MessageCircle, Calendar, Palette, ArrowRight, Play, Users, Award, Target } from "lucide-react";
+import { 
+  Star, 
+  Trophy, 
+  Utensils, 
+  MessageCircle, 
+  Calendar, 
+  Palette, 
+  ArrowRight, 
+  Users, 
+  Award, 
+  Target,
+  Sparkles,
+  ChevronRight,
+  Eye,
+  Zap,
+  TrendingUp,
+  Building,
+  X,
+  ChevronLeft,
+  ChevronRight as ChevronRightIcon,
+  MapPin,
+  Clock,
+  Users as UsersIcon,
+  Tag,
+  ExternalLink,
+  Heart,
+  Share2,
+  Download
+} from "lucide-react";
+import './galerie.css';
 
-const Gallery = () => {
+const OdevolvGallery = () => {
   const [selectedFilter, setSelectedFilter] = useState("Tous");
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const filters = [
-    { name: "Tous", icon: Star },
+    { name: "Tous", icon: Sparkles },
     { name: "Événementiel", icon: Calendar },
     { name: "Cosmétique", icon: Palette },
     { name: "Communication", icon: MessageCircle },
@@ -13,167 +44,250 @@ const Gallery = () => {
     { name: "Restaurant", icon: Utensils }
   ];
 
+  // Données des projets avec plus d'images pour le carrousel
   const galleryItems = [
     { 
+      id: 1,
       category: "Événementiel", 
       title: "Gala d'entreprise 2024",
-      description: "Organisation complète d'un gala prestigieux pour 500 invités",
+      description: "Organisation complète d'un gala prestigieux pour 500 invités avec scénographie immersive et expérience client sur-mesure.",
+      longDescription: "Pour ce gala d'exception, notre équipe a orchestré chaque détail avec précision : de la scénographie immersive à la gastronomie étoilée, en passant par le spectacle live et les animations interactives. Un événement qui a marqué les esprits par son élégance et son innovation.",
       link: "/evenementiel/gala-2024",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80"
+      images: [
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+        "https://images.unsplash.com/photo-1492684223066-e9b4ff9632f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      ],
+      details: {
+        date: "15 Mars 2024",
+        location: "Paris, France",
+        duration: "6 mois de préparation",
+        participants: "500 invités VIP",
+        budget: "Confidentiel"
+      },
+      achievements: ["+200% engagement client", "100% satisfaction", "Retour sur investissance exceptionnel"]
     },
     { 
+      id: 2,
       category: "Cosmétique", 
       title: "Nouvelle collection printemps",
-      description: "Lancement de la collection saisonnière avec shooting professionnel",
+      description: "Lancement de la collection saisonnière avec shooting professionnel et campagne digitale intégrée.",
+      longDescription: "Nous avons créé un univers visuel unique pour cette collection printanière, combinant shooting en extérieur avec des mannequins internationaux et une campagne digitale 360°. Le résultat : une identité forte qui a généré un buzz immédiat sur les réseaux sociaux.",
       link: "/cosmetique/collection-printemps",
-      image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80"
+      images: [
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80",
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2087&q=80",
+        "https://images.unsplash.com/photo-1596703923538-b6d4bb0a44ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1556228578-9c360e1d458b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      ],
+      details: {
+        date: "Février 2024",
+        location: "Côte d'Azur",
+        duration: "3 mois",
+        participants: "Équipe de 15 experts",
+        budget: "Haut de gamme"
+      },
+      achievements: ["+300% ventes premier mois", "1M+ d'impressions digitales", "Prix de l'innovation"]
     },
     { 
+      id: 3,
       category: "Communication", 
-      title: "Campagne digitale",
-      description: "Stratégie de communication 360° pour une marque internationale",
+      title: "Campagne digitale 360°",
+      description: "Stratégie de communication complète pour une marque internationale avec influence marketing.",
+      longDescription: "Notre approche holistique a transformé la présence digitale de la marque. En combinant stratégie de contenu, partenariats d'influence et publicité programmatique, nous avons créé un écosystème digital performant qui a boosté la notoriété et les ventes.",
       link: "/communication/campagne-digitale",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80"
+      images: [
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80",
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+      ],
+      details: {
+        date: "Janvier 2024",
+        location: "International",
+        duration: "4 mois",
+        participants: "10 pays ciblés",
+        budget: "Significatif"
+      },
+      achievements: ["+150% d'engagement", "2M+ de reach", "ROI de 450%"]
     },
     { 
+      id: 4,
       category: "Football", 
       title: "Tournoi inter-académies",
-      description: "Compétition jeunes talents avec 32 équipes participantes",
+      description: "Compétition jeunes talents avec 32 équipes participantes et retransmission internationale.",
+      longDescription: "Un événement sportif d'envergure qui a mis en lumière les talents émergents du football européen. Nous avons géré l'intégralité de l'organisation : logistique, hébergement, médiatisation et partenariats, avec une retransmission en direct sur 5 plateformes.",
       link: "/football/tournoi-academies",
-      image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
+      images: [
+        "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
+        "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80",
+        "https://images.unsplash.com/photo-1579952363873-27f1bddcd8e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
+      ],
+      details: {
+        date: "Avril 2024",
+        location: "Stade National",
+        duration: "5 jours",
+        participants: "32 équipes",
+        budget: "Élevé"
+      },
+      achievements: ["5M de téléspectateurs", "12 jeunes talents repérés", "Sponsoring record"]
     },
     { 
+      id: 5,
       category: "Restaurant", 
       title: "Soirée gastronomique",
-      description: "Événement culinaire d'exception avec chef étoilé",
+      description: "Événement culinaire d'exception avec chef étoilé et expérience sensorielle unique.",
+      longDescription: "Une expérience gastronomique immersive où chaque sens était sollicité. Nous avons conçu un parcours culinaire en 12 services, accompagné d'une harmonisation vins et arts vivants. Un véritable voyage gustatif qui a ébloui les 100 convives triés sur le volet.",
       link: "/restaurant/soiree-gastronomique",
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    { 
-      category: "Événementiel", 
-      title: "Mariage de luxe",
-      description: "Cérémonie haut de gamme dans un château historique",
-      link: "/evenementiel/mariage-luxe",
-      image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-    },
-    { 
-      category: "Cosmétique", 
-      title: "Shooting produits",
-      description: "Mise en valeur des nouveautés avec mannequins internationaux",
-      link: "/cosmetique/shooting-produits",
-      image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2087&q=80"
-    },
-    { 
-      category: "Communication", 
-      title: "Branding corporate",
-      description: "Identité visuelle complète pour groupe multinational",
-      link: "/communication/branding-corporate",
-      image: "https://images.unsplash.com/photo-1565689228644-83e87f26c3f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2089&q=80"
-    },
-    { 
-      category: "Football", 
-      title: "Formation des jeunes talents",
-      description: "Programme de développement sportif avec académie d'élite",
-      link: "/football/formation-jeunes",
-      image: "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80"
-    },
+      images: [
+        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+        "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
+      ],
+      details: {
+        date: "Mars 2024",
+        location: "Château historique",
+        duration: "1 soirée",
+        participants: "100 convives",
+        budget: "Très haut de gamme"
+      },
+      achievements: ["Notation parfaite 10/10", "100% réservation", "Prix de l'excellence"]
+    }
   ];
 
   const filteredItems = selectedFilter === "Tous"
     ? galleryItems
     : galleryItems.filter(item => item.category === selectedFilter);
 
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setCurrentImageIndex(0);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    setSelectedProject(null);
+    document.body.style.overflow = 'auto';
+  };
+
+  const nextImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prev) => 
+        prev === selectedProject.images.length - 1 ? 0 : prev + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedProject) {
+      setCurrentImageIndex((prev) => 
+        prev === 0 ? selectedProject.images.length - 1 : prev - 1
+      );
+    }
+  };
+
+  const goToImage = (index) => {
+    setCurrentImageIndex(index);
+  };
+
   return (
-    <div className="gallery-page">
-      {/* Header */}
-
-
+    <div className="odevolv-gallery">
       {/* Hero Section */}
-      <section className="gallery-hero">
-        <div className="hero-background">
-          <div className="hero-gradient"></div>
-          <div className="hero-pattern"></div>
+      <section className="odevolv-gallery-hero">
+        <div className="odevolv-hero-background">
+          <div className="odevolv-hero-gradient"></div>
+          <div className="odevolv-hero-pattern"></div>
         </div>
-        <div className="hero-content">
-          <div className="hero-text">
-            <div className="hero-badge">
-              <Award size={16} />
-              <span>Excellence depuis 2010</span>
+        <div className="odevolv-hero-content">
+          <div className="odevolv-hero-text">
+            <div className="odevolv-hero-badge">
+              <Building size={16} />
+              <span>Odevolv Group · Excellence depuis 2010</span>
             </div>
-            <h1 className="hero-title">
-              Notre <span className="hero-highlight">Galerie</span> d'Excellence
+            <h1 className="odevolv-hero-title">
+              Galerie d'Excellence <span className="odevolv-hero-underline">Odevolv</span>
             </h1>
-            <p className="hero-description">
+            <p className="odevolv-hero-description">
               Découvrez l'étendue de notre savoir-faire à travers des réalisations 
               qui marquent les esprits. Chaque projet est une promesse d'excellence 
               et d'innovation dans nos cinq domaines d'expertise.
             </p>
-            <div className="hero-stats">
-              <div className="stat">
-                <div className="stat-icon">
-                  <Target size={24} />
+            <div className="odevolv-hero-stats">
+              <div className="odevolv-stat">
+                <div className="odevolv-stat-icon">
+                  <Target size={20} />
                 </div>
-                <div className="stat-content">
-                  <span className="stat-number">150+</span>
-                  <span className="stat-label">Projets d'exception</span>
-                </div>
-              </div>
-              <div className="stat">
-                <div className="stat-icon">
-                  <Users size={24} />
-                </div>
-                <div className="stat-content">
-                  <span className="stat-number">98%</span>
-                  <span className="stat-label">Satisfaction client</span>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">150+</span>
+                  <span className="odevolv-stat-label">Projets d'exception</span>
                 </div>
               </div>
-              <div className="stat">
-                <div className="stat-icon">
-                  <Play size={24} />
+              <div className="odevolv-stat">
+                <div className="odevolv-stat-icon">
+                  <TrendingUp size={20} />
                 </div>
-                <div className="stat-content">
-                  <span className="stat-number">5</span>
-                  <span className="stat-label">Filiales expertes</span>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">98%</span>
+                  <span className="odevolv-stat-label">Satisfaction client</span>
+                </div>
+              </div>
+              <div className="odevolv-stat">
+                <div className="odevolv-stat-icon">
+                  <Zap size={20} />
+                </div>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">5</span>
+                  <span className="odevolv-stat-label">Filiales expertes</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="hero-visual">
-            <div className="visual-card card-1">
+          <div className="odevolv-hero-visual">
+            <div className="odevolv-visual-card odevolv-card-1">
               <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Événement" />
+              <div className="odevolv-card-badge">Événementiel</div>
             </div>
-            <div className="visual-card card-2">
+            <div className="odevolv-visual-card odevolv-card-2">
               <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Communication" />
+              <div className="odevolv-card-badge">Communication</div>
             </div>
-            <div className="visual-card card-3">
+            <div className="odevolv-visual-card odevolv-card-3">
               <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Sport" />
+              <div className="odevolv-card-badge">Sport</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Filters */}
-      <section className="gallery-filters">
-        <div className="filters-container">
-          <h2 className="filters-title">Explorez nos Domaines d'Expertise</h2>
-          <p className="filters-subtitle">
-            Filtrez par filiale pour découvrir nos réalisations spécifiques
-          </p>
-          <div className="filters-grid">
+      <section className="odevolv-gallery-filters">
+        <div className="odevolv-filters-container">
+          <div className="odevolv-filters-header">
+            <h2 className="odevolv-filters-title">Nos Domaines d'Expertise</h2>
+            <p className="odevolv-filters-subtitle">
+              Filtrez par spécialité pour découvrir nos réalisations spécifiques
+            </p>
+          </div>
+          <div className="odevolv-filters-grid">
             {filters.map((filter) => {
               const IconComponent = filter.icon;
               return (
                 <button
                   key={filter.name}
-                  className={`filter-button ${selectedFilter === filter.name ? 'active' : ''}`}
+                  className={`odevolv-filter-button ${selectedFilter === filter.name ? 'odevolv-filter-active' : ''}`}
                   onClick={() => setSelectedFilter(filter.name)}
                 >
-                  <div className="filter-icon">
-                    <IconComponent size={20} />
+                  <div className="odevolv-filter-icon-wrapper">
+                    <div className="odevolv-filter-icon">
+                      <IconComponent size={22} />
+                    </div>
                   </div>
-                  <span className="filter-text">{filter.name}</span>
-                  <div className="filter-arrow">
-                    <ArrowRight size={16} />
+                  <span className="odevolv-filter-text">{filter.name}</span>
+                  <div className="odevolv-filter-indicator">
+                    <ChevronRight size={18} />
                   </div>
                 </button>
               );
@@ -183,37 +297,46 @@ const Gallery = () => {
       </section>
 
       {/* Gallery Grid */}
-      <section className="gallery-grid-section">
-        <div className="gallery-container">
-          <div className="gallery-header">
-            <h2 className="gallery-title">
-              Nos <span className="accent">Réalisations</span>
-            </h2>
-            <p className="gallery-subtitle">
-              {selectedFilter === "Tous" 
-                ? "Découvrez l'ensemble de nos projets marquants" 
-                : `Projets ${selectedFilter} - ${filteredItems.length} réalisation${filteredItems.length > 1 ? 's' : ''}`}
-            </p>
+      <section className="odevolv-gallery-grid-section">
+        <div className="odevolv-gallery-container">
+          <div className="odevolv-gallery-header">
+            <div className="odevolv-gallery-header-content">
+              <h2 className="odevolv-gallery-title">
+                <span className="odevolv-gallery-title-accent">R</span>éalisations
+                <span className="odevolv-gallery-title-underline">Odevolv</span>
+              </h2>
+              <p className="odevolv-gallery-subtitle">
+                {selectedFilter === "Tous" 
+                  ? "Découvrez l'ensemble de nos projets marquants" 
+                  : `Projets ${selectedFilter} · ${filteredItems.length} réalisation${filteredItems.length > 1 ? 's' : ''}`}
+              </p>
+            </div>
           </div>
-          <div className="gallery-grid">
+          <div className="odevolv-gallery-grid">
             {filteredItems.map((item, index) => (
               <div 
                 key={`${item.title}-${index}`} 
-                className="gallery-item"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="odevolv-gallery-item"
+                style={{ animationDelay: `${index * 80}ms` }}
               >
-                <div className="gallery-item-inner">
-                  <div className="item-image">
-                    <img src={item.image} alt={item.title} />
-                    <div className="item-overlay">
-                      <div className="overlay-content">
-                        <span className="item-category">{item.category}</span>
-                        <h3 className="item-title">{item.title}</h3>
-                        <p className="item-description">{item.description}</p>
-                        <a href={item.link} className="item-link">
+                <div className="odevolv-gallery-item-inner">
+                  <div className="odevolv-item-image">
+                    <img src={item.images[0]} alt={item.title} />
+                    <div className="odevolv-item-overlay">
+                      <div className="odevolv-overlay-content">
+                        <span className="odevolv-item-category">
+                          <Award size={14} />
+                          {item.category}
+                        </span>
+                        <h3 className="odevolv-item-title">{item.title}</h3>
+                        <p className="odevolv-item-description">{item.description}</p>
+                        <button 
+                          onClick={() => handleProjectClick(item)} 
+                          className="odevolv-item-link"
+                        >
                           <span>Découvrir le projet</span>
-                          <ArrowRight size={16} />
-                        </a>
+                          <Eye size={16} />
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -221,718 +344,168 @@ const Gallery = () => {
               </div>
             ))}
           </div>
+          
+          {filteredItems.length > 0 && (
+            <div className="odevolv-gallery-footer">
+              <div className="odevolv-gallery-count">
+                <Users size={20} />
+                <span>{filteredItems.length} projets présentés</span>
+              </div>
+              <button className="odevolv-view-all">
+                <span>Voir tous les projets</span>
+                <ArrowRight size={18} />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Footer */}
-    
-      <style jsx>{`
-        .gallery-page {
-          min-height: 100vh;
-          background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
-          color: #1e293b;
-          font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-          line-height: 1.6;
-        }
-
-        /* Header Styles */
-        .gallery-header {
-          position: fixed;
-          top: 0;
-          width: 100%;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(20px);
-          z-index: 1000;
-          border-bottom: 1px solid #e2e8f0;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 1rem 2rem;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        .header-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1e293b;
-        }
-
-        .logo-icon {
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          padding: 0.5rem;
-          border-radius: 10px;
-          font-size: 1.2rem;
-        }
-
-        .header-nav {
-          display: flex;
-          gap: 2rem;
-        }
-
-        .header-nav a {
-          color: #64748b;
-          text-decoration: none;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          position: relative;
-          padding: 0.5rem 0;
-        }
-
-        .header-nav a:hover,
-        .header-nav a.active {
-          color: #f59e0b;
-        }
-
-        .header-nav a.active::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, #f59e0b, #d97706);
-          border-radius: 2px;
-        }
-
-        /* Hero Section */
-        .gallery-hero {
-          position: relative;
-          min-height: 90vh;
-          display: flex;
-          align-items: center;
-          margin-top: 80px;
-          overflow: hidden;
-        }
-
-        .hero-background {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-
-        .hero-gradient {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: 
-            radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(217, 119, 6, 0.05) 0%, transparent 50%),
-            linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        }
-
-        .hero-pattern {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: 
-            radial-gradient(circle at 1px 1px, rgba(245, 158, 11, 0.1) 1px, transparent 0);
-          background-size: 20px 20px;
-        }
-
-        .hero-content {
-          position: relative;
-          z-index: 2;
-          max-width: 1400px;
-          width: 100%;
-          margin: 0 auto;
-          padding: 4rem 2rem;
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 4rem;
-          align-items: center;
-        }
-
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: linear-gradient(135deg, #fef3c7, #fde68a);
-          color: #92400e;
-          padding: 0.5rem 1rem;
-          border-radius: 50px;
-          font-size: 0.875rem;
-          font-weight: 600;
-          margin-bottom: 2rem;
-          border: 1px solid #fcd34d;
-        }
-
-        .hero-title {
-          font-size: 3.5rem;
-          font-weight: 800;
-          line-height: 1.1;
-          margin-bottom: 1.5rem;
-          color: #1e293b;
-        }
-
-        .hero-highlight {
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          position: relative;
-        }
-
-        .hero-highlight::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 4px;
-          background: linear-gradient(90deg, #f59e0b, #d97706);
-          border-radius: 2px;
-          opacity: 0.3;
-        }
-
-        .hero-description {
-          font-size: 1.25rem;
-          color: #64748b;
-          margin-bottom: 3rem;
-          line-height: 1.7;
-        }
-
-        .hero-stats {
-          display: flex;
-          gap: 2rem;
-        }
-
-        .stat {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-        }
-
-        .stat-icon {
-          background: linear-gradient(135deg, #fef3c7, #fde68a);
-          padding: 0.75rem;
-          border-radius: 12px;
-          color: #d97706;
-        }
-
-        .stat-content {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .stat-number {
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: #1e293b;
-        }
-
-        .stat-label {
-          font-size: 0.875rem;
-          color: #64748b;
-          font-weight: 500;
-        }
-
-        .hero-visual {
-          position: relative;
-          height: 500px;
-        }
-
-        .visual-card {
-          position: absolute;
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-          transition: all 0.4s ease;
-          border: 1px solid #e2e8f0;
-        }
-
-        .visual-card img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .card-1 {
-          width: 300px;
-          height: 200px;
-          top: 0;
-          left: 0;
-          transform: rotate(-5deg);
-        }
-
-        .card-2 {
-          width: 250px;
-          height: 180px;
-          top: 50px;
-          right: 50px;
-          transform: rotate(3deg);
-        }
-
-        .card-3 {
-          width: 280px;
-          height: 220px;
-          bottom: 0;
-          left: 100px;
-          transform: rotate(-2deg);
-        }
-
-        .visual-card:hover {
-          transform: rotate(0deg) scale(1.05);
-          z-index: 10;
-        }
-
-        /* Filters Section */
-        .gallery-filters {
-          padding: 4rem 2rem;
-          background: #ffffff;
-          border-top: 1px solid #f1f5f9;
-          border-bottom: 1px solid #f1f5f9;
-        }
-
-        .filters-container {
-          max-width: 1200px;
-          margin: 0 auto;
-          text-align: center;
-        }
-
-        .filters-title {
-          font-size: 2.5rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          color: #1e293b;
-        }
-
-        .filters-subtitle {
-          font-size: 1.125rem;
-          color: #64748b;
-          margin-bottom: 3rem;
-        }
-
-        .filters-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-          gap: 1rem;
-          max-width: 1000px;
-          margin: 0 auto;
-        }
-
-        .filter-button {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 1.25rem 1.5rem;
-          background: #ffffff;
-          border: 2px solid #e2e8f0;
-          border-radius: 16px;
-          color: #64748b;
-          font-size: 1rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .filter-button:hover {
-          border-color: #f59e0b;
-          color: #f59e0b;
-          transform: translateY(-2px);
-          box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.1);
-        }
-
-        .filter-button.active {
-          background: linear-gradient(135deg, #fef3c7, #fde68a);
-          border-color: #f59e0b;
-          color: #92400e;
-          box-shadow: 0 20px 40px -10px rgba(245, 158, 11, 0.2);
-        }
-
-        .filter-icon {
-          transition: transform 0.3s ease;
-        }
-
-        .filter-button.active .filter-icon {
-          transform: scale(1.1);
-        }
-
-        .filter-text {
-          flex: 1;
-          text-align: left;
-        }
-
-        .filter-arrow {
-          opacity: 0;
-          transform: translateX(-10px);
-          transition: all 0.3s ease;
-        }
-
-        .filter-button.active .filter-arrow {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        /* Gallery Grid Section */
-        .gallery-grid-section {
-          padding: 6rem 2rem;
-          background: #f8fafc;
-        }
-
-        .gallery-container {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .gallery-header {
-          text-align: center;
-          margin-bottom: 4rem;
-          position: static;
-          background: none;
-          border: none;
-          box-shadow: none;
-        }
-
-        .gallery-title {
-          font-size: 3rem;
-          font-weight: 700;
-          margin-bottom: 1rem;
-          color: #1e293b;
-        }
-
-        .accent {
-          background: linear-gradient(135deg, #f59e0b, #d97706);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-
-        .gallery-subtitle {
-          font-size: 1.25rem;
-          color: #64748b;
-        }
-
-        .gallery-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-          gap: 2rem;
-        }
-
-        .gallery-item {
-          opacity: 0;
-          animation: fadeInUp 0.6s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-        }
-
-        .gallery-item-inner {
-          position: relative;
-          border-radius: 24px;
-          overflow: hidden;
-          background: #ffffff;
-          box-shadow: 
-            0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
-          transition: all 0.4s ease;
-          border: 1px solid #f1f5f9;
-        }
-
-        .gallery-item-inner:hover {
-          transform: translateY(-8px);
-          box-shadow: 
-            0 25px 50px -12px rgba(0, 0, 0, 0.25),
-            0 0 0 1px rgba(245, 158, 11, 0.1);
-        }
-
-        .item-image {
-          position: relative;
-          aspect-ratio: 4/3;
-          overflow: hidden;
-        }
-
-        .item-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.4s ease;
-        }
-
-        .gallery-item-inner:hover .item-image img {
-          transform: scale(1.1);
-        }
-
-        .item-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(217, 119, 6, 0.9));
-          display: flex;
-          align-items: flex-end;
-          opacity: 0;
-          transition: all 0.4s ease;
-          padding: 2rem;
-        }
-
-        .gallery-item-inner:hover .item-overlay {
-          opacity: 1;
-        }
-
-        .overlay-content {
-          color: white;
-          transform: translateY(20px);
-          transition: transform 0.4s ease;
-        }
-
-        .gallery-item-inner:hover .overlay-content {
-          transform: translateY(0);
-        }
-
-        .item-category {
-          display: inline-block;
-          background: rgba(255, 255, 255, 0.2);
-          color: white;
-          padding: 0.5rem 1rem;
-          border-radius: 20px;
-          font-size: 0.75rem;
-          font-weight: 600;
-          margin-bottom: 1rem;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-          backdrop-filter: blur(10px);
-        }
-
-        .item-title {
-          font-size: 1.5rem;
-          font-weight: 700;
-          margin-bottom: 0.75rem;
-          color: white;
-        }
-
-        .item-description {
-          font-size: 0.9rem;
-          margin-bottom: 1.5rem;
-          color: rgba(255, 255, 255, 0.9);
-          line-height: 1.5;
-        }
-
-        .item-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: white;
-          color: #d97706;
-          padding: 0.75rem 1.5rem;
-          border-radius: 25px;
-          text-decoration: none;
-          font-weight: 600;
-          transition: all 0.3s ease;
-          border: 2px solid transparent;
-        }
-
-        .item-link:hover {
-          background: transparent;
-          border-color: white;
-          color: white;
-          transform: translateX(5px);
-        }
-
-        /* Footer */
-        .gallery-footer {
-          background: #1e293b;
-          color: white;
-          padding: 4rem 2rem 2rem;
-        }
-
-        .footer-content {
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .footer-main {
-          display: grid;
-          grid-template-columns: 1fr 2fr;
-          gap: 4rem;
-          margin-bottom: 3rem;
-        }
-
-        .footer-brand {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .footer-logo {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 1.5rem;
-          font-weight: 700;
-          color: white;
-        }
-
-        .footer-tagline {
-          color: #cbd5e1;
-          line-height: 1.6;
-        }
-
-        .footer-links {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
-        }
-
-        .footer-column h4 {
-          color: #f59e0b;
-          margin-bottom: 1rem;
-          font-size: 1.125rem;
-          font-weight: 600;
-        }
-
-        .footer-column a,
-        .footer-column p {
-          display: block;
-          color: #cbd5e1;
-          text-decoration: none;
-          margin-bottom: 0.5rem;
-          transition: color 0.3s ease;
-        }
-
-        .footer-column a:hover {
-          color: #f59e0b;
-        }
-
-        .footer-bottom {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-top: 2rem;
-          border-top: 1px solid #334155;
-          color: #94a3b8;
-          font-size: 0.875rem;
-        }
-
-        .footer-legal {
-          display: flex;
-          gap: 2rem;
-        }
-
-        .footer-legal a {
-          color: #94a3b8;
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .footer-legal a:hover {
-          color: #f59e0b;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-          .hero-content {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            text-align: center;
-          }
-
-          .hero-visual {
-            height: 300px;
-          }
-
-          .visual-card {
-            position: relative;
-            margin: 0 auto;
-          }
-
-          .card-1, .card-2, .card-3 {
-            position: static;
-            transform: none;
-            margin-bottom: 1rem;
-          }
-
-          .gallery-grid {
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          }
-        }
-
-        @media (max-width: 768px) {
-          .header-content {
-            flex-direction: column;
-            gap: 1rem;
-            padding: 1rem;
-          }
-
-          .header-nav {
-            gap: 1rem;
-          }
-
-          .hero-title {
-            font-size: 2.5rem;
-          }
-
-          .hero-stats {
-            flex-direction: column;
-            gap: 1.5rem;
-            align-items: center;
-          }
-
-          .filters-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .gallery-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .footer-main {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .footer-links {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-          }
-
-          .footer-bottom {
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .hero-title {
-            font-size: 2rem;
-          }
-
-          .hero-description {
-            font-size: 1.1rem;
-          }
-
-          .filters-grid {
-            grid-template-columns: 1fr;
-            }
-        }
-      `}</style>
+      {/* Modal pour les projets */}
+      {selectedProject && (
+        <div className="odevolv-modal-overlay" onClick={closeModal}>
+          <div className="odevolv-modal-content" onClick={(e) => e.stopPropagation()}>
+            {/* Header du modal */}
+            <div className="odevolv-modal-header">
+              <div className="odevolv-modal-header-content">
+                <span className="odevolv-modal-category">
+                  <Award size={14} />
+                  {selectedProject.category}
+                </span>
+                <h2 className="odevolv-modal-title">{selectedProject.title}</h2>
+              </div>
+              <button className="odevolv-modal-close" onClick={closeModal}>
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Contenu du modal */}
+            <div className="odevolv-modal-body">
+              {/* Carrousel d'images */}
+              <div className="odevolv-modal-carousel">
+                <div className="odevolv-carousel-main">
+                  <button className="odevolv-carousel-nav odevolv-carousel-prev" onClick={prevImage}>
+                    <ChevronLeft size={24} />
+                  </button>
+                  
+                  <div className="odevolv-carousel-image">
+                    <img 
+                      src={selectedProject.images[currentImageIndex]} 
+                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                    />
+                    <div className="odevolv-carousel-counter">
+                      {currentImageIndex + 1} / {selectedProject.images.length}
+                    </div>
+                  </div>
+                  
+                  <button className="odevolv-carousel-nav odevolv-carousel-next" onClick={nextImage}>
+                    <ChevronRightIcon size={24} />
+                  </button>
+                </div>
+                
+                {/* Miniatures */}
+                <div className="odevolv-carousel-thumbnails">
+                  {selectedProject.images.map((image, index) => (
+                    <button
+                      key={index}
+                      className={`odevolv-carousel-thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                      onClick={() => goToImage(index)}
+                    >
+                      <img src={image} alt={`Miniature ${index + 1}`} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Détails du projet */}
+              <div className="odevolv-modal-details">
+                <div className="odevolv-modal-description">
+                  <h3>À propos de ce projet</h3>
+                  <p>{selectedProject.longDescription}</p>
+                </div>
+
+                <div className="odevolv-modal-info-grid">
+                  <div className="odevolv-info-item">
+                    <div className="odevolv-info-icon">
+                      <Calendar size={18} />
+                    </div>
+                    <div className="odevolv-info-content">
+                      <span className="odevolv-info-label">Date</span>
+                      <span className="odevolv-info-value">{selectedProject.details.date}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="odevolv-info-item">
+                    <div className="odevolv-info-icon">
+                      <MapPin size={18} />
+                    </div>
+                    <div className="odevolv-info-content">
+                      <span className="odevolv-info-label">Localisation</span>
+                      <span className="odevolv-info-value">{selectedProject.details.location}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="odevolv-info-item">
+                    <div className="odevolv-info-icon">
+                      <Clock size={18} />
+                    </div>
+                    <div className="odevolv-info-content">
+                      <span className="odevolv-info-label">Durée</span>
+                      <span className="odevolv-info-value">{selectedProject.details.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="odevolv-info-item">
+                    <div className="odevolv-info-icon">
+                      <UsersIcon size={18} />
+                    </div>
+                    <div className="odevolv-info-content">
+                      <span className="odevolv-info-label">Participants</span>
+                      <span className="odevolv-info-value">{selectedProject.details.participants}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Réalisations */}
+                <div className="odevolv-modal-achievements">
+                  <h3>Nos réalisations</h3>
+                  <div className="odevolv-achievements-grid">
+                    {selectedProject.achievements.map((achievement, index) => (
+                      <div key={index} className="odevolv-achievement">
+                        <div className="odevolv-achievement-icon">
+                          <Zap size={16} />
+                        </div>
+                        <span>{achievement}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="odevolv-modal-actions">
+                  <button className="odevolv-action-btn odevolv-action-primary">
+                    <ExternalLink size={18} />
+                    <span>Visiter le projet</span>
+                  </button>
+                  <button className="odevolv-action-btn odevolv-action-secondary">
+                    <Heart size={18} />
+                    <span>Sauvegarder</span>
+                  </button>
+                  <button className="odevolv-action-btn odevolv-action-secondary">
+                    <Share2 size={18} />
+                    <span>Partager</span>
+                  </button>
+                  <button className="odevolv-action-btn odevolv-action-secondary">
+                    <Download size={18} />
+                    <span>Télécharger PDF</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default Gallery;
+export default OdevolvGallery;

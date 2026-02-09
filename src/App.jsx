@@ -8,6 +8,9 @@ import Filiales from './page/filiales';
 import Galerie from './page/galerie';
 import New from './page/actualite';
 import Contact from './page/contact';
+import Evenementiel from './page/evenementiel';
+import Cosmétique from './page/cosmetique';
+import Communication from './page/communication';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path="/Notre-galerie" element={<Galerie />} />
         <Route path="/Nos-actualités" element={<New />} />
         <Route path="/Nos-contacts" element={<Contact />} />
+        <Route path="/filiales/evenementiel" element={<Evenementiel />} />
+        <Route path="/filiales/cosmetique" element={<Cosmétique />} />
+        <Route path="/filiales/cosmetique" element={<Communication />} />
       </Routes>
 
       <Footer />

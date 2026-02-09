@@ -1,15 +1,14 @@
-import Hero from '../Composant/Hero'
-import Expli from '../Composant/expli'
+// accueil.jsx
+import Hero from '../Composant/Hero';
+import Expli from '../Composant/expli';
 
-
-function Accueil() {
-
+export function Accueil() {  // 使用命名导出
   return (
     <>
-     <Hero/>
-     <Expli/>
+      <Hero/>
+      <Expli/>
     </>
-  )
+  );
 }
 
-export default Accueil
+export default Accueil;
