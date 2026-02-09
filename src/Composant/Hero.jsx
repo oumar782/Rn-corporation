@@ -10,8 +10,7 @@ import {
   Target,
   Star,
   Shield,
-  Sparkles,
-  Award
+  Sparkles
 } from 'lucide-react';
 
 const Hero = () => {
@@ -126,12 +125,13 @@ const Hero = () => {
     };
 
     typingTimeoutRef.current = setTimeout(handleTyping, typingSpeed);
+    
     return () => {
       if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
       }
     };
-  }, [typedText, isDeleting, typingLoop]);
+  }, [typedText, isDeleting, typingLoop, typingSpeed, TYPING_TEXTS]);
 
   useEffect(() => {
     const carouselInterval = setInterval(() => {
@@ -139,15 +139,15 @@ const Hero = () => {
     }, 6000);
     
     return () => clearInterval(carouselInterval);
-  }, []);
+  }, [CAROUSEL_SLIDES.length]);
 
   const handleNextSlide = useCallback(() => {
     setCurrentSlide(prev => (prev + 1) % CAROUSEL_SLIDES.length);
-  }, []);
+  }, [CAROUSEL_SLIDES.length]);
 
   const handlePrevSlide = useCallback(() => {
     setCurrentSlide(prev => (prev - 1 + CAROUSEL_SLIDES.length) % CAROUSEL_SLIDES.length);
-  }, []);
+  }, [CAROUSEL_SLIDES.length]);
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
@@ -189,6 +189,7 @@ const Hero = () => {
           backgroundImage: `linear-gradient(135deg, ${slide.gradient}, rgba(0, 0, 0, 0.4)), url(${slide.image})`
         }}
         aria-label={`Slide ${index + 1}: ${slide.title}`}
+        role="img"
       />
     ));
   };
@@ -205,6 +206,41 @@ const Hero = () => {
         </div>
       </div>
     ));
+  };
+
+  const renderControls = () => {
+    return (
+      <div className="rn-hero-controls">
+        <button 
+          className="rn-hero-control" 
+          onClick={handlePrevSlide}
+          aria-label="Diapositive précédente"
+        >
+          <ChevronLeft size={20} />
+        </button>
+        
+        <div className="rn-hero-control-dots">
+          {CAROUSEL_SLIDES.map((_, index) => (
+            <button
+              key={`dot-${index}`}
+              className={`rn-hero-control-dot ${index === currentSlide ? 'rn-hero-control-dot--active' : ''}`}
+              onClick={() => setCurrentSlide(index)}
+              aria-label={`Aller à la diapositive ${index + 1}`}
+            >
+              <div className="rn-hero-control-dot-inner" />
+            </button>
+          ))}
+        </div>
+        
+        <button 
+          className="rn-hero-control" 
+          onClick={handleNextSlide}
+          aria-label="Diapositive suivante"
+        >
+          <ChevronRight size={20} />
+        </button>
+      </div>
+    );
   };
 
   return (
@@ -237,8 +273,9 @@ const Hero = () => {
                 <div 
                   key={index} 
                   className="premium-hero__trust-badge"
+                  role="status"
                 >
-                  <Sparkles size={14} className="premium-hero__badge-icon" />
+                  <Sparkles size={14} className="premium-hero__badge-icon" aria-hidden="true" />
                   <span>{badge}</span>
                 </div>
               ))}
@@ -255,7 +292,7 @@ const Hero = () => {
               <span className="rn-hero-title-cursor" aria-hidden="true">|</span>
             </h1>
             <div className="rn-hero-title-underline">
-              <div className="rn-hero-title-underline-inner" />
+              <div className="rn-hero-title-underline-inner" aria-hidden="true" />
             </div>
           </div>
 
@@ -271,9 +308,7 @@ const Hero = () => {
           </div>
 
           {/* Statistiques */}
-          <div className="rn-hero-stats">
-            {renderStats()}
-          </div>
+         
 
           {/* Boutons d'action */}
           <div className="rn-hero-actions">
@@ -303,7 +338,6 @@ const Hero = () => {
       </div>
 
       {/* Contrôles du carrousel */}
-      
     </section>
   );
 };

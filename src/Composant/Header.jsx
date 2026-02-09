@@ -1,66 +1,70 @@
 import { useState, useEffect, useRef } from "react";
 import "./header.css";
-import logoImage from "../assets/go.jpg";
 
-const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activePath, setActivePath] = useState(window.location.pathname);
-  const mobileMenuRef = useRef(null);
+const HeaderEnhanced = () => {
+  const [isScrolledEnhanced, setIsScrolledEnhanced] = useState(false);
+  const [isMobileMenuOpenEnhanced, setIsMobileMenuOpenEnhanced] = useState(false);
+  const [activePathEnhanced, setActivePathEnhanced] = useState(
+    typeof window !== 'undefined' ? window.location.pathname : "/"
+  );
+  const mobileMenuRefEnhanced = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+    if (typeof window === 'undefined') return;
+
+    const handleScrollEnhanced = () => {
+      setIsScrolledEnhanced(window.scrollY > 10);
     };
 
-    const handleLocationChange = () => {
-      setActivePath(window.location.pathname);
-      setIsMobileMenuOpen(false);
+    const handleLocationChangeEnhanced = () => {
+      setActivePathEnhanced(window.location.pathname);
+      setIsMobileMenuOpenEnhanced(false);
     };
 
-    // Fermer le menu mobile en cliquant à l'extérieur
-    const handleClickOutside = (event) => {
+    const handleClickOutsideEnhanced = (event) => {
       if (
-        mobileMenuRef.current &&
-        !mobileMenuRef.current.contains(event.target) &&
-        !event.target.closest('.menu-toggle')
+        mobileMenuRefEnhanced.current &&
+        !mobileMenuRefEnhanced.current.contains(event.target) &&
+        !event.target.closest('.menu-toggle-enhanced')
       ) {
-        setIsMobileMenuOpen(false);
+        setIsMobileMenuOpenEnhanced(false);
       }
     };
 
-    let ticking = false;
-    const optimizedScroll = () => {
-      if (!ticking) {
+    let tickingEnhanced = false;
+    const optimizedScrollEnhanced = () => {
+      if (!tickingEnhanced) {
         requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
+          handleScrollEnhanced();
+          tickingEnhanced = false;
         });
-        ticking = true;
+        tickingEnhanced = true;
       }
     };
 
-    window.addEventListener("scroll", optimizedScroll, { passive: true });
-    window.addEventListener("popstate", handleLocationChange);
-    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", optimizedScrollEnhanced, { passive: true });
+    window.addEventListener("popstate", handleLocationChangeEnhanced);
+    document.addEventListener("mousedown", handleClickOutsideEnhanced);
+
+    // Initial scroll check
+    handleScrollEnhanced();
 
     return () => {
-      window.removeEventListener("scroll", optimizedScroll);
-      window.removeEventListener("popstate", handleLocationChange);
-      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", optimizedScrollEnhanced);
+      window.removeEventListener("popstate", handleLocationChangeEnhanced);
+      document.removeEventListener("mousedown", handleClickOutsideEnhanced);
     };
   }, []);
 
   useEffect(() => {
-    // Empêcher le défilement du body quand le menu mobile est ouvert
-    if (isMobileMenuOpen) {
+    if (isMobileMenuOpenEnhanced) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [isMobileMenuOpen]);
+  }, [isMobileMenuOpenEnhanced]);
 
-  const navigation = [
+  const navigationEnhanced = [
     { name: "Accueil", href: "/" },
     { name: "À Propos", href: "/A-propos-de-nous" },
     { name: "Filiales", href: "/Nos-filiales" },
@@ -69,12 +73,13 @@ const Header = () => {
     { name: "Contact", href: "/Nos-contacts" },
   ];
 
-  const handleNavClick = (href, event) => {
-    event.preventDefault();
-    setActivePath(href);
-    setIsMobileMenuOpen(false);
+  const handleNavClickEnhanced = (href, event) => {
+    if (event) {
+      event.preventDefault();
+    }
+    setActivePathEnhanced(href);
+    setIsMobileMenuOpenEnhanced(false);
     
-    // Animation de transition
     document.body.style.opacity = '0.8';
     setTimeout(() => {
       window.location.href = href;
@@ -85,114 +90,125 @@ const Header = () => {
     }, 300);
   };
 
+  const handleContactClick = () => {
+    handleNavClickEnhanced('/Nos-contacts', { preventDefault: () => {} });
+  };
+
   return (
     <header 
-      className={`header ${isScrolled ? "scrolled" : ""}`}
+      className={`header-enhanced ${isScrolledEnhanced ? "scrolled-enhanced" : ""}`}
       role="banner"
     >
       {/* Banderole de statut */}
-      <div className="status-banner">
-        <div className="status-banner-content">
-          <span className="status-text">Odevolv Corporation</span>
-          <span className="status-separator">•</span>
-          <span className="status-text">Excellence depuis 2005</span>
-          <span className="status-badge">
-            <span className="status-dot"></span>
+      <div className="status-banner-enhanced">
+        <div className="status-banner-content-enhanced">
+          <span className="status-text-enhanced">Odevolv Corporation</span>
+          <span className="status-separator-enhanced">•</span>
+          <span className="status-text-enhanced">Excellence depuis 2005</span>
+          <span className="status-badge-enhanced">
+            <span className="status-dot-enhanced"></span>
             Service 24/7
           </span>
         </div>
       </div>
 
-      <div className="header-container">
-        <nav className="nav-wrapper" aria-label="Navigation principale">
+      <div className="header-container-enhanced">
+        <nav className="nav-wrapper-enhanced" aria-label="Navigation principale">
           {/* Logo */}
           <a 
             href="/" 
-            className="logo" 
-            onClick={(e) => handleNavClick("/", e)}
+            className="logo-enhanced" 
+            onClick={(e) => handleNavClickEnhanced("/", e)}
             aria-label="Odevolv Corporation - Retour à l'accueil"
           >
-            <div className="logo-image-wrapper">
-              <img 
-                src={logoImage} 
-                alt="Odevolv Corporation" 
-                className="logo-img"
-                loading="eager"
-                width={40}
-                height={40}
-              />
+            <div className="logo-symbol-enhanced">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <rect width="40" height="40" rx="8" fill="url(#logo-gradient-enhanced)"/>
+                <path d="M12 20L20 12L28 20L20 28L12 20Z" fill="white" fillOpacity="0.9"/>
+                <path d="M15 20L20 15L25 20L20 25L15 20Z" fill="#D4AF37"/>
+                <defs>
+                  <linearGradient id="logo-gradient-enhanced" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#000000"/>
+                    <stop offset="1" stopColor="#0A0A0A"/>
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
-            <div className="logo-text">
-              <span className="logo-name">Odevolv Corporation</span>
-              <span className="logo-tagline">Excellence & Innovation</span>
+            <div className="logo-text-enhanced">
+              <span className="logo-name-enhanced">Odevolv Corporation</span>
+              <span className="logo-tagline-enhanced">Excellence & Innovation</span>
             </div>
           </a>
 
-          {/* Navigation Desktop */}
-          <div className="nav-desktop">
-            {navigation.map((item) => (
+          {/* Navigation Desktop - Visible uniquement sur desktop */}
+          <div className="nav-desktop-enhanced">
+            {navigationEnhanced.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className={`nav-link ${activePath === item.href ? "active" : ""}`}
-                onClick={(e) => handleNavClick(item.href, e)}
-                aria-current={activePath === item.href ? "page" : undefined}
+                className={`nav-link-enhanced ${activePathEnhanced === item.href ? "active-enhanced" : ""}`}
+                onClick={(e) => handleNavClickEnhanced(item.href, e)}
+                aria-current={activePathEnhanced === item.href ? "page" : undefined}
               >
                 {item.name}
               </a>
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="nav-actions">
+          {/* CTA Button Desktop */}
+          <div className="nav-actions-enhanced">
             <button 
-              className="cta-button" 
+              className="cta-button-enhanced" 
               aria-label="Nous contacter"
-              onClick={() => handleNavClick('/Nos-contacts', { preventDefault: () => {} })}
+              onClick={handleContactClick}
             >
               Nous contacter
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Visible uniquement sur mobile/tablet */}
           <button
-            className={`menu-toggle ${isMobileMenuOpen ? "active" : ""}`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            aria-expanded={isMobileMenuOpen}
+            className={`menu-toggle-enhanced ${isMobileMenuOpenEnhanced ? "active-enhanced" : ""}`}
+            onClick={() => setIsMobileMenuOpenEnhanced(!isMobileMenuOpenEnhanced)}
+            aria-label={isMobileMenuOpenEnhanced ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={isMobileMenuOpenEnhanced}
           >
-            <span className="menu-bar"></span>
-            <span className="menu-bar"></span>
-            <span className="menu-bar"></span>
+            <span className="menu-bar-enhanced"></span>
+            <span className="menu-bar-enhanced"></span>
+            <span className="menu-bar-enhanced"></span>
           </button>
         </nav>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Menu */}
         <div 
-          ref={mobileMenuRef}
-          className={`nav-mobile ${isMobileMenuOpen ? "active" : ""}`}
+          ref={mobileMenuRefEnhanced}
+          className={`nav-mobile-enhanced ${isMobileMenuOpenEnhanced ? "active-enhanced" : ""}`}
           role="navigation"
           aria-label="Navigation mobile"
         >
-          <div className="nav-mobile-inner">
-            {navigation.map((item) => (
+          <div className="nav-mobile-inner-enhanced">
+            {navigationEnhanced.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className={`nav-mobile-link ${activePath === item.href ? "active" : ""}`}
-                onClick={(e) => handleNavClick(item.href, e)}
-                aria-current={activePath === item.href ? "page" : undefined}
+                className={`nav-mobile-link-enhanced ${activePathEnhanced === item.href ? "active-enhanced" : ""}`}
+                onClick={(e) => handleNavClickEnhanced(item.href, e)}
+                aria-current={activePathEnhanced === item.href ? "page" : undefined}
               >
                 {item.name}
-                <span className="mobile-link-indicator">
-                  {activePath === item.href && "✓"}
+                <span className="mobile-link-indicator-enhanced">
+                  {activePathEnhanced === item.href && (
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M13 5L6.5 11.5L3 8" stroke="#D4AF37" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
                 </span>
               </a>
             ))}
             <button 
-              className="cta-button mobile" 
+              className="cta-button-enhanced mobile-enhanced" 
               aria-label="Nous contacter"
-              onClick={() => handleNavClick('/Nos-contacts', { preventDefault: () => {} })}
+              onClick={handleContactClick}
             >
               Nous contacter
             </button>
@@ -201,10 +217,10 @@ const Header = () => {
       </div>
       
       {/* Overlay pour mobile */}
-      {isMobileMenuOpen && (
+      {isMobileMenuOpenEnhanced && (
         <div 
-          className="mobile-menu-overlay"
-          onClick={() => setIsMobileMenuOpen(false)}
+          className="mobile-menu-overlay-enhanced"
+          onClick={() => setIsMobileMenuOpenEnhanced(false)}
           aria-hidden="true"
         />
       )}
@@ -212,4 +228,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderEnhanced;

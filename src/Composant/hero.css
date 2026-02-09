@@ -15,7 +15,7 @@
   --rn-black-950: #050505;
   --rn-black-900: #0A0A0A;
   --rn-white-100: #FFFFFF;
-  --rn-gray-400: #B0B0B0;
+  --rn-gray-400: #D1D5DB;
   
   /* Effets */
   --rn-transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -39,8 +39,8 @@
   position: relative;
   height: 100vh;
   min-height: 700px;
-  max-height: 100vh; /* Changé pour s'adapter */
-  width: 100vw; /* Prend toute la largeur */
+  max-height: 100vh;
+  width: 100vw;
   overflow: hidden;
   background: var(--rn-black-950);
   font-family: var(--rn-font-primary);
@@ -64,7 +64,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   z-index: 1;
   pointer-events: none;
@@ -99,7 +99,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100%;
 }
 
