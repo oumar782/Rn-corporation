@@ -116,7 +116,7 @@
   border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 50px;
   backdrop-filter: blur(12px);
-  margin-bottom: 3.5rem;
+  margin-top: 3.5rem;
   animation: odevolv-filiales-fade-in 1s ease-out 0.2s both;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
@@ -144,20 +144,21 @@
     var(--odevolv-filiales-gold-light) 25%,
     var(--odevolv-filiales-secondary) 50%,
     var(--odevolv-filiales-gold-light) 75%,
-    #FFFFFF 100%);
+    #120d0dff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   background-size: 200% auto;
   animation: odevolv-filiales-shine 3s ease-in-out infinite alternate, 
              odevolv-filiales-fade-up 1s ease-out 0.3s both;
-  text-shadow: 0 2px 30px rgba(212, 175, 55, 0.3);
 }
 
 .odevolv-filiales-hero-highlight {
   position: relative;
   display: inline-block;
   padding: 0 0.5rem;
+  text-color: var(--odevolv-filiales-gradient-gold);
+
 }
 
 .odevolv-filiales-hero-highlight::after {

@@ -136,7 +136,7 @@
   backdrop-filter: blur(16px);
   border: 1px solid rgba(198, 163, 71, 0.25);
   border-radius: var(--about-radius-full);
-  margin-bottom: 40px;
+  margin-top: 40px;
   color: var(--about-color-gray-300);
   font-size: 14px;
   font-weight: 500;

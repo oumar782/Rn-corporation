@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Star, 
   Trophy, 
@@ -22,52 +22,74 @@ import {
   MapPin,
   Clock,
   Users as UsersIcon,
-  Tag,
   ExternalLink,
   Heart,
   Share2,
   Download,
   Camera,
-  Music,
-  Gamepad2,
-  ShoppingBag,
-  Hotel,
-  Car,
-  Plane,
-  Banknote,
+  CheckCircle,
+  ChevronDown,
+  Maximize2,
+  Minimize2,
+  Info,
+  Bookmark,
+  Printer,
+  Mail,
+  MessageSquare,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
   Globe,
-  Microscope,
-  GraduationCap
+  Lock,
+  Shield,
+  Crown,
+  Tag,
+  Image as ImageIcon,
+  FileText,
+  BarChart,
+  Smartphone,
+  Plane,
+  Video,
+  ShoppingBag,
+  Flag,
+  Settings,
+  AlertTriangle,
+  Filter
 } from "lucide-react";
 import './galerie.css';
 
-const OdevolvGalleryModifie = () => {
+const OdevolvGalleryShowcase = () => {
   const [selectedFilter, setSelectedFilter] = useState("Tous");
   const [selectedProject, setSelectedProject] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const filters = [
-    { name: "Tous", icon: Sparkles },
-    { name: "Événementiel", icon: Calendar },
-    { name: "Cosmétique", icon: Palette },
-    { name: "Communication", icon: MessageCircle },
-    { name: "Football", icon: Trophy },
-    { name: "Restaurant", icon: Utensils },
-    { name: "Mode", icon: ShoppingBag },
-    { name: "Sport", icon: Gamepad2 },
-    { name: "Musique", icon: Music },
-    { name: "Technologie", icon: Zap },
-    { name: "Immobilier", icon: Building },
-    { name: "Automobile", icon: Car }
+    { name: "Tous", icon: Sparkles, count: 15 },
+    { name: "Événementiel", icon: Calendar, count: 4 },
+    { name: "Cosmétique", icon: Palette, count: 3 },
+    { name: "Communication", icon: MessageCircle, count: 3 },
+    { name: "Football", icon: Trophy, count: 3 },
+    { name: "Restaurant", icon: Utensils, count: 2 }
   ];
 
-  // Données des projets - 20 réalisations
   const galleryItems = [
     { 
       id: 1,
       category: "Événementiel", 
       title: "Gala d'entreprise 2024",
-      description: "Organisation complète d'un gala prestigieux pour 500 invités avec scénographie immersive.",
+      description: "Organisation complète d'un gala prestigieux pour 500 invités avec scénographie immersive et expérience client sur-mesure.",
       longDescription: "Pour ce gala d'exception, notre équipe a orchestré chaque détail avec précision : de la scénographie immersive à la gastronomie étoilée, en passant par le spectacle live et les animations interactives. Un événement qui a marqué les esprits par son élégance et son innovation.",
       link: "/evenementiel/gala-2024",
       images: [
@@ -81,9 +103,19 @@ const OdevolvGalleryModifie = () => {
         location: "Paris, France",
         duration: "6 mois de préparation",
         participants: "500 invités VIP",
-        budget: "Confidentiel"
+        budget: "Confidentiel",
+        status: "Terminé",
+        priority: "Haute"
       },
-      achievements: ["+200% engagement client", "100% satisfaction", "Retour sur investissement exceptionnel", "Couverture médiatique internationale"]
+      achievements: ["+200% engagement client", "100% satisfaction", "Retour sur investissement exceptionnel"],
+      tags: ["Événement", "Luxe", "VIP", "France"],
+      stats: {
+        views: "12500",
+        likes: "890",
+        shares: "450",
+        downloads: "230"
+      },
+      featured: true
     },
     { 
       id: 2,
@@ -103,9 +135,19 @@ const OdevolvGalleryModifie = () => {
         location: "Côte d'Azur",
         duration: "3 mois",
         participants: "Équipe de 15 experts",
-        budget: "Haut de gamme"
+        budget: "Haut de gamme",
+        status: "En cours",
+        priority: "Moyenne"
       },
-      achievements: ["+300% ventes premier mois", "1M+ d'impressions digitales", "Prix de l'innovation", "Meilleur lancement de l'année"]
+      achievements: ["+300% ventes premier mois", "1M+ d'impressions digitales", "Prix de l'innovation"],
+      tags: ["Beauté", "Mode", "Digital", "France"],
+      stats: {
+        views: "9800",
+        likes: "1200",
+        shares: "670",
+        downloads: "310"
+      },
+      featured: true
     },
     { 
       id: 3,
@@ -125,9 +167,18 @@ const OdevolvGalleryModifie = () => {
         location: "International",
         duration: "4 mois",
         participants: "10 pays ciblés",
-        budget: "Significatif"
+        budget: "Significatif",
+        status: "Terminé",
+        priority: "Critique"
       },
-      achievements: ["+150% d'engagement", "2M+ de reach", "ROI de 450%", "Prix de la meilleure campagne"]
+      achievements: ["+150% d'engagement", "2M+ de reach", "ROI de 450%"],
+      tags: ["Digital", "Marketing", "International", "Stratégie"],
+      stats: {
+        views: "15600",
+        likes: "2100",
+        shares: "890",
+        downloads: "420"
+      }
     },
     { 
       id: 4,
@@ -147,9 +198,18 @@ const OdevolvGalleryModifie = () => {
         location: "Stade National",
         duration: "5 jours",
         participants: "32 équipes",
-        budget: "Élevé"
+        budget: "Élevé",
+        status: "Terminé",
+        priority: "Haute"
       },
-      achievements: ["5M de téléspectateurs", "12 jeunes talents repérés", "Sponsoring record", "Meilleur événement sportif"]
+      achievements: ["5M de téléspectateurs", "12 jeunes talents repérés", "Sponsoring record"],
+      tags: ["Sport", "Jeunes", "Compétition", "Live"],
+      stats: {
+        views: "23400",
+        likes: "3400",
+        shares: "1200",
+        downloads: "560"
+      }
     },
     { 
       id: 5,
@@ -169,310 +229,18 @@ const OdevolvGalleryModifie = () => {
         location: "Château historique",
         duration: "1 soirée",
         participants: "100 convives",
-        budget: "Très haut de gamme"
+        budget: "Très haut de gamme",
+        status: "Terminé",
+        priority: "Maximum"
       },
-      achievements: ["Notation parfaite 10/10", "100% réservation", "Prix de l'excellence", "Recommandation 5 étoiles"]
-    },
-    { 
-      id: 6,
-      category: "Mode", 
-      title: "Défilé Haute Couture",
-      description: "Présentation exclusive de la collection automne-hiver avec mannequins internationaux.",
-      longDescription: "Un défilé qui a redéfini les standards de la mode avec une scénographie révolutionnaire et des créations uniques. Nous avons orchestré chaque détail pour créer une expérience mémorable.",
-      link: "/mode/defile-haute-couture",
-      images: [
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Octobre 2024",
-        location: "Milan, Italie",
-        duration: "2 mois",
-        participants: "30 mannequins",
-        budget: "Exceptionnel"
-      },
-      achievements: ["Couverture Vogue", "+500% ventes", "Tendance mondiale"]
-    },
-    { 
-      id: 7,
-      category: "Sport", 
-      title: "Marathon international",
-      description: "Organisation d'un marathon avec 10 000 participants et retransmission mondiale.",
-      longDescription: "Événement sportif majeur avec une logistique complexe et une sécurité optimale pour tous les participants. Une réussite complète.",
-      link: "/sport/marathon-international",
-      images: [
-        "https://images.unsplash.com/photo-1552674605-db6ffd8facb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Mai 2024",
-        location: "New York, USA",
-        duration: "6 mois",
-        participants: "10 000 coureurs",
-        budget: "Important"
-      },
-      achievements: ["Record participation", "0 incident", "Retransmission 50 pays"]
-    },
-    { 
-      id: 8,
-      category: "Musique", 
-      title: "Festival de musique",
-      description: "Festival 3 jours avec 50 artistes internationaux et 100 000 spectateurs.",
-      longDescription: "Production d'un festival majeur avec scènes multiples, hébergement et sécurité optimisés pour une expérience inoubliable.",
-      link: "/musique/festival",
-      images: [
-        "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Juillet 2024",
-        location: "Coachella, USA",
-        duration: "8 mois",
-        participants: "100 000 spectateurs",
-        budget: "Majeur"
-      },
-      achievements: ["Billetterie sold-out", "Streaming record", "Médias internationaux"]
-    },
-    { 
-      id: 9,
-      category: "Technologie", 
-      title: "Conférence Tech Summit",
-      description: "Événement tech avec 200 startups et 5 000 professionnels du secteur.",
-      longDescription: "Organisation d'un sommet technologique majeur avec keynotes, workshops et networking de qualité.",
-      link: "/technologie/tech-summit",
-      images: [
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Novembre 2024",
-        location: "San Francisco, USA",
-        duration: "3 jours",
-        participants: "5 000 professionnels",
-        budget: "Élevé"
-      },
-      achievements: ["200 startups", "50 partenaires", "20M$ investissements"]
-    },
-    { 
-      id: 10,
-      category: "Immobilier", 
-      title: "Lancement de résidence",
-      description: "Marketing et lancement d'une résidence de luxe avec 100 appartements.",
-      longDescription: "Stratégie marketing complète pour le lancement d'un projet immobilier haut de gamme avec succès total.",
-      link: "/immobilier/residence-luxe",
-      images: [
-        "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Septembre 2024",
-        location: "Monaco",
-        duration: "1 an",
-        participants: "100 acheteurs",
-        budget: "Prestige"
-      },
-      achievements: ["100% vendu", "Prix records", "Clientèle internationale"]
-    },
-    { 
-      id: 11,
-      category: "Automobile", 
-      title: "Lancement véhicule électrique",
-      description: "Événement de lancement mondial pour un nouveau véhicule électrique premium.",
-      longDescription: "Production d'un événement spectaculaire pour révéler un véhicule révolutionnaire avec invités VIP mondiaux.",
-      link: "/automobile/lancement-ve",
-      images: [
-        "https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2025&q=80",
-        "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Juin 2024",
-        location: "Los Angeles, USA",
-        duration: "4 mois",
-        participants: "300 VIP",
-        budget: "Exceptionnel"
-      },
-      achievements: ["30 000 précommandes", "Couverture mondiale", "Innovation award"]
-    },
-    { 
-      id: 12,
-      category: "Événementiel", 
-      title: "Mariage royal",
-      description: "Organisation complète d'un mariage royal avec 2 000 invités et sécurité maximale.",
-      longDescription: "Coordination d'un événement historique avec protocole strict, sécurité renforcée et luxe absolu.",
-      link: "/evenementiel/mariage-royal",
-      images: [
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-        "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Août 2024",
-        location: "Londres, UK",
-        duration: "1 an",
-        participants: "2 000 invités",
-        budget: "Royal"
-      },
-      achievements: ["Sécurité parfaite", "Médias mondiaux", "Référence internationale"]
-    },
-    { 
-      id: 13,
-      category: "Cosmétique", 
-      title: "Ligne biologique exclusive",
-      description: "Développement et lancement d'une ligne cosmétique 100% biologique.",
-      longDescription: "Création d'une gamme innovante respectueuse de l'environnement avec packaging écologique.",
-      link: "/cosmetique/bio-exclusive",
-      images: [
-        "https://images.unsplash.com/photo-1556228578-9c360e1d458b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1596703923538-b6d4bb0a44ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Mars 2024",
-        location: "Zurich, Suisse",
-        duration: "18 mois",
-        participants: "Labo 20 experts",
-        budget: "Innovation"
-      },
-      achievements: ["Certification bio", "+400% ventes", "Prix écologie"]
-    },
-    { 
-      id: 14,
-      category: "Communication", 
-      title: "Rebranding global",
-      description: "Refonte complète de l'identité visuelle d'une multinationale.",
-      longDescription: "Transformation profonde de l'image de marque avec nouvelle stratégie de communication.",
-      link: "/communication/rebranding",
-      images: [
-        "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1586717799252-bd134ad00e26?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Janvier 2024",
-        location: "Global",
-        duration: "9 mois",
-        participants: "100 pays",
-        budget: "Significatif"
-      },
-      achievements: ["Notoriété +200%", "ROI 500%", "Case study Harvard"]
-    },
-    { 
-      id: 15,
-      category: "Football", 
-      title: "Sponsoring stade",
-      description: "Négociation et gestion de partenariat naming pour un stade majeur.",
-      longDescription: "Stratégie complète de sponsoring avec activation marketing maximale.",
-      link: "/football/sponsoring-stade",
-      images: [
-        "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
-        "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80"
-      ],
-      details: {
-        date: "Février 2024",
-        location: "Madrid, Espagne",
-        duration: "2 ans",
-        participants: "Partenaire majeur",
-        budget: "Millions"
-      },
-      achievements: ["Visibilité maximale", "ROI 300%", "Partnership award"]
-    },
-    { 
-      id: 16,
-      category: "Restaurant", 
-      title: "Ouverture gastronomique",
-      description: "Création et lancement d'un restaurant 3 étoiles Michelin.",
-      longDescription: "Direction complète du projet de création d'un établissement gastronomique d'exception.",
-      link: "/restaurant/ouverture-3etoiles",
-      images: [
-        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Avril 2024",
-        location: "Tokyo, Japon",
-        duration: "18 mois",
-        participants: "Chef étoilé",
-        budget: "Excellence"
-      },
-      achievements: ["3 étoiles", "Liste d'attente 1 an", "Prix design"]
-    },
-    { 
-      id: 17,
-      category: "Mode", 
-      title: "Collaboration artistique",
-      description: "Collection capsule avec artiste contemporain renommé.",
-      longDescription: "Fusion entre mode et art contemporain pour une collection unique et limitée.",
-      link: "/mode/collaboration-art",
-      images: [
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Mai 2024",
-        location: "Paris, France",
-        duration: "6 mois",
-        participants: "Artiste célèbre",
-        budget: "Créatif"
-      },
-      achievements: ["Édition limitée", "Vendu en 24h", "Exposition musée"]
-    },
-    { 
-      id: 18,
-      category: "Sport", 
-      title: "Compétition e-sport",
-      description: "Tournoi e-sport avec 1M€ de prize pool et streaming mondial.",
-      longDescription: "Organisation d'un événement e-sport majeur avec production broadcast de qualité.",
-      link: "/sport/esport-tournament",
-      images: [
-        "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Octobre 2024",
-        location: "Séoul, Corée",
-        duration: "3 jours",
-        participants: "100 équipes",
-        budget: "Majeur"
-      },
-      achievements: ["10M viewers", "Sponsors premium", "Media value 5M€"]
-    },
-    { 
-      id: 19,
-      category: "Musique", 
-      title: "Tournée mondiale",
-      description: "Production complète d'une tournée internationale pour artiste pop.",
-      longDescription: "Gestion logistique et production d'une tournée dans 30 pays avec scénographie innovante.",
-      link: "/musique/tournee-mondiale",
-      images: [
-        "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "2023-2024",
-        location: "30 pays",
-        duration: "18 mois",
-        participants: "Artiste A-list",
-        budget: "Colossal"
-      },
-      achievements: ["2M spectateurs", "Revenue record", "Production award"]
-    },
-    { 
-      id: 20,
-      category: "Technologie", 
-      title: "Salon innovation",
-      description: "Salon B2B avec 500 exposants et 20 000 visiteurs professionnels.",
-      longDescription: "Organisation d'un salon leader dans le secteur technologique avec conférences et networking.",
-      link: "/technologie/salon-innovation",
-      images: [
-        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Novembre 2024",
-        location: "Berlin, Allemagne",
-        duration: "4 jours",
-        participants: "20 000 visiteurs",
-        budget: "Important"
-      },
-      achievements: ["500 exposants", "95% satisfaction", "Édition record"]
+      achievements: ["Notation parfaite 10/10", "100% réservation", "Prix de l'excellence"],
+      tags: ["Gastronomie", "Luxe", "Événement", "VIP"],
+      stats: {
+        views: "8700",
+        likes: "980",
+        shares: "320",
+        downloads: "190"
+      }
     }
   ];
 
@@ -483,15 +251,18 @@ const OdevolvGalleryModifie = () => {
   const handleProjectClick = (project) => {
     setSelectedProject(project);
     setCurrentImageIndex(0);
-    document.body.classList.add('odevolv-modifie-modal-open');
+    setIsFullscreen(false);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
     setSelectedProject(null);
-    document.body.classList.remove('odevolv-modifie-modal-open');
+    setIsFullscreen(false);
+    document.body.style.overflow = 'auto';
   };
 
-  const nextImage = () => {
+  const nextImage = (e) => {
+    e?.stopPropagation();
     if (selectedProject) {
       setCurrentImageIndex((prev) => 
         prev === selectedProject.images.length - 1 ? 0 : prev + 1
@@ -499,7 +270,8 @@ const OdevolvGalleryModifie = () => {
     }
   };
 
-  const prevImage = () => {
+  const prevImage = (e) => {
+    e?.stopPropagation();
     if (selectedProject) {
       setCurrentImageIndex((prev) => 
         prev === 0 ? selectedProject.images.length - 1 : prev - 1
@@ -511,105 +283,198 @@ const OdevolvGalleryModifie = () => {
     setCurrentImageIndex(index);
   };
 
-  return (
-    <div className="odevolv-modifie">
-      {/* Hero Section */}
-      <section className="odevolv-modifie-hero">
-        <div className="odevolv-modifie-hero-background">
-          <div className="odevolv-modifie-hero-gradient"></div>
-          <div className="odevolv-modifie-hero-pattern"></div>
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
+  const toggleLike = () => {
+    setIsLiked(!isLiked);
+  };
+
+  const toggleBookmark = () => {
+    setIsBookmarked(!isBookmarked);
+  };
+
+  const handleDownload = () => {
+    alert("Portfolio du projet téléchargé avec succès");
+  };
+
+  const handlePrint = () => {
+    window.print();
+  };
+
+  const handleShare = (platform) => {
+    const url = window.location.href;
+    const title = selectedProject?.title || "Projet Odevolv";
+    
+    let shareUrl = "";
+    switch(platform) {
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+        break;
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
+        break;
+      case 'mail':
+        shareUrl = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}`;
+        break;
+      default:
+        if (navigator.share) {
+          navigator.share({
+            title: title,
+            url: url
+          });
+          return;
+        }
+    }
+    
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="odevolv-gs-loading">
+        <div className="odevolv-gs-loading-spinner">
+          <div className="odevolv-gs-spinner-ring"></div>
+          <Building size={32} className="odevolv-gs-spinner-icon" />
         </div>
-        <div className="odevolv-modifie-hero-content">
-          <div className="odevolv-modifie-hero-text">
-            <div className="odevolv-modifie-hero-badge">
+        <p className="odevolv-gs-loading-text">Chargement de l'excellence Odevolv...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="odevolv-gs-container">
+      {/* Hero Section */}
+      <section className="odevolv-gs-hero">
+        <div className="odevolv-gs-hero-background">
+          <div className="odevolv-gs-hero-gradient"></div>
+          <div className="odevolv-gs-hero-pattern"></div>
+        </div>
+        
+        <div className="odevolv-gs-hero-content">
+          <div className="odevolv-gs-hero-text">
+            <div className="odevolv-gs-hero-badge">
               <Building size={18} />
               <span>Odevolv Group · Excellence depuis 2010</span>
             </div>
-            <h1 className="odevolv-modifie-hero-title">
-              Galerie d'Excellence <span className="odevolv-modifie-hero-underline">Odevolv</span>
+            
+            <h1 className="odevolv-gs-hero-title">
+              Galerie d'
+              <span className="odevolv-gs-title-accent">Excellence</span>
+              <br />
+              <span className="odevolv-gs-title-underline">Odevolv</span>
             </h1>
-            <p className="odevolv-modifie-hero-description">
-              Découvrez l'étendue de notre savoir-faire à travers 20 réalisations 
-              exceptionnelles qui marquent les esprits. Chaque projet est une promesse 
-              d'excellence et d'innovation dans nos 12 domaines d'expertise.
+            
+            <p className="odevolv-gs-hero-description">
+              Découvrez l'art de l'excellence à travers des réalisations 
+              qui transcendent les standards. Chaque projet est une symphonie 
+              d'innovation et de maîtrise dans nos cinq domaines d'expertise.
             </p>
-            <div className="odevolv-modifie-hero-stats">
-              <div className="odevolv-modifie-stat">
-                <div className="odevolv-modifie-stat-icon">
+            
+            <div className="odevolv-gs-hero-stats">
+              <div className="odevolv-gs-stat">
+                <div className="odevolv-gs-stat-icon">
                   <Target size={22} />
                 </div>
-                <div className="odevolv-modifie-stat-content">
-                  <span className="odevolv-modifie-stat-number">200+</span>
-                  <span className="odevolv-modifie-stat-label">Projets d'exception</span>
+                <div className="odevolv-gs-stat-content">
+                  <span className="odevolv-gs-stat-number">150+</span>
+                  <span className="odevolv-gs-stat-label">Projets d'exception</span>
                 </div>
               </div>
-              <div className="odevolv-modifie-stat">
-                <div className="odevolv-modifie-stat-icon">
+              
+              <div className="odevolv-gs-stat">
+                <div className="odevolv-gs-stat-icon">
                   <TrendingUp size={22} />
                 </div>
-                <div className="odevolv-modifie-stat-content">
-                  <span className="odevolv-modifie-stat-number">99%</span>
-                  <span className="odevolv-modifie-stat-label">Satisfaction client</span>
+                <div className="odevolv-gs-stat-content">
+                  <span className="odevolv-gs-stat-number">98%</span>
+                  <span className="odevolv-gs-stat-label">Satisfaction client</span>
                 </div>
               </div>
-              <div className="odevolv-modifie-stat">
-                <div className="odevolv-modifie-stat-icon">
+              
+              <div className="odevolv-gs-stat">
+                <div className="odevolv-gs-stat-icon">
                   <Zap size={22} />
                 </div>
-                <div className="odevolv-modifie-stat-content">
-                  <span className="odevolv-modifie-stat-number">12</span>
-                  <span className="odevolv-modifie-stat-label">Domaines experts</span>
+                <div className="odevolv-gs-stat-content">
+                  <span className="odevolv-gs-stat-number">5</span>
+                  <span className="odevolv-gs-stat-label">Filiales expertes</span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="odevolv-modifie-hero-visual">
-            <div className="odevolv-modifie-visual-card odevolv-modifie-card-1">
-              <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Événement" />
-              <div className="odevolv-modifie-card-badge">Événementiel</div>
+          
+          <div className="odevolv-gs-hero-visual">
+            <div className="odevolv-gs-visual-card odevolv-gs-card-1">
+              <img 
+                src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                alt="Événementiel Odevolv" 
+              />
+              <div className="odevolv-gs-card-badge">
+                <Calendar size={14} />
+                Événementiel
+              </div>
             </div>
-            <div className="odevolv-modifie-visual-card odevolv-modifie-card-2">
-              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Communication" />
-              <div className="odevolv-modifie-card-badge">Communication</div>
+            
+            <div className="odevolv-gs-visual-card odevolv-gs-card-2">
+              <img 
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                alt="Communication Odevolv" 
+              />
+              <div className="odevolv-gs-card-badge">
+                <MessageCircle size={14} />
+                Communication
+              </div>
             </div>
-            <div className="odevolv-modifie-visual-card odevolv-modifie-card-3">
-              <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Sport" />
-              <div className="odevolv-modifie-card-badge">Sport</div>
-            </div>
-            <div className="odevolv-modifie-visual-card odevolv-modifie-card-4">
-              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mode" />
-              <div className="odevolv-modifie-card-badge">Mode</div>
+            
+            <div className="odevolv-gs-visual-card odevolv-gs-card-3">
+              <img 
+                src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                alt="Sport Odevolv" 
+              />
+              <div className="odevolv-gs-card-badge">
+                <Trophy size={14} />
+                Sport
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="odevolv-modifie-filters">
-        <div className="odevolv-modifie-filters-container">
-          <div className="odevolv-modifie-filters-header">
-            <h2 className="odevolv-modifie-filters-title">Nos 12 Domaines d'Expertise</h2>
-            <p className="odevolv-modifie-filters-subtitle">
-              Filtrez par spécialité pour découvrir nos 20 réalisations exceptionnelles
+      {/* Filters Section */}
+      <section className="odevolv-gs-filters">
+        <div className="odevolv-gs-filters-container">
+          <div className="odevolv-gs-filters-header">
+            <h2 className="odevolv-gs-filters-title">Nos Domaines d'Excellence</h2>
+            <p className="odevolv-gs-filters-subtitle">
+              Sélectionnez une spécialité pour découvrir nos réalisations phares
             </p>
           </div>
-          <div className="odevolv-modifie-filters-grid">
+          
+          <div className="odevolv-gs-filters-grid">
             {filters.map((filter) => {
               const IconComponent = filter.icon;
               return (
                 <button
                   key={filter.name}
-                  className={`odevolv-modifie-filter-button ${selectedFilter === filter.name ? 'odevolv-modifie-filter-active' : ''}`}
+                  className={`odevolv-gs-filter-button ${selectedFilter === filter.name ? 'odevolv-gs-filter-actives' : ''}`}
                   onClick={() => setSelectedFilter(filter.name)}
                 >
-                  <div className="odevolv-modifie-filter-icon-wrapper">
-                    <div className="odevolv-modifie-filter-icon">
-                      <IconComponent size={24} />
-                    </div>
+                  <div className="odevolv-gs-filter-icon-wrapper">
+                    <IconComponent size={24} className="odevolv-gs-filter-icon" />
+                    {filter.count && (
+                      <span className="odevolv-gs-filter-count">{filter.count}</span>
+                    )}
                   </div>
-                  <span className="odevolv-modifie-filter-text">{filter.name}</span>
-                  <div className="odevolv-modifie-filter-indicator">
-                    <ChevronRight size={20} />
+                  <span className="odevolv-gs-filter-text">{filter.name}</span>
+                  <div className="odevolv-gs-filter-indicator">
+                    <ChevronRight size={18} />
                   </div>
                 </button>
               );
@@ -618,45 +483,54 @@ const OdevolvGalleryModifie = () => {
         </div>
       </section>
 
-      {/* Gallery Grid */}
-      <section className="odevolv-modifie-gallery-section">
-        <div className="odevolv-modifie-gallery-container">
-          <div className="odevolv-modifie-gallery-header">
-            <div className="odevolv-modifie-gallery-header-content">
-              <h2 className="odevolv-modifie-gallery-title">
-                <span className="odevolv-modifie-gallery-title-accent">20</span> Réalisations
-                <span className="odevolv-modifie-gallery-title-underline">Odevolv Excellence</span>
+      {/* Gallery Grid Section - CORRIGÉ */}
+      <section className="odevolv-gs-grid-section">
+        <div className="odevolv-gs-container">
+          <div className="odevolv-gs-header">
+            <div className="odevolv-gs-header-content">
+              <h2 className="odevolv-gs-title">
+                <span className="odevolv-gs-title-accent">R</span>éalisations 
+                <span className="odevolv-gs-title-underlines"> Odevolv</span>
               </h2>
-              <p className="odevolv-modifie-gallery-subtitle">
+              <p className="odevolv-gs-subtitle">
                 {selectedFilter === "Tous" 
-                  ? "Découvrez l'ensemble de nos 20 projets marquants à travers le monde" 
-                  : `Projets ${selectedFilter} · ${filteredItems.length} réalisation${filteredItems.length > 1 ? 's' : ''} exceptionnelle${filteredItems.length > 1 ? 's' : ''}`}
+                  ? "Collection exclusive de nos projets les plus marquants" 
+                  : `Projets ${selectedFilter} · ${filteredItems.length} réalisation${filteredItems.length > 1 ? 's' : ''}`}
               </p>
             </div>
           </div>
-          <div className="odevolv-modifie-gallery-grid">
+          
+          <div className="odevolv-gs-grid">
             {filteredItems.map((item, index) => (
               <div 
-                key={`${item.title}-${index}`} 
-                className="odevolv-modifie-gallery-item"
-                style={{ animationDelay: `${index * 60}ms` }}
+                key={item.id} 
+                className="odevolv-gs-item"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="odevolv-modifie-gallery-item-inner">
-                  <div className="odevolv-modifie-item-image">
-                    <img src={item.images[0]} alt={item.title} />
-                    <div className="odevolv-modifie-item-overlay">
-                      <div className="odevolv-modifie-overlay-content">
-                        <span className="odevolv-modifie-item-category">
+                <div className="odevolv-gs-item-inner">
+                  <div className="odevolv-gs-item-image">
+                    <img src={item.images[0]} alt={item.title} loading="lazy" />
+                    
+                    {item.featured && (
+                      <div className="odevolv-gs-item-featured">
+                        <Star size={14} fill="currentColor" />
+                        Projet phare
+                      </div>
+                    )}
+                    
+                    <div className="odevolv-gs-item-overlay">
+                      <div className="odevolv-gs-overlay-content">
+                        <span className="odevolv-gs-item-category">
                           <Award size={16} />
                           {item.category}
                         </span>
-                        <h3 className="odevolv-modifie-item-title">{item.title}</h3>
-                        <p className="odevolv-modifie-item-description">{item.description}</p>
+                        <h3 className="odevolv-gs-item-title">{item.title}</h3>
+                        <p className="odevolv-gs-item-description">{item.description}</p>
                         <button 
                           onClick={() => handleProjectClick(item)} 
-                          className="odevolv-modifie-item-link"
+                          className="odevolv-gs-item-link"
                         >
-                          <span>Découvrir le projet</span>
+                          <span>Explorer le projet</span>
                           <Eye size={18} />
                         </button>
                       </div>
@@ -668,13 +542,13 @@ const OdevolvGalleryModifie = () => {
           </div>
           
           {filteredItems.length > 0 && (
-            <div className="odevolv-modifie-gallery-footer">
-              <div className="odevolv-modifie-gallery-count">
+            <div className="odevolv-gs-footer">
+              <div className="odevolv-gs-count">
                 <Users size={22} />
-                <span>{filteredItems.length} projets sur 20 présentés</span>
+                <span>{filteredItems.length} projets présentés</span>
               </div>
-              <button className="odevolv-modifie-view-all">
-                <span>Voir les 20 projets complets</span>
+              <button className="odevolv-gs-view-all">
+                <span>Voir toute la collection</span>
                 <ArrowRight size={20} />
               </button>
             </div>
@@ -682,132 +556,258 @@ const OdevolvGalleryModifie = () => {
         </div>
       </section>
 
-      {/* Modal pour les projets - BOUTONS AGRANDIS */}
+      {/* Modal */}
       {selectedProject && (
-        <div className="odevolv-modifie-modal-overlay" onClick={closeModal}>
-          <div className="odevolv-modifie-modal-content" onClick={(e) => e.stopPropagation()}>
-            {/* Header du modal avec BOUTON FERMER AGRANDI */}
-            <div className="odevolv-modifie-modal-header">
-              <div className="odevolv-modifie-modal-header-content">
-                <span className="odevolv-modifie-modal-category">
-                  <Award size={16} />
+        <div className="odevolv-gs-modal-overlay" onClick={closeModal}>
+          <div 
+            className={`odevolv-gs-modal-content ${isFullscreen ? 'odevolv-gs-modal-fullscreen' : ''}`} 
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="odevolv-gs-modal-header">
+              <div className="odevolv-gs-modal-header-left">
+                <span className="odevolv-gs-modal-category">
+                  <Award size={18} />
                   {selectedProject.category}
+                  <ChevronDown size={12} className="odevolv-gs-modal-category-chevron" />
                 </span>
-                <h2 className="odevolv-modifie-modal-title">{selectedProject.title}</h2>
+                <h2 className="odevolv-gs-modal-title">{selectedProject.title}</h2>
+                
+                <div className="odevolv-gs-modal-badges">
+                  <span className="odevolv-gs-modal-badge">
+                    <div className={`odevolv-gs-status-indicator odevolv-gs-status-${selectedProject.details.status === "Terminé" ? "completed" : selectedProject.details.status === "En cours" ? "ongoing" : "critical"}`} />
+                    {selectedProject.details.status}
+                  </span>
+                  <span className="odevolv-gs-modal-badge">
+                    <Flag size={14} />
+                    Priorité: {selectedProject.details.priority}
+                  </span>
+                </div>
               </div>
-              <button 
-                className="odevolv-modifie-modal-close" 
-                onClick={closeModal}
-                aria-label="Fermer le modal"
-              >
-                <X size={32} />
-              </button>
-            </div>
-
-            {/* Contenu du modal */}
-            <div className="odevolv-modifie-modal-body">
-              {/* Carrousel d'images avec BOUTONS NAVIGATION AGRANDIS */}
-              <div className="odevolv-modifie-modal-carousel">
-                <div className="odevolv-modifie-carousel-main">
-                  <button 
-                    className="odevolv-modifie-carousel-nav odevolv-modifie-carousel-prev" 
-                    onClick={prevImage}
-                    aria-label="Image précédente"
-                  >
-                    <ChevronLeft size={36} />
+              
+              <div className="odevolv-gs-modal-controls">
+                <div className="odevolv-gs-modal-social-buttons">
+                  <button className="odevolv-gs-modal-social-btn" onClick={toggleLike} title="Apprécier">
+                    <Heart size={20} fill={isLiked ? "#000000" : "none"} color={isLiked ? "#000000" : "currentColor"} />
+                    <span className="odevolv-gs-modal-social-count">{selectedProject.stats.likes}</span>
                   </button>
                   
-                  <div className="odevolv-modifie-carousel-image">
-                    <img 
-                      src={selectedProject.images[currentImageIndex]} 
-                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
-                    />
-                    <div className="odevolv-modifie-carousel-counter">
-                      {currentImageIndex + 1} / {selectedProject.images.length}
-                    </div>
-                  </div>
-                  
-                  <button 
-                    className="odevolv-modifie-carousel-nav odevolv-modifie-carousel-next" 
-                    onClick={nextImage}
-                    aria-label="Image suivante"
-                  >
-                    <ChevronRightIcon size={36} />
+                  <button className="odevolv-gs-modal-social-btn" onClick={toggleBookmark} title="Archiver">
+                    <Bookmark size={20} fill={isBookmarked ? "#000000" : "none"} color={isBookmarked ? "#000000" : "currentColor"} />
                   </button>
                 </div>
                 
-                {/* Miniatures avec BOUTONS AGRANDIS */}
-                <div className="odevolv-modifie-carousel-thumbnails">
-                  {selectedProject.images.map((image, index) => (
-                    <button
-                      key={index}
-                      className={`odevolv-modifie-carousel-thumbnail ${index === currentImageIndex ? 'odevolv-modifie-thumbnail-active' : ''}`}
-                      onClick={() => goToImage(index)}
-                      aria-label={`Voir l'image ${index + 1}`}
-                    >
-                      <img src={image} alt={`Miniature ${index + 1}`} />
+                <div className="odevolv-gs-modal-action-buttons">
+                  <button className="odevolv-gs-modal-action-btn" onClick={toggleFullscreen} title={isFullscreen ? "Réduire" : "Immersion"}>
+                    {isFullscreen ? <Minimize2 size={22} /> : <Maximize2 size={22} />}
+                  </button>
+                  
+                  <button className="odevolv-gs-modal-action-btn" onClick={handleDownload} title="Télécharger">
+                    <Download size={22} />
+                  </button>
+                </div>
+                
+                <button className="odevolv-gs-modal-close" onClick={closeModal} title="Fermer">
+                  <X size={26} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="odevolv-gs-modal-body">
+              {/* Carousel Section */}
+              <div className="odevolv-gs-modal-carousel">
+                <div className="odevolv-gs-carousel-main">
+                  <div className="odevolv-gs-carousel-image">
+                    <img 
+                      src={selectedProject.images[currentImageIndex]} 
+                      alt={`${selectedProject.title} - Vue ${currentImageIndex + 1}`}
+                    />
+                    
+                    <div className="odevolv-gs-carousel-overlay">
+                      <button className="odevolv-gs-carousel-overlay-btn" onClick={toggleFullscreen} title="Immersion">
+                        <Maximize2 size={22} />
+                      </button>
+                      <button className="odevolv-gs-carousel-overlay-btn" onClick={handleDownload} title="Télécharger">
+                        <Download size={22} />
+                      </button>
+                    </div>
+                    
+                    <div className="odevolv-gs-carousel-counter">
+                      <Camera size={18} />
+                      <span>{currentImageIndex + 1} / {selectedProject.images.length}</span>
+                      <span className="odevolv-gs-carousel-size">4K</span>
+                    </div>
+                  </div>
+                  
+                  <button className="odevolv-gs-carousel-nav odevolv-gs-carousel-prev" onClick={prevImage} title="Précédent">
+                    <ChevronLeft size={32} />
+                  </button>
+                  
+                  <button className="odevolv-gs-carousel-nav odevolv-gs-carousel-next" onClick={nextImage} title="Suivant">
+                    <ChevronRightIcon size={32} />
+                  </button>
+                  
+                  <div className="odevolv-gs-carousel-progress">
+                    {selectedProject.images.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`odevolv-gs-carousel-progress-dot ${index === currentImageIndex ? 'active' : ''}`}
+                        onClick={() => goToImage(index)}
+                        title={`Vue ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Thumbnails */}
+                <div className="odevolv-gs-carousel-thumbnails">
+                  <div className="odevolv-gs-carousel-thumbnails-header">
+                    <h4>
+                      <ImageIcon size={18} />
+                      Galerie
+                      <span className="odevolv-gs-carousel-thumbnails-count">
+                        {selectedProject.images.length} vues
+                      </span>
+                    </h4>
+                    <button className="odevolv-gs-carousel-thumbnails-expand" onClick={toggleFullscreen}>
+                      <Maximize2 size={16} />
                     </button>
-                  ))}
+                  </div>
+                  
+                  <div className="odevolv-gs-carousel-thumbnails-grid">
+                    {selectedProject.images.map((image, index) => (
+                      <button
+                        key={index}
+                        className={`odevolv-gs-carousel-thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                        onClick={() => goToImage(index)}
+                        title={`Vue ${index + 1}`}
+                      >
+                        <img src={image} alt={`Miniature ${index + 1}`} />
+                        {index === currentImageIndex && (
+                          <div className="odevolv-gs-carousel-thumbnail-active">
+                            <CheckCircle size={16} />
+                          </div>
+                        )}
+                        <div className="odevolv-gs-carousel-thumbnail-hover">
+                          <Eye size={20} />
+                        </div>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Détails du projet */}
-              <div className="odevolv-modifie-modal-details">
-                <div className="odevolv-modifie-modal-description">
-                  <h3>À propos de ce projet</h3>
+              {/* Details Section */}
+              <div className="odevolv-gs-modal-details">
+                <div className="odevolv-gs-modal-description">
+                  <div className="odevolv-gs-modal-description-header">
+                    <h3>
+                      <FileText size={22} />
+                      Narration du projet
+                    </h3>
+                    <div className="odevolv-gs-modal-description-actions">
+                      <button className="odevolv-gs-modal-description-btn" onClick={toggleBookmark}>
+                        <Bookmark size={18} />
+                      </button>
+                      <button className="odevolv-gs-modal-description-btn" onClick={handlePrint}>
+                        <Printer size={18} />
+                      </button>
+                    </div>
+                  </div>
                   <p>{selectedProject.longDescription}</p>
-                </div>
-
-                <div className="odevolv-modifie-modal-info-grid">
-                  <div className="odevolv-modifie-info-item">
-                    <div className="odevolv-modifie-info-icon">
-                      <Calendar size={20} />
-                    </div>
-                    <div className="odevolv-modifie-info-content">
-                      <span className="odevolv-modifie-info-label">Date</span>
-                      <span className="odevolv-modifie-info-value">{selectedProject.details.date}</span>
-                    </div>
-                  </div>
                   
-                  <div className="odevolv-modifie-info-item">
-                    <div className="odevolv-modifie-info-icon">
-                      <MapPin size={20} />
-                    </div>
-                    <div className="odevolv-modifie-info-content">
-                      <span className="odevolv-modifie-info-label">Localisation</span>
-                      <span className="odevolv-modifie-info-value">{selectedProject.details.location}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="odevolv-modifie-info-item">
-                    <div className="odevolv-modifie-info-icon">
-                      <Clock size={20} />
-                    </div>
-                    <div className="odevolv-modifie-info-content">
-                      <span className="odevolv-modifie-info-label">Durée</span>
-                      <span className="odevolv-modifie-info-value">{selectedProject.details.duration}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="odevolv-modifie-info-item">
-                    <div className="odevolv-modifie-info-icon">
-                      <UsersIcon size={20} />
-                    </div>
-                    <div className="odevolv-modifie-info-content">
-                      <span className="odevolv-modifie-info-label">Participants</span>
-                      <span className="odevolv-modifie-info-value">{selectedProject.details.participants}</span>
+                  <div className="odevolv-gs-modal-tags">
+                    <h4>
+                      <Tag size={18} />
+                      Éléments clés
+                    </h4>
+                    <div className="odevolv-gs-modal-tags-list">
+                      {selectedProject.tags.map((tag, index) => (
+                        <span key={index} className="odevolv-gs-modal-tag">
+                          {tag === "Luxe" && <Crown size={14} />}
+                          {tag === "VIP" && <Star size={14} />}
+                          {tag === "France" && <Globe size={14} />}
+                          {tag === "Sport" && <Trophy size={14} />}
+                          {tag === "Digital" && <Smartphone size={14} />}
+                          {tag === "Gastronomie" && <Utensils size={14} />}
+                          {tag === "Événement" && <Calendar size={14} />}
+                          {tag === "Marketing" && <BarChart size={14} />}
+                          {tag === "International" && <Plane size={14} />}
+                          {tag === "Stratégie" && <Target size={14} />}
+                          {tag === "Live" && <Video size={14} />}
+                          {tag === "Beauté" && <Palette size={14} />}
+                          {tag === "Mode" && <ShoppingBag size={14} />}
+                          {tag === "Compétition" && <Flag size={14} />}
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
 
-                {/* Réalisations */}
-                <div className="odevolv-modifie-modal-achievements">
-                  <h3>Nos réalisations</h3>
-                  <div className="odevolv-modifie-achievements-grid">
+                {/* Info Grid */}
+                <div className="odevolv-gs-modal-info-grid">
+                  <div className="odevolv-gs-info-item">
+                    <div className="odevolv-gs-info-icon">
+                      <Calendar size={22} />
+                    </div>
+                    <div className="odevolv-gs-info-content">
+                      <span className="odevolv-gs-info-label">Date</span>
+                      <span className="odevolv-gs-info-value">{selectedProject.details.date}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="odevolv-gs-info-item">
+                    <div className="odevolv-gs-info-icon">
+                      <MapPin size={22} />
+                    </div>
+                    <div className="odevolv-gs-info-content">
+                      <span className="odevolv-gs-info-label">Localisation</span>
+                      <span className="odevolv-gs-info-value">{selectedProject.details.location}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="odevolv-gs-info-item">
+                    <div className="odevolv-gs-info-icon">
+                      <Clock size={22} />
+                    </div>
+                    <div className="odevolv-gs-info-content">
+                      <span className="odevolv-gs-info-label">Durée</span>
+                      <span className="odevolv-gs-info-value">{selectedProject.details.duration}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="odevolv-gs-info-item">
+                    <div className="odevolv-gs-info-icon">
+                      <UsersIcon size={22} />
+                    </div>
+                    <div className="odevolv-gs-info-content">
+                      <span className="odevolv-gs-info-label">Participants</span>
+                      <span className="odevolv-gs-info-value">{selectedProject.details.participants}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Achievements */}
+                <div className="odevolv-gs-modal-achievements">
+                  <div className="odevolv-gs-modal-achievements-header">
+                    <h3>
+                      <CheckCircle size={22} />
+                      Réalisations majeures
+                    </h3>
+                    <div className="odevolv-gs-modal-achievements-stat">
+                      {selectedProject.achievements.length} succès
+                    </div>
+                  </div>
+                  <div className="odevolv-gs-achievements-grid">
                     {selectedProject.achievements.map((achievement, index) => (
-                      <div key={index} className="odevolv-modifie-achievement">
-                        <div className="odevolv-modifie-achievement-icon">
-                          <Zap size={18} />
+                      <div key={index} className="odevolv-gs-achievement">
+                        <div className="odevolv-gs-achievement-icon">
+                          {index === 0 && <Zap size={18} />}
+                          {index === 1 && <CheckCircle size={18} />}
+                          {index === 2 && <Star size={18} />}
+                          {index >= 3 && <CheckCircle size={18} />}
                         </div>
                         <span>{achievement}</span>
                       </div>
@@ -815,37 +815,125 @@ const OdevolvGalleryModifie = () => {
                   </div>
                 </div>
 
-                {/* Actions avec BOUTONS AGRANDIS */}
-                <div className="odevolv-modifie-modal-actions">
-                  <button 
-                    className="odevolv-modifie-action-btn odevolv-modifie-action-primary"
-                    aria-label="Visiter le projet"
-                  >
-                    <ExternalLink size={22} />
-                    <span>Visiter le projet</span>
-                  </button>
-                  <button 
-                    className="odevolv-modifie-action-btn odevolv-modifie-action-secondary"
-                    aria-label="Sauvegarder le projet"
-                  >
-                    <Heart size={22} />
-                    <span>Sauvegarder</span>
-                  </button>
-                  <button 
-                    className="odevolv-modifie-action-btn odevolv-modifie-action-secondary"
-                    aria-label="Partager le projet"
-                  >
-                    <Share2 size={22} />
-                    <span>Partager</span>
-                  </button>
-                  <button 
-                    className="odevolv-modifie-action-btn odevolv-modifie-action-secondary"
-                    aria-label="Télécharger le PDF"
-                  >
-                    <Download size={22} />
-                    <span>Télécharger PDF</span>
-                  </button>
+                {/* Stats */}
+                <div className="odevolv-gs-modal-stats">
+                  <h3>
+                    <BarChart size={22} />
+                    Métriques d'impact
+                  </h3>
+                  <div className="odevolv-gs-modal-stats-grid">
+                    <div className="odevolv-gs-modal-stat">
+                      <div className="odevolv-gs-modal-stat-icon">
+                        <Eye size={20} />
+                      </div>
+                      <div className="odevolv-gs-modal-stat-content">
+                        <span className="odevolv-gs-modal-stat-value">{selectedProject.stats.views}</span>
+                        <span className="odevolv-gs-modal-stat-label">Vues</span>
+                      </div>
+                    </div>
+                    
+                    <div className="odevolv-gs-modal-stat">
+                      <div className="odevolv-gs-modal-stat-icon">
+                        <Heart size={20} />
+                      </div>
+                      <div className="odevolv-gs-modal-stat-content">
+                        <span className="odevolv-gs-modal-stat-value">{selectedProject.stats.likes}</span>
+                        <span className="odevolv-gs-modal-stat-label">Appréciations</span>
+                      </div>
+                    </div>
+                    
+                    <div className="odevolv-gs-modal-stat">
+                      <div className="odevolv-gs-modal-stat-icon">
+                        <Share2 size={20} />
+                      </div>
+                      <div className="odevolv-gs-modal-stat-content">
+                        <span className="odevolv-gs-modal-stat-value">{selectedProject.stats.shares}</span>
+                        <span className="odevolv-gs-modal-stat-label">Partages</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Actions */}
+                <div className="odevolv-gs-modal-actions">
+                  <div className="odevolv-gs-modal-actions-header">
+                    <h3>
+                      <Settings size={22} />
+                      Actions disponibles
+                    </h3>
+                    <button className="odevolv-gs-modal-actions-quick-btn" onClick={() => window.open(selectedProject.link, '_blank')}>
+                      <Settings size={20} />
+                    </button>
+                  </div>
+                  
+                  <div className="odevolv-gs-modal-actions-grid">
+                    <button className="odevolv-gs-action-btn odevolv-gs-action-primary" onClick={() => window.open(selectedProject.link, '_blank')}>
+                      <ExternalLink size={22} />
+                      <span>Visiter le projet</span>
+                      <ChevronRight size={18} className="odevolv-gs-action-btn-arrow" />
+                    </button>
+                    
+                    <button className="odevolv-gs-action-btn odevolv-gs-action-secondary" onClick={() => handleShare('mail')}>
+                      <Mail size={22} />
+                      <span>Partager par email</span>
+                    </button>
+                    
+                    <button className="odevolv-gs-action-btn odevolv-gs-action-secondary" onClick={handlePrint}>
+                      <Printer size={22} />
+                      <span>Imprimer le portfolio</span>
+                    </button>
+                    
+                    <button className="odevolv-gs-action-btn odevolv-gs-action-secondary" onClick={() => handleShare('linkedin')}>
+                      <Linkedin size={22} />
+                      <span>Partager sur LinkedIn</span>
+                    </button>
+                  </div>
+                  
+                  {/* Social Share */}
+                  <div className="odevolv-gs-modal-social-share">
+                    <h4>
+                      <Share2 size={18} />
+                      Partager sur les réseaux
+                    </h4>
+                    <div className="odevolv-gs-modal-social-share-buttons">
+                      <button className="odevolv-gs-modal-social-share-btn odevolv-gs-modal-social-fb" onClick={() => handleShare('facebook')} title="Facebook">
+                        <Facebook size={20} />
+                      </button>
+                      <button className="odevolv-gs-modal-social-share-btn odevolv-gs-modal-social-tw" onClick={() => handleShare('twitter')} title="Twitter">
+                        <Twitter size={20} />
+                      </button>
+                      <button className="odevolv-gs-modal-social-share-btn odevolv-gs-modal-social-in" onClick={() => handleShare('linkedin')} title="LinkedIn">
+                        <Linkedin size={20} />
+                      </button>
+                      <button className="odevolv-gs-modal-social-share-btn odevolv-gs-modal-social-msg" onClick={() => handleShare('mail')} title="Email">
+                        <Mail size={20} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="odevolv-gs-modal-footer">
+              <div className="odevolv-gs-modal-footer-left">
+                <span className="odevolv-gs-modal-footer-info">
+                  <Shield size={16} />
+                  Projet sécurisé
+                </span>
+                <span className="odevolv-gs-modal-footer-security">
+                  <Lock size={16} />
+                  ID: {selectedProject.id}
+                </span>
+              </div>
+              
+              <div className="odevolv-gs-modal-footer-right">
+                <button className="odevolv-gs-modal-footer-btn" title="Support">
+                  <Info size={18} />
+                </button>
+                <button className="odevolv-gs-modal-footer-btn" title="Feedback">
+                  <MessageSquare size={18} />
+                </button>
               </div>
             </div>
           </div>
@@ -855,4 +943,4 @@ const OdevolvGalleryModifie = () => {
   );
 };
 
-export default OdevolvGalleryModifie;
+export default OdevolvGalleryShowcase;

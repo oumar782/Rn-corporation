@@ -119,7 +119,7 @@ const OdevolvEvenementiel = () => {
             </div>
             
             <h1 className="evnt-hero-title">
-              Odevolv <span className="evnt-hero-highlight">Événementiel</span>
+              Odevolv <span className="evnt-hero-highlights">Événementiel</span>
             </h1>
             
             <p className="evnt-hero-subtitle">
@@ -155,9 +155,7 @@ const OdevolvEvenementiel = () => {
       <section className="evnt-portfolio-section" id="services">
         <div className="evnt-container">
           <div className="evnt-section-header">
-            <div className="evnt-section-badge">
-              Notre Expertise
-            </div>
+           
             <h2 className="evnt-section-title">
               Services Premium
             </h2>
@@ -231,9 +229,7 @@ const OdevolvEvenementiel = () => {
       <section className="evnt-value-section">
         <div className="evnt-container">
           <div className="evnt-section-header">
-            <div className="evnt-section-badge">
-              Pourquoi Nous Choisir
-            </div>
+           
             <h2 className="evnt-section-title">
               Garanties d'Excellence
             </h2>
@@ -260,9 +256,7 @@ const OdevolvEvenementiel = () => {
       <section className="evnt-portfolio-section" style={{ background: '#ffffff' }}>
         <div className="evnt-container">
           <div className="evnt-section-header">
-            <div className="evnt-section-badge">
-              Ils Nous Font Confiance
-            </div>
+           
             <h2 className="evnt-section-title">
               Témoignages Clients
             </h2>
@@ -313,10 +307,8 @@ const OdevolvEvenementiel = () => {
       <section className="evnt-equipements-section">
         <div className="evnt-container">
           <div className="evnt-section-header">
-            <div className="evnt-section-badge">
-              Notre Matériel
-            </div>
-            <h2 className="evnt-section-title">
+           
+            <h2 className="evnt-section-titles">
               Équipements Haut de Gamme
             </h2>
             <p className="evnt-section-description">
@@ -337,83 +329,8 @@ const OdevolvEvenementiel = () => {
         </div>
       </section>
 
-      {/* Section Contact */}
-      <section className="evnt-cta-section">
-        <div className="evnt-container">
-          <div className="evnt-cta-content">
-            <div className="evnt-cta-badge">
-              <Sparkles size={16} />
-              <span>Prochain Événement ?</span>
-            </div>
-            
-            <h2 className="evnt-cta-title">
-              Créons Ensemble <span className="evnt-cta-highlight">Votre Événement</span>
-            </h2>
-            
-            <p className="evnt-cta-description">
-              Discutons de votre projet et transformons vos idées en expériences 
-              mémorables. Notre équipe d'experts est à votre écoute.
-            </p>
-            
-            <div className="evnt-contact-info">
-              <div className="evnt-contact-item">
-                <Phone size={20} />
-                <span>+225 27 22 44 55 66</span>
-              </div>
-              <div className="evnt-contact-item">
-                <Mail size={20} />
-                <span>evenementiel@odevolv.ci</span>
-              </div>
-              <div className="evnt-contact-item">
-                <MapPin size={20} />
-                <span>Plateau, Abidjan - Côte d'Ivoire</span>
-              </div>
-            </div>
-            
-            <div className="evnt-cta-actions">
-              <a href="/contact" className="evnt-cta-button evnt-cta-primary">
-                <MessageCircle size={20} />
-                <span>Demander un Devis</span>
-              </a>
-              <a href="/portfolio" className="evnt-cta-button evnt-cta-secondary">
-                <span>Voir Notre Portfolio</span>
-                <ArrowRight size={18} />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="evnt-footer">
-        <div className="evnt-container">
-          <div className="evnt-footer-content">
-            <div className="evnt-footer-brand">
-              <h3 className="evnt-footer-title">Odevolv Événementiel</h3>
-              <p className="evnt-footer-tagline">
-                Leader de l'événementiel premium en Afrique de l'Ouest
-              </p>
-            </div>
-            
-            <div className="evnt-footer-links">
-              <a href="/mentions-legales">Mentions légales</a>
-              <a href="/confidentialite">Confidentialité</a>
-              <a href="/cgv">CGV</a>
-            </div>
-            
-            <div className="evnt-footer-certifications">
-              <div className="evnt-certification">
-                <Shield size={16} />
-                <span>ISO 9001 Certified</span>
-              </div>
-              <div className="evnt-certification">
-                <Award size={16} />
-                <span>Meilleure Agence 2023</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      
     </div>
   );
 };

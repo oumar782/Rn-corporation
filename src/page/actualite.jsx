@@ -1,269 +1,223 @@
 import { useState } from "react";
 import { 
-  Star, 
-  Trophy, 
-  Utensils, 
-  MessageCircle, 
   Calendar, 
-  Palette, 
+  Tag, 
   ArrowRight, 
+  Clock, 
   Users, 
   Award, 
-  Target,
-  Sparkles,
-  ChevronRight,
-  Eye,
-  Zap,
   TrendingUp,
-  Building,
   X,
   ChevronLeft,
-  ChevronRight as ChevronRightIcon,
+  ChevronRight,
   MapPin,
-  Clock,
-  Users as UsersIcon,
   ExternalLink,
-  Heart,
   Share2,
   Download,
-  Gem,
-  Crown,
-  Globe,
+  Heart,
+  Target,
+  Star,
+  FileText,
+  Eye,
+  BookOpen,
+  Newspaper,
+  Trophy,
+  Briefcase,
+  ChevronDown,
+  Maximize2,
+  Minus,
+  Plus,
   Filter,
-  Camera,
-  Sparkle,
   CheckCircle,
-  Medal
+  Shield,
+  Globe,
+  BarChart3
 } from "lucide-react";
-import './galerie.css';
+import './actualite.css';
 
-const OdevolvGalleryLuxe = () => {
-  const [selectedFilter, setSelectedFilter] = useState("Tous");
-  const [selectedProject, setSelectedProject] = useState(null);
+const OdevolvNews = () => {
+  const [selectedCategory, setSelectedCategory] = useState("Tous");
+  const [selectedArticle, setSelectedArticle] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalFullscreen, setIsModalFullscreen] = useState(false);
 
-  const filters = [
-    { name: "Tous", icon: Sparkles, color: "#D4AF37" },
-    { name: "Événementiel", icon: Calendar, color: "#C9A227" },
-    { name: "Cosmétique", icon: Palette, color: "#B8971E" },
-    { name: "Communication", icon: MessageCircle, color: "#A88515" },
-    { name: "Football", icon: Trophy, color: "#D4AF37" },
-    { name: "Restaurant", icon: Utensils, color: "#C9A227" },
-    { name: "Mode Luxe", icon: Gem, color: "#B8971E" },
-    { name: "Immobilier", icon: Building, color: "#A88515" }
+  const categories = [
+    { name: "Tous", icon: <Globe size={16} />, count: 3 },
+    { name: "Football", icon: <Trophy size={16} />, count: 1 },
+    { name: "Cosmétique", icon: <Award size={16} />, count: 1 },
+    { name: "Événementiel", icon: <Calendar size={16} />, count: 1 },
+    { name: "Communication", icon: <Share2 size={16} />, count: 0 },
+    { name: "Restaurant", icon: <Target size={16} />, count: 0 },
+    { name: "Location", icon: <Briefcase size={16} />, count: 0 },
+    { name: "Groupe", icon: <Users size={16} />, count: 0 }
   ];
 
-  const galleryItems = [
-    { 
+  const newsArticles = [
+    {
       id: 1,
-      category: "Événementiel", 
-      title: "Gala d'Exception 2024",
-      description: "Organisation d'un gala prestigieux pour 500 invités VIP avec scénographie immersive.",
-      longDescription: "Pour ce gala d'exception, notre équipe a orchestré chaque détail avec une précision millimétrée : scénographie immersive signée par un artiste renommé, gastronomie étoilée préparée par un chef 3 étoiles Michelin, et spectacle live exclusif. Un événement qui a redéfini les standards du luxe événementiel.",
-      link: "/evenementiel/gala-2024",
+      title: "Odevolv Group inaugure son académie de football ultramoderne de 5 hectares",
+      excerpt: "Investissement stratégique de 800 millions FCFA pour former la prochaine génération de champions africains.",
+      fullContent: `Odevolv Group franchit une étape historique dans le développement du sport africain avec l'inauguration de son académie de football d'excellence. Cet investissement de 800 millions FCFA matérialise notre vision pour l'émergence des talents locaux.
+
+      Infrastructure d'exception :
+      • 3 terrains synthétiques dernière génération
+      • 1 terrain naturel aux normes FIFA
+      • Centre de performance avec analyse vidéo
+      • Internat premium pour 200 jeunes sportifs
+      • Centre médical et de rééducation
+      • Salle de musculation high-tech
+      
+      Programme pédagogique exclusif :
+      • Encadrement par 15 coachs diplômés UEFA/CAF
+      • Suivi scolaire individualisé
+      • Développement personnel et leadership
+      • Stages internationaux avec clubs partenaires
+      
+      Partenariats stratégiques avec 3 clubs européens d'élite pour offrir des débouchés professionnels à nos meilleurs éléments.`,
+      date: "15 Mars 2024",
+      category: "Football",
+      readTime: "4 min",
       images: [
-        "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-        "https://images.unsplash.com/photo-1492684223066-e9b4ff9632f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "15 Mars 2024",
-        location: "Paris, Palais Garnier",
-        duration: "8 mois de préparation",
-        participants: "500 invités VIP",
-        budget: "Prestige"
-      },
-      achievements: ["+250% engagement client", "100% satisfaction", "Retour sur investissement ×5", "Couverture médiatique internationale"],
-      highlight: true
-    },
-    { 
-      id: 2,
-      category: "Cosmétique", 
-      title: "Collection Or Impérial",
-      description: "Lancement exclusif d'une collection cosmétique avec or 24 carats.",
-      longDescription: "Création d'une ligne cosmétique ultraluxe intégrant de l'or 24 carats et des ingrédients rares. Chaque flacon est une œuvre d'art soufflée à la main et sertie de cristaux Swarovski. Une expérience sensorielle qui transcende la beauté.",
-      link: "/cosmetique/or-imperial",
-      images: [
-        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80",
-        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2087&q=80",
-        "https://images.unsplash.com/photo-1596703923538-b6d4bb0a44ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1556228578-9c360e1d458b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Février 2024",
-        location: "Monte-Carlo, Hôtel de Paris",
-        duration: "14 mois de développement",
-        participants: "Équipe de 25 experts",
-        budget: "Ultra Luxe"
-      },
-      achievements: ["+400% ventes premier mois", "2M+ d'impressions", "Prix de l'Innovation Luxe", "Édition limitée épuisée"],
-      highlight: true
-    },
-    { 
-      id: 3,
-      category: "Communication", 
-      title: "Stratégie Royale",
-      description: "Campagne de communication pour une maison royale européenne.",
-      longDescription: "Développement d'une stratégie de communication discrète mais impactante pour une maison royale. Gestion de l'image, relations presse internationales et création d'événements privés exclusifs. Une approche raffinée qui a renforcé le prestige de la monarchie.",
-      link: "/communication/royale",
-      images: [
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2015&q=80",
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Janvier 2024",
-        location: "Europe - International",
-        duration: "12 mois",
-        participants: "15 pays ciblés",
-        budget: "Confidentiel"
-      },
-      achievements: ["Image renforcée +300%", "Couverture média premium", "Prix Excellence", "Relations diplomatiques"],
-      highlight: false
-    },
-    { 
-      id: 4,
-      category: "Football", 
-      title: "Académie d'Élite",
-      description: "Création d'une académie de football pour jeunes talents d'exception.",
-      longDescription: "Conception et mise en œuvre d'une académie de football ultramoderne dédiée aux jeunes prodiges. Infrastructure de pointe, encadrement par d'anciens champions et programme éducatif d'excellence. Un incubateur de futurs légendes du ballon rond.",
-      link: "/football/academie-elite",
-      images: [
-        "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80",
-        "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80",
+        "https://images.unsplash.com/photo-1577223625818-2c7d0e2ee41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
         "https://images.unsplash.com/photo-1579952363873-27f1bddcd8e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
         "https://images.unsplash.com/photo-1519861531473-920034658307?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
       ],
-      details: {
-        date: "Septembre 2024",
-        location: "Madrid, Espagne",
-        duration: "18 mois",
-        participants: "50 jeunes talents",
-        budget: "Investissement majeur"
+      location: "Abidjan, Côte d'Ivoire",
+      author: "Jean Koffi",
+      position: "Directeur Sports Odevolv",
+      tags: ["Football", "Formation", "Jeunes Talents", "Infrastructure"],
+      stats: {
+        investissement: "800M FCFA",
+        surface: "5 Hectares",
+        capacite: "200 Jeunes",
+        coachs: "15 Experts"
       },
-      achievements: ["5 talents repérés par clubs pro", "Académie certifiée FIFA", "Sponsoring premium", "Référence européenne"],
-      highlight: true
+      featured: true
     },
-    { 
-      id: 5,
-      category: "Restaurant", 
-      title: "Table des Rois",
-      description: "Ouverture d'un restaurant gastronomique dans un château historique.",
-      longDescription: "Transformation d'un château du XVIIIe siècle en temple de la gastronomie. Architecture préservée, mobilier d'époque restauré et cuisine signée par un chef doublement étoilé. Une expérience historique et gustative unique au monde.",
-      link: "/restaurant/table-des-rois",
+    {
+      id: 2,
+      title: "Lancement de \"Ébène Royale Prestige\", notre ligne cosmétique bio d'excellence",
+      excerpt: "25 produits innovants 100% naturels, certifiés bio et enrichis d'ingrédients africains rares.",
+      fullContent: `Odevolv Group révolutionne l'industrie cosmétique avec "Ébène Royale Prestige", une collection qui célèbre la beauté africaine authentique.
+
+      Innovation scientifique :
+      • 25 formules brevetées développées avec des dermatologues
+      • Ingrédients 100% africains d'exception
+      • Procédés d'extraction à froid préservant les actifs
+      • Tests cliniques rigoureux
+      
+      Ingrédients phares :
+      • Beurre de karité pur du Burkina Faso
+      • Huile de moringa biologique certifiée
+      • Extrait de baobab riche en antioxydants
+      • Argile de Ndop aux propriétés purifiantes
+      
+      Engagement durable :
+      • Packaging 100% recyclable et éco-conçu
+      • Production neutre en carbone
+      • Partenariat avec 50 coopératives locales
+      • Programme de reforestation
+      
+      Disponible dans 30 points de vente premium et bientôt exportée vers 4 pays d'Afrique de l'Ouest.`,
+      date: "8 Mars 2024",
+      category: "Cosmétique",
+      readTime: "5 min",
       images: [
-        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80"
+        "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2087&q=80",
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80",
+        "https://images.unsplash.com/photo-1596703923538-b6d4bb0a44ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       ],
-      details: {
-        date: "Juin 2024",
-        location: "Loire Valley, France",
-        duration: "24 mois de restauration",
-        participants: "40 couverts exclusifs",
-        budget: "Patrimoine & Luxe"
+      location: "Laboratoires Odevolv, Abidjan",
+      author: "Dr Aïcha Diarra",
+      position: "Directrice R&D Cosmétique",
+      tags: ["Cosmétique", "Bio", "Innovation", "Made in Africa"],
+      stats: {
+        produits: "25 Formules",
+        certification: "Ecocert Bio",
+        pointsVente: "30 Boutiques",
+        export: "4 Pays"
       },
-      achievements: ["2 étoiles Michelin", "Liste d'attente 1 an", "Prix du Patrimoine", "Clientèle internationale"],
-      highlight: true
+      featured: true
     },
-    { 
-      id: 6,
-      category: "Mode Luxe", 
-      title: "Haute Couture Diamant",
-      description: "Collection capsule sertie de diamants et de soie rare.",
-      longDescription: "Création d'une collection de haute couture où chaque pièce est une œuvre unique. Robes serties de diamants certifiés, soie de Lyon rare et broderies réalisées par les derniers artisans maîtres. Un hommage à l'artisanat d'excellence français.",
-      link: "/mode/haute-couture-diamant",
+    {
+      id: 3,
+      title: "Gala Annuel 2024 : Une célébration d'excellence au Sofitel Hôtel Ivoire",
+      excerpt: "650 personnalités d'élite ont célébré nos succès lors d'une soirée événementielle mémorable.",
+      fullContent: `Le Gala Annuel Odevolv Group 2024 a marqué les esprits par son raffinement et son ambition. Réunissant l'élite économique d'Afrique de l'Ouest, cet événement a témoigné de notre leadership régional.
+
+      Scénographie immersive :
+      • Design signé par notre agence événementielle
+      • Éclairage intelligent et mapping vidéo
+      • Décors végétalisés et mobilier design
+      • Ambiance sonore sur-mesure
+      
+      Expérience culinaire :
+      • Menu dégustation en 5 services par notre chef étoilé
+      • Accord mets-vins par notre sommelier
+      • Produits locaux d'exception réinterprétés
+      • Service au cordon bleu
+      
+      Moments stratégiques :
+      • Signature de 3 nouveaux partenariats majeurs
+      • Lancement de notre fondation éducative
+      • Présentation de notre roadmap innovation 2025-2027
+      • Remise des trophées "Partenaire d'Excellence"
+      
+      Retombées exceptionnelles avec une couverture média internationale.`,
+      date: "1 Mars 2024",
+      category: "Événementiel",
+      readTime: "3 min",
       images: [
-        "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+        "https://images.unsplash.com/photo-1511578314322-379afb476865?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+        "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
+        "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
       ],
-      details: {
-        date: "Mars 2024",
-        location: "Paris, Avenue Montaigne",
-        duration: "9 mois de création",
-        participants: "12 pièces uniques",
-        budget: "Exceptionnel"
-      },
-      achievements: ["Prix de la Création", "Ventes record", "Exposition au Louvre", "Clientèle royale"],
-      highlight: true
-    },
-    { 
-      id: 7,
-      category: "Immobilier", 
-      title: "Résidence Céleste",
-      description: "Conceptualisation d'une résidence ultra-luxe avec vue panoramique.",
-      longDescription: "Architecture visionnaire pour une résidence qui défie les limites du luxe. Chaque appartement est une penthouse avec piscine à débordement, terrasse privée et service de majordome 24h/24. Une adresse qui devient légendaire.",
-      link: "/immobilier/residence-celeste",
-      images: [
-        "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Novembre 2024",
-        location: "Dubai, Palm Jumeirah",
-        duration: "36 mois",
-        participants: "25 appartements",
-        budget: "Record du marché"
-      },
-      achievements: ["100% vendu en pré-vente", "Prix au m² record", "Architecture primée", "Référence mondiale"],
-      highlight: false
-    },
-    { 
-      id: 8,
-      category: "Événementiel", 
-      title: "Mariage Impérial",
-      description: "Organisation d'un mariage princier avec protocole strict.",
-      longDescription: "Coordination d'une union historique entre deux grandes familles. Logistique complexe, sécurité maximale, décoration florale spectaculaire et protocole d'État. Un événement qui a fait la une des médias internationaux.",
-      link: "/evenementiel/mariage-imperial",
-      images: [
-        "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80",
-        "https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-      ],
-      details: {
-        date: "Mai 2024",
-        location: "Vienna, Hofburg Palace",
-        duration: "16 mois",
-        participants: "800 invités triés",
-        budget: "Historique"
-      },
-      achievements: ["Sécurité parfaite", "Couverture mondiale", "Protocole impeccable", "Référence absolue"],
-      highlight: true
+      location: "Sofitel Hôtel Ivoire, Abidjan",
+      author: "Sophie N'Guessan",
+      position: "Directrice Événementiel",
+      tags: ["Événement", "Gala", "Networking", "Prestige"],
+      stats: {
+        invites: "650 Personnalités",
+        duree: "6 Heures",
+        medias: "8 Couvertures",
+        partenaires: "15 Distinctions"
+      }
     }
   ];
 
-  const filteredItems = selectedFilter === "Tous"
-    ? galleryItems
-    : galleryItems.filter(item => item.category === selectedFilter);
+  const filteredItems = selectedCategory === "Tous" 
+    ? newsArticles 
+    : newsArticles.filter(item => item.category === selectedCategory);
 
-  const handleProjectClick = (project) => {
-    setSelectedProject(project);
+  const handleArticleClick = (article) => {
+    setSelectedArticle(article);
     setCurrentImageIndex(0);
-    document.body.classList.add('odevolv-luxe-modal-open');
+    setIsModalFullscreen(false);
+    document.body.style.overflow = 'hidden';
   };
 
   const closeModal = () => {
-    setSelectedProject(null);
-    document.body.classList.remove('odevolv-luxe-modal-open');
+    setSelectedArticle(null);
+    setIsModalFullscreen(false);
+    document.body.style.overflow = 'auto';
   };
 
-  const nextImage = (e) => {
-    e.stopPropagation();
-    if (selectedProject) {
+  const toggleFullscreen = () => {
+    setIsModalFullscreen(!isModalFullscreen);
+  };
+
+  const nextImage = () => {
+    if (selectedArticle) {
       setCurrentImageIndex((prev) => 
-        prev === selectedProject.images.length - 1 ? 0 : prev + 1
+        prev === selectedArticle.images.length - 1 ? 0 : prev + 1
       );
     }
   };
 
-  const prevImage = (e) => {
-    e.stopPropagation();
-    if (selectedProject) {
+  const prevImage = () => {
+    if (selectedArticle) {
       setCurrentImageIndex((prev) => 
-        prev === 0 ? selectedProject.images.length - 1 : prev - 1
+        prev === 0 ? selectedArticle.images.length - 1 : prev - 1
       );
     }
   };
@@ -273,431 +227,502 @@ const OdevolvGalleryLuxe = () => {
   };
 
   return (
-    <div className="odevolv-luxe">
-      {/* Hero Section */}
-      <section className="odevolv-luxe-hero">
-        <div className="odevolv-luxe-hero-background">
-          <div className="odevolv-luxe-hero-gold-gradient"></div>
-          <div className="odevolv-luxe-hero-pattern"></div>
-          <div className="odevolv-luxe-hero-glitter"></div>
+    <div className="odevolv-news-system">
+      {/* Hero Section Élégante */}
+      <section className="odevolv-hero-section">
+        <div className="odevolv-hero-background">
+          <div className="odevolv-hero-gradient"></div>
+          <div className="odevolv-hero-pattern"></div>
         </div>
         
-        <div className="odevolv-luxe-hero-content">
-          <div className="odevolv-luxe-hero-text">
-            <div className="odevolv-luxe-hero-badge">
-              <Crown size={20} className="odevolv-luxe-gold-icon" />
-              <span className="odevolv-luxe-gold-text">Odevolv Group · Excellence depuis 2010</span>
-              <div className="odevolv-luxe-badge-sparkle"></div>
+        <div className="odevolv-hero-container">
+          <div className="odevolv-hero-content">
+            <div className="odevolv-hero-badge">
+              <Newspaper size={18} />
+              <span>Odevolv Group · Actualités Premium</span>
             </div>
             
-            <h1 className="odevolv-luxe-hero-title">
-              <span className="odevolv-luxe-hero-title-glow">Galerie d'Excellence</span>
-              <span className="odevolv-luxe-hero-title-main">
-                <span className="odevolv-luxe-gold-glow">Odevolv</span> <span className="odevolv-luxe-hero-title-luxe">Luxe</span>
-              </span>
+            <h1 className="odevolv-hero-title">
+              L'Excellence en <span className="odevolv-hero-highlight">Actualités</span>
             </h1>
             
-            <p className="odevolv-luxe-hero-description">
-              Plongez dans l'univers du luxe absolu à travers nos réalisations 
-              <span className="odevolv-luxe-gold-highlight"> d'exception</span>. 
-              Chaque projet est une symphonie de <span className="odevolv-luxe-gold-highlight">perfection</span>, 
-              d'<span className="odevolv-luxe-gold-highlight">innovation</span> et d'<span className="odevolv-luxe-gold-highlight">élégance</span>.
+            <p className="odevolv-hero-description">
+              Découvrez les réalisations, innovations et succès qui font d'Odevolv Group 
+              un leader incontournable en Afrique de l'Ouest. Chaque actualité témoigne 
+              de notre engagement pour l'excellence et le développement durable.
             </p>
-            
-            <div className="odevolv-luxe-hero-stats">
-              <div className="odevolv-luxe-stat odevolv-luxe-stat-gold">
-                <div className="odevolv-luxe-stat-icon">
-                  <Target size={24} />
+
+            <div className="odevolv-hero-stats">
+              <div className="odevolv-stat-card">
+                <div className="odevolv-stat-icon">
+                  <Calendar size={22} />
                 </div>
-                <div className="odevolv-luxe-stat-content">
-                  <span className="odevolv-luxe-stat-number">200+</span>
-                  <span className="odevolv-luxe-stat-label">Projets d'exception</span>
-                </div>
-                <div className="odevolv-luxe-stat-sparkle"></div>
-              </div>
-              
-              <div className="odevolv-luxe-stat odevolv-luxe-stat-silver">
-                <div className="odevolv-luxe-stat-icon">
-                  <TrendingUp size={24} />
-                </div>
-                <div className="odevolv-luxe-stat-content">
-                  <span className="odevolv-luxe-stat-number">99.8%</span>
-                  <span className="odevolv-luxe-stat-label">Satisfaction client</span>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">{newsArticles.length}</span>
+                  <span className="odevolv-stat-label">Articles Premium</span>
                 </div>
               </div>
               
-              <div className="odevolv-luxe-stat odevolv-luxe-stat-bronze">
-                <div className="odevolv-luxe-stat-icon">
-                  <Gem size={24} />
+              <div className="odevolv-stat-card">
+                <div className="odevolv-stat-icon">
+                  <Target size={22} />
                 </div>
-                <div className="odevolv-luxe-stat-content">
-                  <span className="odevolv-luxe-stat-number">8</span>
-                  <span className="odevolv-luxe-stat-label">Domaines experts</span>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">8</span>
+                  <span className="odevolv-stat-label">Filiales Expertes</span>
+                </div>
+              </div>
+              
+              <div className="odevolv-stat-card">
+                <div className="odevolv-stat-icon">
+                  <Trophy size={22} />
+                </div>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">15+</span>
+                  <span className="odevolv-stat-label">Distinctions</span>
+                </div>
+              </div>
+              
+              <div className="odevolv-stat-card">
+                <div className="odevolv-stat-icon">
+                  <Globe size={22} />
+                </div>
+                <div className="odevolv-stat-content">
+                  <span className="odevolv-stat-number">5+</span>
+                  <span className="odevolv-stat-label">Pays d'Impact</span>
                 </div>
               </div>
             </div>
           </div>
-          
-          <div className="odevolv-luxe-hero-visual">
-            <div className="odevolv-luxe-visual-card odevolv-luxe-card-1">
-              <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Événement" />
-              <div className="odevolv-luxe-card-badge">
-                <Sparkle size={12} />
-                Événementiel
-              </div>
-              <div className="odevolv-luxe-card-glow"></div>
-            </div>
-            
-            <div className="odevolv-luxe-visual-card odevolv-luxe-card-2">
-              <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Communication" />
-              <div className="odevolv-luxe-card-badge">
-                <Sparkle size={12} />
-                Communication
-              </div>
-              <div className="odevolv-luxe-card-glow"></div>
-            </div>
-            
-            <div className="odevolv-luxe-visual-card odevolv-luxe-card-3">
-              <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Sport" />
-              <div className="odevolv-luxe-card-badge">
-                <Sparkle size={12} />
-                Football
-              </div>
-              <div className="odevolv-luxe-card-glow"></div>
-            </div>
-            
-            <div className="odevolv-luxe-visual-card odevolv-luxe-card-4">
-              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Mode" />
-              <div className="odevolv-luxe-card-badge">
-                <Sparkle size={12} />
-                Mode Luxe
-              </div>
-              <div className="odevolv-luxe-card-glow"></div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Filters */}
-      <section className="odevolv-luxe-filters">
-        <div className="odevolv-luxe-filters-container">
-          <div className="odevolv-luxe-filters-header">
-            <div className="odevolv-luxe-filters-title-wrapper">
-              <Filter size={28} className="odevolv-luxe-filter-title-icon" />
-              <h2 className="odevolv-luxe-filters-title">
-                Domaines d'Excellence
-                <span className="odevolv-luxe-filters-subtitle-glow">Nos 8 spécialités</span>
-              </h2>
-            </div>
-            <p className="odevolv-luxe-filters-subtitle">
-              Filtrez par domaine pour découvrir nos <span className="odevolv-luxe-gold-text">réalisations d'exception</span>
-            </p>
-          </div>
-          
-          <div className="odevolv-luxe-filters-grid">
-            {filters.map((filter) => {
-              const IconComponent = filter.icon;
-              return (
-                <button
-                  key={filter.name}
-                  className={`odevolv-luxe-filter-button ${selectedFilter === filter.name ? 'odevolv-luxe-filter-active' : ''}`}
-                  onClick={() => setSelectedFilter(filter.name)}
-                  style={{ '--filter-gold': filter.color }}
-                >
-                  <div className="odevolv-luxe-filter-icon-wrapper">
-                    <div className="odevolv-luxe-filter-icon">
-                      <IconComponent size={26} className="odevolv-luxe-filter-icon-svg" />
-                      <div className="odevolv-luxe-filter-icon-glow"></div>
-                    </div>
-                  </div>
-                  <span className="odevolv-luxe-filter-text">{filter.name}</span>
-                  <div className="odevolv-luxe-filter-indicator">
-                    <ChevronRight size={22} />
-                  </div>
-                  <div className="odevolv-luxe-filter-gold-border"></div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Grid */}
-      <section className="odevolv-luxe-gallery-section">
-        <div className="odevolv-luxe-gallery-container">
-          <div className="odevolv-luxe-gallery-header">
-            <div className="odevolv-luxe-gallery-header-content">
-              <div className="odevolv-luxe-gallery-title-wrapper">
-                <Medal size={32} className="odevolv-luxe-gallery-title-icon" />
-                <h2 className="odevolv-luxe-gallery-title">
-                  <span className="odevolv-luxe-gallery-title-number">8</span>
-                  <span className="odevolv-luxe-gallery-title-text">
-                    Réalisations
-                    <span className="odevolv-luxe-gallery-title-luxe">Luxe</span>
+          <div className="odevolv-hero-visual">
+            <div className="odevolv-hero-image-stack">
+              <div className="odevolv-hero-image-main">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                  alt="Odevolv Group Leadership" 
+                />
+                <div className="odevolv-hero-image-overlay">
+                  <span className="odevolv-featured-tag">
+                    <Star size={14} />
+                    À la une
                   </span>
-                </h2>
+                  <h3 className="odevolv-image-title">Leadership & Innovation</h3>
+                  <p className="odevolv-image-subtitle">Odevolv Group redéfinit l'excellence</p>
+                </div>
               </div>
-              <p className="odevolv-luxe-gallery-subtitle">
-                {selectedFilter === "Tous" 
-                  ? "Découvrez nos 8 projets d'exception à travers le monde" 
-                  : `Projets ${selectedFilter} · ${filteredItems.length} réalisation${filteredItems.length > 1 ? 's' : ''} exclusive${filteredItems.length > 1 ? 's' : ''}`}
+              
+              <div className="odevolv-hero-image-secondary">
+                <img src={newsArticles[0].images[0]} alt="Académie de football" />
+                <div className="odevolv-image-mini-badge">
+                  <Trophy size={12} />
+                  <span>Nouveau</span>
+                </div>
+              </div>
+              
+              <div className="odevolv-hero-image-tertiary">
+                <img src={newsArticles[1].images[0]} alt="Cosmétique bio" />
+                <div className="odevolv-image-mini-badge">
+                  <Award size={12} />
+                  <span>Innovation</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Filtres Premium */}
+      <section className="odevolv-filters-section">
+        <div className="odevolv-filters-container">
+          <div className="odevolv-filters-header">
+            <h2 className="odevolv-filters-title">
+              <Filter size={24} />
+              Filtrer par Expertise
+            </h2>
+            <p className="odevolv-filters-subtitle">
+              Découvrez nos actualités par domaine d'excellence
+            </p>
+          </div>
+          
+          <div className="odevolv-filters-grid">
+            {categories.map((category) => (
+              <button
+                key={category.name}
+                className={`odevolv-filter-button ${
+                  selectedCategory === category.name ? 'odevolv-filter-active' : ''
+                }`}
+                onClick={() => setSelectedCategory(category.name)}
+              >
+                <div className="odevolv-filter-icon">
+                  {category.icon}
+                </div>
+                <div className="odevolv-filter-text">
+                  <span className="odevolv-filter-name">{category.name}</span>
+                  <span className="odevolv-filter-count">{category.count} articles</span>
+                </div>
+                {selectedCategory === category.name && (
+                  <div className="odevolv-filter-indicator">
+                    <CheckCircle size={16} />
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Section Articles Grid */}
+      <section className="odevolv-articles-section">
+        <div className="odevolv-articles-container">
+          <div className="odevolv-articles-header">
+            <div className="odevolv-articles-title-group">
+              <h2 className="odevolv-articles-main-title">
+                <span className="odevolv-title-accent">A</span>ctualités
+                <span className="odevolv-title-sub">Odevolv</span>
+              </h2>
+              <p className="odevolv-articles-subtitle">
+                {selectedCategory === "Tous" 
+                  ? "Explorez nos dernières réalisations d'excellence" 
+                  : `${selectedCategory} · ${filteredItems.length} article${filteredItems.length > 1 ? 's' : ''} premium`}
               </p>
             </div>
           </div>
-          
-          <div className="odevolv-luxe-gallery-grid">
-            {filteredItems.map((item, index) => (
-              <div 
-                key={`${item.title}-${index}`} 
-                className={`odevolv-luxe-gallery-item ${item.highlight ? 'odevolv-luxe-gallery-item-highlight' : ''}`}
-                style={{ animationDelay: `${index * 80}ms` }}
+
+          <div className="odevolv-articles-grid">
+            {filteredItems.map((article, index) => (
+              <article 
+                key={`article-${article.id}`}
+                className="odevolv-article-card"
+                style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => handleArticleClick(article)}
               >
-                <div className="odevolv-luxe-gallery-item-inner">
-                  {item.highlight && (
-                    <div className="odevolv-luxe-item-highlight-badge">
-                      <Star size={14} />
-                      <span>Excellence</span>
+                <div className="odevolv-article-image">
+                  <img src={article.images[0]} alt={article.title} />
+                  {article.featured && (
+                    <div className="odevolv-featured-badge">
+                      <Star size={12} />
+                      <span>Premium</span>
                     </div>
                   )}
-                  
-                  <div className="odevolv-luxe-item-image">
-                    <img src={item.images[0]} alt={item.title} />
-                    <div className="odevolv-luxe-item-gold-overlay"></div>
-                    <div className="odevolv-luxe-item-overlay">
-                      <div className="odevolv-luxe-overlay-content">
-                        <span className="odevolv-luxe-item-category">
-                          <Award size={16} className="odevolv-luxe-gold-icon" />
-                          {item.category}
-                          <div className="odevolv-luxe-item-category-glow"></div>
-                        </span>
-                        <h3 className="odevolv-luxe-item-title">{item.title}</h3>
-                        <p className="odevolv-luxe-item-description">{item.description}</p>
-                        <button 
-                          onClick={() => handleProjectClick(item)} 
-                          className="odevolv-luxe-item-link"
-                        >
-                          <span>Découvrir l'excellence</span>
-                          <Eye size={18} />
-                          <div className="odevolv-luxe-item-link-glow"></div>
-                        </button>
-                      </div>
+                  <div className="odevolv-article-category">
+                    <Tag size={14} />
+                    <span>{article.category}</span>
+                  </div>
+                  <div className="odevolv-article-hover">
+                    <div className="odevolv-hover-content">
+                      <Eye size={20} />
+                      <span>Voir les détails</span>
                     </div>
                   </div>
                 </div>
-              </div>
+                
+                <div className="odevolv-article-content">
+                  <div className="odevolv-article-meta">
+                    <div className="odevolv-meta-item">
+                      <Calendar size={14} />
+                      <span>{article.date}</span>
+                    </div>
+                    <div className="odevolv-meta-item">
+                      <Clock size={14} />
+                      <span>{article.readTime}</span>
+                    </div>
+                    <div className="odevolv-meta-item">
+                      <MapPin size={14} />
+                      <span>{article.location}</span>
+                    </div>
+                  </div>
+                  
+                  <h3 className="odevolv-article-title">{article.title}</h3>
+                  <p className="odevolv-article-excerpt">{article.excerpt}</p>
+                  
+                  <div className="odevolv-article-footer">
+                    <div className="odevolv-author-info">
+                      <div className="odevolv-author-avatar">
+                        {article.author.split(' ')[0][0]}
+                      </div>
+                      <div className="odevolv-author-details">
+                        <span className="odevolv-author-name">{article.author}</span>
+                        <span className="odevolv-author-position">{article.position}</span>
+                      </div>
+                    </div>
+                    <button className="odevolv-read-more">
+                      <span>Lire</span>
+                      <ArrowRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
-          
+
           {filteredItems.length > 0 && (
-            <div className="odevolv-luxe-gallery-footer">
-              <div className="odevolv-luxe-gallery-count">
-                <Users size={24} className="odevolv-luxe-gold-icon" />
-                <span>{filteredItems.length} projets d'exception présentés</span>
+            <div className="odevolv-section-footer">
+              <div className="odevolv-count-info">
+                <FileText size={20} />
+                <span>{filteredItems.length} articles premium trouvés</span>
               </div>
-              <button className="odevolv-luxe-view-all">
-                <span>Voir toutes les réalisations</span>
-                <ArrowRight size={20} />
-                <div className="odevolv-luxe-view-all-glow"></div>
+              <button className="odevolv-view-all-button">
+                <span>Voir toutes les actualités</span>
+                <ChevronDown size={18} />
               </button>
             </div>
           )}
         </div>
       </section>
 
-      {/* Modal Luxe */}
-      {selectedProject && (
-        <div className="odevolv-luxe-modal-overlay" onClick={closeModal}>
-          <div className="odevolv-luxe-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="odevolv-luxe-modal-gold-border"></div>
-            
-            {/* Header du modal */}
-            <div className="odevolv-luxe-modal-header">
-              <div className="odevolv-luxe-modal-header-glow"></div>
-              <div className="odevolv-luxe-modal-header-content">
-                <span className="odevolv-luxe-modal-category">
-                  <Award size={18} className="odevolv-luxe-gold-icon" />
-                  {selectedProject.category}
-                  <div className="odevolv-luxe-modal-category-sparkle"></div>
-                </span>
-                <h2 className="odevolv-luxe-modal-title">
-                  {selectedProject.title}
-                  {selectedProject.highlight && (
-                    <span className="odevolv-luxe-modal-highlight-badge">
-                      <Crown size={16} />
-                      <span>Projet d'Excellence</span>
-                    </span>
+      {/* Modal Article Premium */}
+      {selectedArticle && (
+        <div 
+          className={`odevolv-modal-overlay ${isModalFullscreen ? 'odevolv-modal-fullscreen' : ''}`}
+          onClick={closeModal}
+        >
+          <div 
+            className="odevolv-modal-container"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header du Modal */}
+            <div className="odevolv-modal-header">
+              <div className="odevolv-modal-header-content">
+                <div className="odevolv-modal-badge-group">
+                  <div className="odevolv-category-badge">
+                    <Tag size={14} />
+                    <span>{selectedArticle.category}</span>
+                  </div>
+                  {selectedArticle.featured && (
+                    <div className="odevolv-featured-badge-modal">
+                      <Star size={12} />
+                      <span>Article Premium</span>
+                    </div>
                   )}
-                </h2>
+                </div>
+                
+                <h2 className="odevolv-modal-title">{selectedArticle.title}</h2>
+                
+                <div className="odevolv-modal-meta">
+                  <div className="odevolv-modal-meta-item">
+                    <Calendar size={14} />
+                    <span>{selectedArticle.date}</span>
+                  </div>
+                  <div className="odevolv-modal-meta-item">
+                    <Clock size={14} />
+                    <span>{selectedArticle.readTime} de lecture</span>
+                  </div>
+                  <div className="odevolv-modal-meta-item">
+                    <MapPin size={14} />
+                    <span>{selectedArticle.location}</span>
+                  </div>
+                  <div className="odevolv-modal-meta-item">
+                    <Eye size={14} />
+                    <span>Expert</span>
+                  </div>
+                </div>
               </div>
               
-              <button 
-                className="odevolv-luxe-modal-close" 
-                onClick={closeModal}
-                aria-label="Fermer"
-              >
-                <X size={30} className="odevolv-luxe-modal-close-icon" />
-                <div className="odevolv-luxe-modal-close-glow"></div>
-              </button>
+              <div className="odevolv-modal-controls">
+                <button className="odevolv-modal-button odevolv-share-button">
+                  <Share2 size={18} />
+                </button>
+                <button className="odevolv-modal-button odevolv-download-button">
+                  <Download size={18} />
+                </button>
+                <button 
+                  className="odevolv-modal-button odevolv-fullscreen-button"
+                  onClick={toggleFullscreen}
+                >
+                  {isModalFullscreen ? <Minus size={18} /> : <Maximize2 size={18} />}
+                </button>
+                <button 
+                  className="odevolv-modal-button odevolv-close-button"
+                  onClick={closeModal}
+                >
+                  <X size={20} />
+                </button>
+              </div>
             </div>
 
-            {/* Contenu du modal */}
-            <div className="odevolv-luxe-modal-body">
-              {/* Carrousel */}
-              <div className="odevolv-luxe-modal-carousel">
-                <div className="odevolv-luxe-carousel-main">
+            {/* Corps du Modal */}
+            <div className="odevolv-modal-body">
+              {/* Section Images avec Carrousel */}
+              <div className="odevolv-image-carousel-section">
+                <div className="odevolv-carousel-main">
                   <button 
-                    className="odevolv-luxe-carousel-nav odevolv-luxe-carousel-prev" 
+                    className="odevolv-carousel-button odevolv-prev-button"
                     onClick={prevImage}
-                    aria-label="Précédent"
                   >
-                    <ChevronLeft size={38} className="odevolv-luxe-carousel-nav-icon" />
-                    <div className="odevolv-luxe-carousel-nav-glow"></div>
+                    <ChevronLeft size={24} />
                   </button>
                   
-                  <div className="odevolv-luxe-carousel-image">
+                  <div className="odevolv-carousel-image-container">
                     <img 
-                      src={selectedProject.images[currentImageIndex]} 
-                      alt={`${selectedProject.title} - Image ${currentImageIndex + 1}`}
+                      src={selectedArticle.images[currentImageIndex]} 
+                      alt={`${selectedArticle.title} - Image ${currentImageIndex + 1}`}
                     />
-                    <div className="odevolv-luxe-carousel-counter">
-                      <Camera size={16} />
-                      {currentImageIndex + 1} / {selectedProject.images.length}
+                    <div className="odevolv-carousel-counter">
+                      {currentImageIndex + 1} / {selectedArticle.images.length}
                     </div>
-                    <div className="odevolv-luxe-carousel-gold-overlay"></div>
+                    
+                    <div className="odevolv-carousel-overlay">
+                      <button className="odevolv-zoom-button">
+                        <Plus size={20} />
+                      </button>
+                    </div>
                   </div>
                   
                   <button 
-                    className="odevolv-luxe-carousel-nav odevolv-luxe-carousel-next" 
+                    className="odevolv-carousel-button odevolv-next-button"
                     onClick={nextImage}
-                    aria-label="Suivant"
                   >
-                    <ChevronRightIcon size={38} className="odevolv-luxe-carousel-nav-icon" />
-                    <div className="odevolv-luxe-carousel-nav-glow"></div>
+                    <ChevronRight size={24} />
                   </button>
+                  
+                  <div className="odevolv-carousel-progress">
+                    {selectedArticle.images.map((_, index) => (
+                      <button
+                        key={`progress-${index}`}
+                        className={`odevolv-progress-dot ${index === currentImageIndex ? 'active' : ''}`}
+                        onClick={() => goToImage(index)}
+                      />
+                    ))}
+                  </div>
                 </div>
                 
                 {/* Miniatures */}
-                <div className="odevolv-luxe-carousel-thumbnails">
-                  {selectedProject.images.map((image, index) => (
-                    <button
-                      key={index}
-                      className={`odevolv-luxe-carousel-thumbnail ${index === currentImageIndex ? 'odevolv-luxe-thumbnail-active' : ''}`}
-                      onClick={() => goToImage(index)}
-                      aria-label={`Voir l'image ${index + 1}`}
-                    >
-                      <img src={image} alt={`Miniature ${index + 1}`} />
-                      {index === currentImageIndex && (
-                        <div className="odevolv-luxe-thumbnail-gold-border"></div>
-                      )}
-                    </button>
-                  ))}
+                <div className="odevolv-carousel-thumbnails">
+                  <div className="odevolv-thumbnails-header">
+                    <h4>Galerie d'images</h4>
+                    <span className="odevolv-thumbnails-count">
+                      {selectedArticle.images.length} photos
+                    </span>
+                  </div>
+                  <div className="odevolv-thumbnails-grid">
+                    {selectedArticle.images.map((image, index) => (
+                      <button
+                        key={`thumb-${index}`}
+                        className={`odevolv-thumbnail ${index === currentImageIndex ? 'active' : ''}`}
+                        onClick={() => goToImage(index)}
+                      >
+                        <img src={image} alt={`Miniature ${index + 1}`} />
+                        {index === currentImageIndex && (
+                          <div className="odevolv-thumbnail-active">
+                            <CheckCircle size={12} />
+                          </div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Détails */}
-              <div className="odevolv-luxe-modal-details">
-                <div className="odevolv-luxe-modal-description">
-                  <h3>
-                    <span className="odevolv-luxe-gold-text">À propos</span> de ce projet
-                  </h3>
-                  <p className="odevolv-luxe-modal-description-text">{selectedProject.longDescription}</p>
-                </div>
-
-                <div className="odevolv-luxe-modal-info-grid">
-                  <div className="odevolv-luxe-info-item">
-                    <div className="odevolv-luxe-info-icon odevolv-luxe-info-icon-gold">
-                      <Calendar size={22} />
+              {/* Contenu de l'article */}
+              <div className="odevolv-article-content-section">
+                <div className="odevolv-author-section">
+                  <div className="odevolv-author-card">
+                    <div className="odevolv-author-avatar-large">
+                      {selectedArticle.author.split(' ')[0][0]}
                     </div>
-                    <div className="odevolv-luxe-info-content">
-                      <span className="odevolv-luxe-info-label">Date</span>
-                      <span className="odevolv-luxe-info-value">{selectedProject.details.date}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="odevolv-luxe-info-item">
-                    <div className="odevolv-luxe-info-icon odevolv-luxe-info-icon-gold">
-                      <MapPin size={22} />
-                    </div>
-                    <div className="odevolv-luxe-info-content">
-                      <span className="odevolv-luxe-info-label">Localisation</span>
-                      <span className="odevolv-luxe-info-value">{selectedProject.details.location}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="odevolv-luxe-info-item">
-                    <div className="odevolv-luxe-info-icon odevolv-luxe-info-icon-gold">
-                      <Clock size={22} />
-                    </div>
-                    <div className="odevolv-luxe-info-content">
-                      <span className="odevolv-luxe-info-label">Durée</span>
-                      <span className="odevolv-luxe-info-value">{selectedProject.details.duration}</span>
-                    </div>
-                  </div>
-                  
-                  <div className="odevolv-luxe-info-item">
-                    <div className="odevolv-luxe-info-icon odevolv-luxe-info-icon-gold">
-                      <UsersIcon size={22} />
-                    </div>
-                    <div className="odevolv-luxe-info-content">
-                      <span className="odevolv-luxe-info-label">Participants</span>
-                      <span className="odevolv-luxe-info-value">{selectedProject.details.participants}</span>
+                    <div className="odevolv-author-info-details">
+                      <span className="odevolv-author-name-large">{selectedArticle.author}</span>
+                      <span className="odevolv-author-position-large">{selectedArticle.position}</span>
+                      <div className="odevolv-author-verified">
+                        <Shield size={14} />
+                        <span>Expert vérifié Odevolv</span>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Réalisations */}
-                <div className="odevolv-luxe-modal-achievements">
-                  <h3>
-                    <span className="odevolv-luxe-gold-text">Nos</span> réalisations
+                <div className="odevolv-article-full-content">
+                  <h3 className="odevolv-content-title">
+                    <BookOpen size={20} />
+                    Article Complet
                   </h3>
-                  <div className="odevolv-luxe-achievements-grid">
-                    {selectedProject.achievements.map((achievement, index) => (
-                      <div key={index} className="odevolv-luxe-achievement">
-                        <div className="odevolv-luxe-achievement-icon">
-                          <CheckCircle size={18} />
-                          <div className="odevolv-luxe-achievement-glow"></div>
+                  <div className="odevolv-content-text">
+                    {selectedArticle.fullContent.split('\n\n').map((paragraph, index) => (
+                      <p key={`para-${index}`}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Statistiques Chiffrées */}
+                <div className="odevolv-stats-section">
+                  <h4 className="odevolv-stats-title">
+                    <BarChart3 size={20} />
+                    Chiffres Clés
+                  </h4>
+                  <div className="odevolv-stats-grid">
+                    {Object.entries(selectedArticle.stats).map(([key, value]) => (
+                      <div key={`stat-${key}`} className="odevolv-stat-card-modal">
+                        <div className="odevolv-stat-value-modal">{value}</div>
+                        <div className="odevolv-stat-label-modal">
+                          {key.replace(/([A-Z])/g, ' $1').trim()}
                         </div>
-                        <span className="odevolv-luxe-achievement-text">{achievement}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                {/* Actions */}
-                <div className="odevolv-luxe-modal-actions">
-                  <button 
-                    className="odevolv-luxe-action-btn odevolv-luxe-action-primary"
-                    aria-label="Visiter le projet"
-                  >
-                    <ExternalLink size={24} />
-                    <span>Visiter le projet</span>
-                    <div className="odevolv-luxe-action-btn-glow"></div>
-                  </button>
-                  
-                  <button 
-                    className="odevolv-luxe-action-btn odevolv-luxe-action-secondary"
-                    aria-label="Sauvegarder"
-                  >
-                    <Heart size={24} />
-                    <span>Sauvegarder</span>
-                  </button>
-                  
-                  <button 
-                    className="odevolv-luxe-action-btn odevolv-luxe-action-secondary"
-                    aria-label="Partager"
-                  >
-                    <Share2 size={24} />
-                    <span>Partager</span>
-                  </button>
-                  
-                  <button 
-                    className="odevolv-luxe-action-btn odevolv-luxe-action-secondary"
-                    aria-label="Télécharger"
-                  >
-                    <Download size={24} />
-                    <span>Télécharger</span>
-                  </button>
+                {/* Tags */}
+                <div className="odevolv-tags-section">
+                  <h4 className="odevolv-tags-title">Mots-clés associés</h4>
+                  <div className="odevolv-tags-list">
+                    {selectedArticle.tags.map((tag, index) => (
+                      <span key={`tag-${index}`} className="odevolv-tag-item">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
+
+                {/* Actions */}
+                <div className="odevolv-actions-section">
+                  <button className="odevolv-action-button odevolv-action-primary">
+                    <ExternalLink size={18} />
+                    <span>Consulter le dossier complet</span>
+                    <ArrowRight size={16} />
+                  </button>
+                  <div className="odevolv-secondary-actions">
+                    <button className="odevolv-action-button odevolv-action-secondary">
+                      <Heart size={18} />
+                      <span>Enregistrer</span>
+                    </button>
+                    <button className="odevolv-action-button odevolv-action-secondary">
+                      <Share2 size={18} />
+                      <span>Partager</span>
+                    </button>
+                    <button className="odevolv-action-button odevolv-action-secondary">
+                      <Download size={18} />
+                      <span>PDF</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Prochain Article */}
+                <div className="odevolv-next-article-section">
+                  <div className="odevolv-next-content">
+                    <span className="odevolv-next-label">À découvrir ensuite</span>
+                    <h5 className="odevolv-next-title">Explorez nos autres succès d'excellence</h5>
+                    <button className="odevolv-next-button">
+                      <span>Voir toutes les actualités</span>
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer du Modal */}
+            <div className="odevolv-modal-footer">
+              <div className="odevolv-footer-left">
+                <div className="odevolv-footer-info">
+                  <Shield size={14} />
+                  <span>Contenu vérifié · Odevolv Group © 2024</span>
+                </div>
+              </div>
+              <div className="odevolv-footer-right">
+                <button className="odevolv-footer-button">
+                  <span>Signaler un problème</span>
+                </button>
               </div>
             </div>
           </div>
@@ -707,4 +732,4 @@ const OdevolvGalleryLuxe = () => {
   );
 };
 
-export default OdevolvGalleryLuxe;
+export default OdevolvNews;

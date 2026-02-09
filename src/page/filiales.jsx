@@ -102,7 +102,7 @@ const OdevolvSubsidiaries = () => {
           </div>
           
           <h1 className="odevolv-filiales-hero-title">
-            L'Empire <span className="odevolv-filiales-hero-highlight">Odevolv</span>
+            L'Empire Odevolv 
           </h1>
           
           <p className="odevolv-filiales-hero-subtitle">

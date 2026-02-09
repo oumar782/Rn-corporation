@@ -156,13 +156,10 @@ const OdevolvCosmetique = () => {
         
         <div className="cos-container">
           <div className="cos-hero-content">
-            <div className="cos-hero-badge">
-              <Diamond size={16} />
-              <span>Cosmétique de Luxe</span>
-            </div>
+           
             
             <h1 className="cos-hero-title">
-              Odevolv <span className="cos-hero-highlight">Cosmétique</span>
+              Odevolv <span className="cos-hero-highlights">Cosmétique</span>
             </h1>
             
             <p className="cos-hero-subtitle">
@@ -198,9 +195,7 @@ const OdevolvCosmetique = () => {
       <section className="cos-collections-section" id="collections">
         <div className="cos-container">
           <div className="cos-section-header">
-            <div className="cos-section-badge">
-              Nos Créations
-            </div>
+            
             <h2 className="cos-section-title">
               Collections d'Exception
             </h2>
@@ -274,9 +269,7 @@ const OdevolvCosmetique = () => {
       <section className="cos-categories-section">
         <div className="cos-container">
           <div className="cos-section-header">
-            <div className="cos-section-badge">
-              Univers
-            </div>
+           
             <h2 className="cos-section-title">
               Nos Univers de Beauté
             </h2>
@@ -308,9 +301,7 @@ const OdevolvCosmetique = () => {
       <section className="cos-avantages-section">
         <div className="cos-container">
           <div className="cos-section-header">
-            <div className="cos-section-badge">
-              Notre Excellence
-            </div>
+            
             <h2 className="cos-section-title">
               Garanties de Prestige
             </h2>
@@ -337,9 +328,8 @@ const OdevolvCosmetique = () => {
       <section className="cos-certifications-section">
         <div className="cos-container">
           <div className="cos-section-header">
-            <div className="cos-section-badge">
-              Nos Certifications
-            </div>
+           
+        
             <h2 className="cos-section-title">
               Excellence Validée
             </h2>
@@ -365,9 +355,7 @@ const OdevolvCosmetique = () => {
       <section className="cos-temoignages-section">
         <div className="cos-container">
           <div className="cos-section-header">
-            <div className="cos-section-badge">
-              Témoignages
-            </div>
+           
             <h2 className="cos-section-title">
               Leurs Expériences
             </h2>
@@ -415,119 +403,9 @@ const OdevolvCosmetique = () => {
       </section>
 
       {/* Section CTA */}
-      <section className="cos-cta-section">
-        <div className="cos-container">
-          <div className="cos-cta-content">
-            <div className="cos-cta-badge">
-              <Diamond size={16} />
-              <span>Accès VIP</span>
-            </div>
-            
-            <h2 className="cos-cta-title">
-              Rejoignez le <span className="cos-cta-highlight">Cercle Privilège</span>
-            </h2>
-            
-            <p className="cos-cta-description">
-              Accédez à des avantages exclusifs, des éditions limitées et un service 
-              sur-mesure dédié à votre beauté.
-            </p>
-            
-            <div className="cos-contact-info">
-              <div className="cos-contact-item">
-                <Phone size={20} />
-                <span>+225 27 33 44 55 66</span>
-              </div>
-              <div className="cos-contact-item">
-                <Mail size={20} />
-                <span>luxe@odevolv.ci</span>
-              </div>
-              <div className="cos-contact-item">
-                <MapPin size={20} />
-                <span>Riviera, Abidjan - Côte d'Ivoire</span>
-              </div>
-            </div>
-            
-            <div className="cos-cta-actions">
-              <a href="/boutique" className="cos-cta-button cos-cta-primary">
-                <ShoppingBag size={20} />
-                <span>Accéder à la Boutique</span>
-              </a>
-              <a href="/contact" className="cos-cta-button cos-cta-secondary">
-                <MessageCircle size={20} />
-                <span>Devenir Client VIP</span>
-              </a>
-            </div>
+      
 
-            <div className="cos-garanties">
-              <div className="cos-garantie">
-                <Shield size={16} />
-                <span>Service Concierge 24/7</span>
-              </div>
-              <div className="cos-garantie">
-                <Truck size={16} />
-                <span>Livraison Express Privée</span>
-              </div>
-              <div className="cos-garantie">
-                <Award size={16} />
-                <span>Produits Édition Limitée</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="cos-footer">
-        <div className="cos-container">
-          <div className="cos-footer-content">
-            <div className="cos-footer-brand">
-              <h3 className="cos-footer-title">Odevolv Cosmétique</h3>
-              <p className="cos-footer-tagline">
-                L'art suprême de la beauté luxe
-              </p>
-            </div>
-            
-            <div className="cos-footer-links">
-              <div className="cos-footer-column">
-                <h4>Collections</h4>
-                <a href="/soins-luxe">Soins Luxe</a>
-                <a href="/maquillage-or">Maquillage Or</a>
-                <a href="/parfums-signature">Parfums Signature</a>
-                <a href="/editions-limitees">Éditions Limitées</a>
-              </div>
-              <div className="cos-footer-column">
-                <h4>Services</h4>
-                <a href="/concierge">Service Concierge</a>
-                <a href="/consultation">Consultation Beauté</a>
-                <a href="/cadeaux">Cadeaux & Coffrets</a>
-                <a href="/ateliers">Ateliers VIP</a>
-              </div>
-              <div className="cos-footer-column">
-                <h4>Maison Odevolv</h4>
-                <a href="/histoire">Notre Histoire</a>
-                <a href="/savoir-faire">Savoir-Faire</a>
-                <a href="/carrieres">Carrières</a>
-                <a href="/contact">Contact Privilège</a>
-              </div>
-            </div>
-            
-            <div className="cos-footer-certifications">
-              <div className="cos-certification">
-                <Diamond size={16} />
-                <span>Cosmétique Luxe Certifiée</span>
-              </div>
-              <div className="cos-certification">
-                <Shield size={16} />
-                <span>Qualité Exceptionnelle</span>
-              </div>
-              <div className="cos-certification">
-                <Award size={16} />
-                <span>Prix Excellence 2024</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
